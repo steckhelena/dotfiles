@@ -11,10 +11,10 @@
             "current_border_width": 2,
             "floating": "auto_off",
             "name": "Spotify",
-            "percent": 0.65,
+            "percent": 0.60,
             "swallows": [
                {
-                    "title": "^Spotify$"
+                    "class": "^Spotify$"
                }
             ],
             "type": "con"
@@ -24,10 +24,10 @@
             "current_border_width": 2,
             "floating": "auto_off",
             "name": "Deluge",
-            "percent": 0.35,
+            "percent": 0.40,
             "swallows": [
                {
-                    "title": "^Deluge$"
+                    "class": "^Deluge$"
                }
             ],
             "type": "con"
