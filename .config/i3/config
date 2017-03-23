@@ -42,7 +42,7 @@ bindsym $mod+Shift+q kill
 # lock screen
 bindsym $mod+Shift+Control+l exec "~/.config/i3/scripts/lock.sh"
 
-# start dmenu (a program launcher)
+# start rofi (a program launcher)
 bindsym $mod+space exec rofi -show run -lines 3
 
 # change focus
