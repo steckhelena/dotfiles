@@ -1,9 +1,12 @@
 # First ignoring all files
 *
 
-# Now removing form ignore list
-
+# Now removing from ignore list
 !.gitignore
+
+# Git
+!.gitignore_global
+!.gitconfig
 
 # Common folders
 !.config/

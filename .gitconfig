@@ -1,0 +1,9 @@
+[user]
+	name = Marco Antonio Steck Filho
+	email = steckmarco@outlook.com
+
+[core]
+	editor = vim
+	fileMode = false
+	excludesfile = /home/steckmarco/.gitignore_global
+	quotepath = false
