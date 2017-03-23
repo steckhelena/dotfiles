@@ -1,0 +1,32 @@
+# First ignoring all files
+*
+
+# Now removing form ignore list
+
+!.gitignore
+
+# Common folders
+!.config/
+
+# Bash
+!.bashrc
+!.bash_profile
+!.bash_logout
+
+!.config/bash/
+!.config/bash/*
+!.config/bash/*/
+!.config/bash/*/*
+
+# Installed pacman apps
+!.config/.apps
+
+# i3
+!.config/i3/
+!.config/i3/config
+!.config/i3/i3blocks.conf
+!.config/i3/workspaces/
+!.config/i3/workspaces/*
+!.config/i3blocks/
+!.config/i3blocks/Blocks/
+!.config/i3blocks/Blocks/*
