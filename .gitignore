@@ -24,6 +24,9 @@
 !.config/bash/*/
 !.config/bash/*/*
 
+# Lock image
+!.xlock/icon.png
+
 # Installed pacman apps
 !.config/.apps
 
