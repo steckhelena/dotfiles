@@ -1,14 +1,23 @@
-#!/bin/bash
+#!/bin/bash 
 
-statusLine=$(amixer get Master | tail -n 1)
-Vol=$(echo "${statusLine}" | awk -F ' ' '{print $5}' | tr -d '[]%')
-Mute=$(amixer -c 0 get Master | grep "Mono:" | awk '{print $6}' | tr -d "[-]")
+Vol=$(amixer -c 0 -M get Master | grep "Mono:" | awk '{print $4}' | tr -d "[ %]")
+Mute=$(amixer -c 0 -M get Master | grep "Mono:" | awk '{print $6}' | tr -d "[-]")
 
-if [ "$Mute" = "off" ];then
+if [ "$Mute" = "off" ];then 
     echo -e " Mute"
 else
-    echo -e " $Vol %"
-fi
-
+    if [ "$Vol" -gt "80" ];then
+        echo -e " $Vol %"
+    elif [ "$Vol" -gt "60" ];then
+        echo -e " $Vol %"
+    elif [ "$Vol" -gt "40" ];then
+        echo -e " $Vol %"
+    elif [ "$Vol" -gt "20" ];then
+        echo -e " $Vol %"
+    elif [ "$Vol" -gt "0" ];then 
+        echo -e " $Vol %"
+    fi 
+fi 
+ 
 unset Vol
 unset Mute
