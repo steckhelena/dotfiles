@@ -2,6 +2,7 @@
 
 Bat=$(acpi | cut -d " " -f4 | tr -d "%,")
 Adapt=$(acpi -a | cut -d " " -f3)
+Remain=$(acpi | cut -d " " -f5 | cut -d ":" -f1-2)
 
 if [ "$Adapt" = "on-line" ];then
 	icon0=""
@@ -22,13 +23,13 @@ if [ -z "$Bat" ];then
 elif [ "$Bat" -gt "100" ];then 
      bat="$icon4 Full"
 elif [ "$Bat" -gt "90" ];then 
-     bat="$icon3 $Bat %"
+     bat="$icon3 $Bat%"
 elif [ "$Bat" -gt "60" ];then 
-     bat="$icon2 $Bat %"
+     bat="$icon2 $Bat%"
 elif [ "$Bat" -gt "30" ];then 
-     bat="$icon1 $Bat %"
+     bat="$icon1 $Bat%"
 elif [ "$Bat" -lt "30" ];then
-    bat="$icon0 $Bat %"
+    bat="$icon0 $Bat%"
 fi 
 
-echo -e "$bat"
+echo -e "$bat $Remain"
