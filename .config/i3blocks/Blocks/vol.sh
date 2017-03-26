@@ -7,17 +7,17 @@ if [ "$Mute" = "off" ];then
     echo -e " Mute"
 else
     if [ "$Vol" -gt "80" ];then
-        echo -e " $Vol %"
+        echo -e " $Vol%"
     elif [ "$Vol" -gt "60" ];then
-        echo -e " $Vol %"
+        echo -e " $Vol%"
     elif [ "$Vol" -gt "40" ];then
-        echo -e " $Vol %"
+        echo -e " $Vol%"
     elif [ "$Vol" -gt "20" ];then
-        echo -e " $Vol %"
+        echo -e " $Vol%"
     elif [ "$Vol" -gt "0" ];then 
-        echo -e " $Vol %"
-    fi 
-fi 
+        echo -e " $Vol%"
+    fi
+fi
  
 unset Vol
 unset Mute
