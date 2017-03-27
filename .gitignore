@@ -11,8 +11,9 @@
 # Common folders
 !.config/
 
-# Xresources
+# X
 !.Xresources
+!.XCompose
 
 # Bash
 !.bashrc

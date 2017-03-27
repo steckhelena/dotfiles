@@ -168,9 +168,9 @@ bindcode 238 exec "kbdlight up 6"
 bindcode 173 exec "playerctl previous"
 bindcode 172 exec "playerctl play-pause"
 bindcode 171 exec "playerctl next"
-bindcode 121 exec "amixer -M set Master toggle"
-bindcode 122 exec "amixer -M set Master 5%-"
-bindcode 123 exec "amixer -M set Master 5%+"
+bindcode 121 exec "amixer -q -M set Master toggle"
+bindcode 122 exec "amixer -q -M set Master 5%-"
+bindcode 123 exec "amixer -q -M set Master 5%+"
 
 ###################################################################
 # System
@@ -184,8 +184,11 @@ exec --no-startup-id "xautolock -time 15 -locker '~/.config/i3/scripts/lock.sh'"
 # Enables lock after sleep
 exec --no-startup-id "xss-lock -- ~/.config/i3/scripts/lock.sh"
 
-# System sleep menu
+# System power menu
 bindsym $mod+Shift+p exec ~/.config/i3/scripts/sysmenu.sh
+
+# System power menu
+bindsym $mod+Shift+d exec ~/.config/i3/scripts/kbdlayout.sh
 
 # Disable nvidia power hungry card
 exec --no-startup-id "sudo ~/.config/i3/scripts/disable_gpu.sh"
