@@ -155,6 +155,9 @@ bindsym $mod+r mode "resize"
 ###################################################################
 # Mac specific keybinds
 ###################################################################
+# Keyboard brightness
+bindcode 232 exec "~/.config/i3/scripts/backlight_control.sh -d 5"
+bindcode 233 exec "~/.config/i3/scripts/backlight_control.sh -i 5"
 
 # Keyboard brightness
 bindcode 237 exec "kbdlight down 6"
