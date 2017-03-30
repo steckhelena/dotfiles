@@ -196,6 +196,12 @@ bindsym $mod+Shift+d exec ~/.config/i3/scripts/kbdlayout.sh
 # Disable nvidia power hungry card
 exec --no-startup-id "sudo ~/.config/i3/scripts/disable_gpu.sh"
 
+# Network manger GUI
+exec --no-startup-id nm-applet
+
+# Enables redshift, to make display warmer
+exec --no-startup-id redshift-gtk
+
 ###################################################################
 # Windows
 ###################################################################
