@@ -202,6 +202,9 @@ exec --no-startup-id nm-applet
 # Enables redshift, to make display warmer
 exec --no-startup-id redshift-gtk
 
+# Loads brightness
+exec --no-startup-id "~/.config/i3/scripts/backlight_control.sh -l"
+
 ###################################################################
 # Windows
 ###################################################################
