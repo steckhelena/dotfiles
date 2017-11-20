@@ -286,8 +286,8 @@ exec --no-startup-id "i3-msg 'workspace \"1:\"; append_layout ~/.config/i3/wo
 exec --no-startup-id firefox
 
 # Workspace 2: Atom
-exec --no-startup-id "i3-msg 'workspace \"2:✍\"; append_layout ~/.config/i3/workspaces/2.json'"
-exec --no-startup-id atom
+# exec --no-startup-id "i3-msg 'workspace \"2:✍\"; append_layout ~/.config/i3/workspaces/2.json'"
+# exec --no-startup-id atom
 
 # Workspace 3: Spotify
 exec --no-startup-id "i3-msg 'workspace \"3:♪\"; append_layout ~/.config/i3/workspaces/3.json'"
@@ -295,10 +295,10 @@ exec --no-startup-id deluge-gtk
 exec --no-startup-id "LD_PRELOAD=/usr/lib/libcurl.so.3:/home/steckmarco/spotifywm/spotifywm.so /usr/share/spotify/spotify"
 
 # Workspace 4: Science Bitch!
-exec --no-startup-id "i3-msg 'workspace \"4:∮\"; append_layout ~/.config/i3/workspaces/4.json'"
-exec --no-startup-id qalculate-gtk
-exec --no-startup-id xfce4-terminal --hide-menubar --role="terminal-4" -e python3
-exec --no-startup-id octave --force-gui
+# exec --no-startup-id "i3-msg 'workspace \"4:∮\"; append_layout ~/.config/i3/workspaces/4.json'"
+# exec --no-startup-id qalculate-gtk
+# exec --no-startup-id xfce4-terminal --hide-menubar --role="terminal-4" -e python3
+# exec --no-startup-id octave --force-gui
 
 # Workspace 10: Terminal
 exec --no-startup-id "i3-msg 'workspace \"10:¶\"; append_layout ~/.config/i3/workspaces/10.json'"

@@ -12,6 +12,7 @@
 !.config/
 
 # X
+!.xinitrc
 !.Xresources
 !.XCompose
 
@@ -30,6 +31,9 @@
 
 # Installed pacman apps
 !.config/.apps
+
+# Vim
+!.vimrc
 
 # i3
 !.config/i3/
