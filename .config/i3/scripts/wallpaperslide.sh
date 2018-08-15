@@ -6,6 +6,8 @@ bgtimer=300
 # Changes to a random wallpaper in bgfolder after the seconds defined by bgtimer
 while true
 do
-feh --randomize --bg-fill $bgfolder/*
-sleep $bgtimer
+	wallpaperfile=$(ls $bgfolder | sort -R | head -n 1)
+	feh --bg-fill $bgfolder/$wallpaperfile
+	cp $bgfolder/$wallpaperfile /usr/share/lightdmwallpaper/.current
+	sleep $bgtimer
 done
