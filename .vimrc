@@ -22,6 +22,17 @@ silent! while 0
   set nocompatible
 silent! endwhile
 
+" Vundle configuration
+filetype off
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'mboughaba/i3config.vim'
+
+call vundle#end()
+filetype plugin indent on
+
 " Allow backspacing over everything in insert mode.
 set backspace=indent,eol,start
 
@@ -33,9 +44,6 @@ set wildmenu		" display completion matches in a status line
 " Make ctrl-U and ctrl-W allow to undo changes
 inoremap <c-u> <c-g>u<c-u>
 inoremap <c-w> <c-g>u<c-w>
-
-" Starts pathogen
-execute pathogen#infect()
 
 " Instead of failing a command raise a dialog asking for confirm on saving the
 " file
@@ -121,6 +129,9 @@ if has("autocmd")
       \ | endif
 
   augroup END
+
+  " Sets rasi as a css file
+  autocmd BufNewFile,BufRead *.rasi   set syntax=css
 
 endif " has("autocmd")
 
