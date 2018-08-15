@@ -26,6 +26,9 @@
 !.config/bash/*/
 !.config/bash/*/*
 
+# Zsh
+.zshrc
+
 # Lock image
 !.xlock/icon.png
 
@@ -35,14 +38,19 @@
 # Vim
 !.vimrc
 
+# rofi
+!.config/rofi/
+!.config/rofi/*
+
+# xfce4 terminal
+!.config/xfce4/terminal/terminalrc
+
 # i3
 !.config/i3/
 !.config/i3/config
-!.config/i3/i3blocks.conf
 !.config/i3/scripts/
 !.config/i3/scripts/*
 !.config/i3/workspaces/
 !.config/i3/workspaces/*
-!.config/i3blocks/
-!.config/i3blocks/Blocks/
-!.config/i3blocks/Blocks/*
+!.config/polybar/
+!.config/polybar/*
