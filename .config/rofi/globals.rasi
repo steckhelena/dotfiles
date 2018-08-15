@@ -1,0 +1,34 @@
+* {
+	background-color:            #181818;
+	text-color:                  #d3d7cfFF;
+	selbg:                       #215d9c;
+	actbg:                       #262626;
+	urgbg:                       #e53935;
+	winbg:			             #26c6da;
+
+	selected-normal-foreground:  @winbg;
+	normal-foreground:           @text-color;
+	selected-normal-background:  @actbg;
+	normal-background:           @background-color;
+
+	selected-urgent-foreground:  @background-color;
+	urgent-foreground:           @text-color;
+	selected-urgent-background:  @urgbg;
+	urgent-background:           @background-color;
+
+	selected-active-foreground:  @winbg;
+	active-foreground:           @text-color;
+	selected-active-background:  @actbg;
+	active-background:           @selbg;
+
+	line-margin:                 2;
+	line-padding:                2;
+	separator-style:             "none";
+	hide-scrollbar:              "true";
+	margin:                      0;
+	padding:                     0;
+}
+
+window {
+	margin:                      27px 0 0 0;
+}
