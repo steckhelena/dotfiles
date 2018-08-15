@@ -42,8 +42,14 @@ bindsym $mod+Shift+q kill
 # lock screen
 bindsym $mod+Shift+Control+l exec "~/.config/i3/scripts/lock.sh"
 
+# System power menu
+bindsym $mod+Shift+p exec "~/.config/i3/scripts/sysmenu.sh &"
+
+# Audio output menu
+bindsym $mod+Shift+m exec "~/.config/i3/scripts/sel_audio_dev.sh &"
+
 # start rofi (a program launcher)
-bindsym $mod+space exec rofi -show run -lines 3
+bindsym $mod+space exec rofi -show combi -theme LaunchMenu
 
 # change focus
 bindsym $mod+j focus left
@@ -123,8 +129,6 @@ bindsym $mod+Shift+0 move container to workspace $ws10; workspace $ws10
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
-# exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Warning, autodestroy sequence detected, do you wish to proceed with it grand master of universe?' -b 'Yes, do as i command for i am your master' 'i3-msg exit'"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -153,27 +157,40 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 ###################################################################
+# Multimedia Keys
+###################################################################
+# Pulse Audio controls
+bindsym XF86AudioRaiseVolume exec --no-startup-id pulseaudio-ctl up 1 #increase sound volume
+bindsym XF86AudioLowerVolume exec --no-startup-id pulseaudio-ctl down 1 #decrease sound volume
+bindsym XF86AudioMute exec --no-startup-id pulseaudio-ctl mute # mute sound
+
+# Media player controls
+bindsym XF86AudioPlay exec --no-startup-id "playerctl play-pause"
+bindsym XF86AudioNext exec --no-startup-id "playerctl next"
+bindsym XF86AudioPrev exec --no-startup-id "playerctl previous"
+
+###################################################################
 # Mac specific keybinds
 ###################################################################
 # Keyboard brightness
-bindcode 232 exec "~/.config/i3/scripts/backlight_control.sh -d 5"
-bindcode 233 exec "~/.config/i3/scripts/backlight_control.sh -i 5"
+# bindcode 232 exec "~/.config/i3/scripts/backlight_control.sh -d 5"
+# bindcode 233 exec "~/.config/i3/scripts/backlight_control.sh -i 5"
 
 # Keyboard brightness
-bindcode 237 exec "kbdlight down 6"
-bindcode 238 exec "kbdlight up 6"
+# bindcode 237 exec "kbdlight down 6"
+# bindcode 238 exec "kbdlight up 6"
 
 # Swipe left and right
-#bindsym --whole-window button8 workspace prev
-#bindsym --whole-window button9 workspace next
+# bindsym --whole-window button8 workspace prev
+# bindsym --whole-window button9 workspace next
 
 # Media settings
-bindcode 173 exec "playerctl previous"
-bindcode 172 exec "playerctl play-pause"
-bindcode 171 exec "playerctl next"
-bindcode 121 exec "amixer -q -M set Master toggle"
-bindcode 122 exec "amixer -q -M set Master 5%-"
-bindcode 123 exec "amixer -q -M set Master 5%+"
+# bindcode 173 exec "playerctl previous"
+# bindcode 172 exec "playerctl play-pause"
+# bindcode 171 exec "playerctl next"
+# bindcode 121 exec "amixer -q -M set Master toggle"
+# bindcode 122 exec "amixer -q -M set Master 5%-"
+# bindcode 123 exec "amixer -q -M set Master 5%+"
 
 ###################################################################
 # System
@@ -187,45 +204,34 @@ exec --no-startup-id "xautolock -time 15 -locker '~/.config/i3/scripts/lock.sh'"
 # Enables lock after sleep
 exec --no-startup-id "xss-lock -- ~/.config/i3/scripts/lock.sh"
 
-# System power menu
-bindsym $mod+Shift+p exec "~/.config/i3/scripts/sysmenu.sh &"
-
 # System keyboard menu
 bindsym $mod+Shift+d exec ~/.config/i3/scripts/kbdlayout.sh
 
 # Disable nvidia power hungry card
-exec --no-startup-id "sudo ~/.config/i3/scripts/disable_gpu.sh"
+# exec --no-startup-id "sudo ~/.config/i3/scripts/disable_gpu.sh"
 
 # Network manger GUI
 exec --no-startup-id nm-applet
 
+# Nextcloud sync clien
+exec --no-startup-id nextcloud
+
 # Enables redshift, to make display warmer
 exec --no-startup-id redshift-gtk
-
-# Loads brightness
-exec --no-startup-id "~/.config/i3/scripts/backlight_control.sh -l"
 
 ###################################################################
 # Windows
 ###################################################################
-# Web Browser
-set $ws1 "1:"
-# Text editor
-set $ws2 "2:✍"
-# Music
-set $ws3 "3:♪"
-# Calculator
-set $ws4 "4:∮"
-# Random
-set $ws5 "5:?"
-set $ws6 "6:?"
-set $ws7 "7:?"
-# Mpv
-set $ws8 "8:▶"
-# Streamlink twitch
-set $ws9 "9:T"
-# Terminal
-set $ws10 "10:¶"
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
 set $wsNull desktop
 
 #Define colors used
@@ -237,22 +243,24 @@ set $i-border-color #666666
 set $text-color     #ffffff
 set $i-text-color   #cecece
 
-# Start i3bar to display a workspace bar
-bar {
-        position top
-        #status_command i3status
-        status_command i3blocks -c ~/.config/i3/i3blocks.conf
+exec --no-startup-id polybar main
 
-        strip_workspace_numbers yes
-        colors {
-            background $bg-color
-            separator #757575
-        #                  border             background         text
-        focused_workspace  $border-color      $bg-color          $text-color
-        inactive_workspace $i-border-color    $i-bg-color        $i-text-color
-        urgent_workspace   $u-bg-color        $u-bg-color        $text-color
-        }
-}
+# Start i3bar to display a workspace bar
+#bar {
+#        position top
+#        #status_command i3status
+#        status_command i3blocks -c ~/.config/i3/i3blocks.conf
+#
+#        strip_workspace_numbers yes
+#        colors {
+#            background $bg-color
+#            separator #757575
+#        #                  border             background         text
+#        focused_workspace  $border-color      $bg-color          $text-color
+#        inactive_workspace $i-border-color    $i-bg-color        $i-text-color
+#        urgent_workspace   $u-bg-color        $u-bg-color        $text-color
+#        }
+#}
 
 # i3 gaps
 for_window [class="^.*"] border pixel 2
@@ -273,35 +281,35 @@ for_window [window_role="task_dialog"] floating enable;border normal
 ###################################################################
 #Open applications on specific workspaces
 assign [class="Firefox"] $ws1
-assign [class="Atom"] $ws2
-assign [class="spotify"] $ws3
+for_window [class="Firefox"] layout tabbed
+for_window [class="Spotify"] move to workspace $ws2
 assign [title="Deluge"] $ws3
-assign [title="Qalculate!"] $ws4
-assign [class="octave-gui"] $ws4
-assign [title="VLC media player"] $ws8
-assign [class="streamlink-twitch-gui"] $ws9
+assign [class="Steam"] $ws4
+for_window [class="Steam"] layout tabbed
+assign [class="discord"] $ws5
+assign [title="VLC media player"] $ws7
+assign [class="streamlink-twitch-gui"] $ws8
 
 # Workspace 1: Web
-exec --no-startup-id "i3-msg 'workspace \"1:\"; append_layout ~/.config/i3/workspaces/1.json'"
+exec --no-startup-id "i3-msg 'workspace \"1\"; append_layout ~/.config/i3/workspaces/1.json'"
 exec --no-startup-id firefox
 
-# Workspace 2: Atom
-# exec --no-startup-id "i3-msg 'workspace \"2:✍\"; append_layout ~/.config/i3/workspaces/2.json'"
-# exec --no-startup-id atom
+# Workspace 2: Spotify
+exec --no-startup-id spotify
 
-# Workspace 3: Spotify
-exec --no-startup-id "i3-msg 'workspace \"3:♪\"; append_layout ~/.config/i3/workspaces/3.json'"
-exec --no-startup-id deluge-gtk
-exec --no-startup-id "LD_PRELOAD=/usr/lib/libcurl.so.3:/home/steckmarco/spotifywm/spotifywm.so /usr/share/spotify/spotify"
+# Workspace 3: Deluge
+#exec --no-startup-id deluge-gtk
 
-# Workspace 4: Science Bitch!
-# exec --no-startup-id "i3-msg 'workspace \"4:∮\"; append_layout ~/.config/i3/workspaces/4.json'"
-# exec --no-startup-id qalculate-gtk
-# exec --no-startup-id xfce4-terminal --hide-menubar --role="terminal-4" -e python3
-# exec --no-startup-id octave --force-gui
+# Workspace 4: Steam
+exec --no-startup-id "i3-msg 'workspace \"4\"; append_layout ~/.config/i3/workspaces/4.json'"
+
+# Workspace 9: Config
+exec --no-startup-id "i3-msg 'workspace \"9\"; append_layout ~/.config/i3/workspaces/9.json'"
+exec --no-startup-id pavucontrol
+exec --no-startup-id xfce4-terminal --hide-menubar --role="htop-terminal" -e htop
 
 # Workspace 10: Terminal
-exec --no-startup-id "i3-msg 'workspace \"10:¶\"; append_layout ~/.config/i3/workspaces/10.json'"
+exec --no-startup-id "i3-msg 'workspace \"10\"; append_layout ~/.config/i3/workspaces/10.json'"
 exec --no-startup-id xfce4-terminal --hide-menubar --role="terminal-1"
 exec --no-startup-id xfce4-terminal --hide-menubar --role="terminal-2" -e ranger
 exec --no-startup-id xfce4-terminal --hide-menubar --role="terminal-3"
