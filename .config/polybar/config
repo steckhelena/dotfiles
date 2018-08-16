@@ -79,8 +79,8 @@ modules-right = filesystem cpu memory temperature ip wlan download upload
 
 tray-position = right
 tray-padding = 2
+tray-backgroud = ${colors.background}
 ;tray-transparent = true
-;tray-background = #0063ff
 
 ;wm-restack = bspwm
 ;wm-restack = i3
