@@ -195,6 +195,9 @@ bindsym XF86AudioPrev exec --no-startup-id "playerctl previous"
 ###################################################################
 # System
 ###################################################################
+# Enables numlock
+exec_always --no-startup-id numlockx on
+
 # Composite manager
 exec --no-startup-id compton -f
 
