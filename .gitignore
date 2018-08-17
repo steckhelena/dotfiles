@@ -5,7 +5,6 @@
 !.gitignore
 
 # Git
-!.gitignore_global
 !.gitconfig
 
 # Common folders
@@ -20,11 +19,6 @@
 !.bashrc
 !.bash_profile
 !.bash_logout
-
-!.config/bash/
-!.config/bash/*
-!.config/bash/*/
-!.config/bash/*/*
 
 # Zsh
 .zshrc
