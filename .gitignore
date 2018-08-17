@@ -21,7 +21,7 @@
 !.bash_logout
 
 # Zsh
-.zshrc
+!.zshrc
 
 # Lock image
 !.xlock/icon.png
