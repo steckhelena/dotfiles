@@ -70,8 +70,14 @@ source $ZSH/oh-my-zsh.sh
 # User configuration
 export DEFAULT_USER=steckmarco
 export EDITOR='vim'
+
+# Cuda directories
 export PATH="${PATH}:/opt/cuda/bin"
 export CPATH="${CPATH}:/opt/cuda/include"
+
+# Python virtualenv
+export WORKON_HOME=~/.virtualenvs
+source /usr/bin/virtualenvwrapper.sh
 
 ### Examples:
 # export MANPATH="/usr/local/man:$MANPATH"
