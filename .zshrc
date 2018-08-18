@@ -70,6 +70,8 @@ source $ZSH/oh-my-zsh.sh
 # User configuration
 export DEFAULT_USER=steckmarco
 export EDITOR='vim'
+export PATH="${PATH}:/opt/cuda/bin"
+export CPATH="${CPATH}:/opt/cuda/include"
 
 ### Examples:
 # export MANPATH="/usr/local/man:$MANPATH"
