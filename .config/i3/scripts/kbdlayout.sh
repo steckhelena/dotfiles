@@ -1,6 +1,6 @@
 #!/bin/bash
 
-res=$(echo "US-International;US-Default" | rofi -sep ";" -dmenu -p "Keyboard Layout:" -hide-scrollbar -width 200 -lines 2 -i -theme KeyboardSelMenu)
+res=$(echo "	US-International;	US-Default" | rofi -sep ";" -dmenu -p "Keyboard Layout:" -hide-scrollbar -width 200 -lines 2 -i -theme KeyboardSelMenu)
 
 if [[ $res = *"US-International"* ]]; then
     setxkbmap -layout "us" -variant "intl"
