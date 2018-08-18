@@ -1,41 +1,13 @@
-configuration {
-	display-drun:    "";
-	display-run:	 "";
-	show-icons:      true;
-	modi:            "combi";
-	combi-modi:      "drun,run";
-}
-
 window {
-	location:	 north west;
-	anchor:		 north west;
-	height:		 100%;
-	width:		 22%;
-	orientation: horizontal;
-	children:	 [mainbox];
+    anchor:     center;
+    location:   center;
+    width:      15%;
+    children:   [ vertibox ];
 }
 
-mainbox {
-	spacing:  0.8em;
-	children: [ entry,listview,sidebar ];
-}
-
-button { padding: 5px 2px; }
-
-button selected {
-	background-color: @active-background;
-	text-color:       @background-color;
-}
-
-inputbar {
-	padding: 5px;
-	spacing: 5px;
-}
-
-listview {
-	spacing: 0.5em;
-	dynamic: false;
-	cycle:   true;
+vertibox {
+    orientation: vertical;
+    children:   [ listview ];
 }
 
 element { padding: 10px; }

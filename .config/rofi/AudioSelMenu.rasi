@@ -1,5 +1,3 @@
-@import "globals.rasi"
-
 configuration {
 	lines:     2;
 }
