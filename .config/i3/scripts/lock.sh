@@ -7,7 +7,7 @@ tmpbg="$HOME/.cache/i3lock/l_blur.png"
 #(( $# )) && { icon=$1; }
 
 scrot -z $tmpbg
-convert $tmpbg  -filter Gaussian -resize 20% \
+convert $tmpbg  -filter Gaussian -resize 20% -fill black -colorize 60% \
       -define filter:sigma=0.5 -resize 500% $tmpbg
 betterlockscreen -l blur
 #convert "$tmpbg" "$icon" -gravity center -composite -matte "$tmpbg"
