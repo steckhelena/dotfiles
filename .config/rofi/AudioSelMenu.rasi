@@ -16,6 +16,14 @@ vertibox {
 
 element { padding: 10px; }
 
+prompt {
+	padding:	5px;
+}
+
+listview {
+	spacing: 0;
+}
+
 entry {
 	expand:         false;
 	text-color:     @normal-foreground;
