@@ -1,10 +1,15 @@
 alsa-utils
+arduino
+arduino-docs
 autoconf
 automake
 awesome-terminal-fonts
 bash
+betterlockscreen
 binutils
 bison
+blueman
+bluez-utils
 broadcom-wl
 bzip2
 compton
@@ -17,7 +22,6 @@ dialog
 diffutils
 discord
 dmenu
-dunst
 e2fsprogs
 efibootmgr
 fakeroot
@@ -42,12 +46,12 @@ grub
 gzip
 htop
 i3-gaps
-i3lock
 imagemagick
 inetutils
 iproute2
 iputils
 jfsutils
+jpegexiforient
 less
 lib32-gtk2
 lib32-gtk3
@@ -69,6 +73,7 @@ m4
 make
 man-db
 man-pages
+mcomix
 mdadm
 nano
 nautilus
@@ -121,6 +126,7 @@ tar
 terminus-font
 texinfo
 ttf-font-awesome
+unrar
 usbutils
 util-linux
 vi
@@ -130,6 +136,7 @@ which
 wine
 wine-mono
 wine_gecko
+winetricks
 xfce4-terminal
 xfsprogs
 xorg-xev
