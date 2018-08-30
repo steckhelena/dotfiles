@@ -22,6 +22,9 @@
 
 # Zsh
 !.zshrc
+!.oh-my-custom-zsh/
+!.oh-my-custom-zsh/themes/
+!.oh-my-custom-zsh/themes/my_agnoster.zsh-theme
 
 # Lock image
 !.xlock/
@@ -38,6 +41,8 @@
 !.config/rofi/*
 
 # xfce4 terminal
+!.config/xfce4/
+!.config/xfce4/terminal/
 !.config/xfce4/terminal/terminalrc
 
 # i3
