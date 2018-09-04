@@ -2,6 +2,7 @@ window {
     anchor:     center;
     location:   center;
     width:      15%;
+	margin:     0 0 0 0;
     children:   [ vertibox ];
 }
 
@@ -11,13 +12,6 @@ vertibox {
 }
 
 element { padding: 10px; }
-
-entry {
-	expand:         false;
-	text-color:     @normal-foreground;
-	vertical-align: 1;
-	padding:        5px;
-}
 
 element normal.normal {
 	background-color: @normal-background;
