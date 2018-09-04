@@ -81,6 +81,14 @@ export CPATH="${CPATH}:/opt/cuda/include"
 export WORKON_HOME=~/.virtualenvs
 source /usr/bin/virtualenvwrapper.sh
 
+# Starts ssh-agent
+if ! pgrep -u "$USER" ssh-agent > /dev/null; then
+    ssh-agent > ~/.ssh-agent-thing
+fi
+if [[ "$SSH_AGENT_PID" == "" ]]; then
+    eval "$(<~/.ssh-agent-thing)"
+fi
+
 ### Examples:
 # export MANPATH="/usr/local/man:$MANPATH"
 # You may need to manually set your language environment
