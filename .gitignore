@@ -35,6 +35,8 @@
 
 # Vim
 !.vimrc
+!.vim/
+!.vim/.ycm_extra_conf.py
 
 # rofi
 !.config/rofi/
