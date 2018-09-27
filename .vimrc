@@ -22,6 +22,10 @@ silent! while 0
   set nocompatible
 silent! endwhile
 
+" ycm config
+let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
+map <F9> :YcmCompleter FixIt<CR>
+
 " Vundle configuration
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -158,11 +162,6 @@ set shiftwidth=4
 set softtabstop=0 noexpandtab
 
 autocmd FileType python setlocal expandtab
-
-" syntastic config 
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
 
 " Enables ARM syntax
 au BufNewFile,BufRead *.s,*.S set filetype=arm " arm = armv6/7
