@@ -367,7 +367,7 @@ label-disconnected = %ifname% disconnected
 type = internal/date
 interval = 1
 
-date = "%Y-%m-%d -"
+date = "%d-%m-%Y -"
 date-alt = 
 
 time = %H:%M:%S
