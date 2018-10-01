@@ -83,7 +83,7 @@ source /usr/bin/virtualenvwrapper.sh
 
 # Starts ssh-agent
 if ! pgrep -u "$USER" ssh-agent > /dev/null; then
-    ssh-agent > ~/.ssh-agent-thing
+	eval "$(ssh-agent -s)" > ~/.ssh-agent-thing
 fi
 
 ### Examples:
