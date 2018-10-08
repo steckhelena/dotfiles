@@ -13,10 +13,23 @@ BASE_FLAGS = [
         '-fexceptions',
         '-ferror-limit=10000',
         '-DNDEBUG',
-        '-std=c++1z',
-        '-xc++',
         '-I/usr/lib/',
         '-I/usr/include/'
+        ]
+
+CPP_FLAGS = [
+        '-std=c++1z',
+        '-xc++'
+        ]
+
+CUDA_FLAGS = [
+    '-x',
+    'cuda',
+    '--cuda-path=/opt/cuda',
+    ]
+
+CUDA_SOURCE_EXTENSIONS = [
+        '.cu'
         ]
 
 SOURCE_EXTENSIONS = [
@@ -25,7 +38,7 @@ SOURCE_EXTENSIONS = [
         '.cc',
         '.c',
         '.m',
-        '.mm'
+        '.mm',
         ]
 
 SOURCE_DIRECTORIES = [
@@ -37,7 +50,8 @@ HEADER_EXTENSIONS = [
         '.h',
         '.hxx',
         '.hpp',
-        '.hh'
+        '.hh',
+        '.cuh'
         ]
 
 HEADER_DIRECTORIES = [
@@ -53,7 +67,7 @@ def IsHeaderFile(filename):
 def GetCompilationInfoForFile(database, filename):
     if IsHeaderFile(filename):
         basename = os.path.splitext(filename)[0]
-        for extension in SOURCE_EXTENSIONS:
+        for extension in SOURCE_EXTENSIONS + CUDA_SOURCE_EXTENSIONS:
             # Get info from the source files by replacing the extension.
             replacement_file = basename + extension
             if os.path.exists(replacement_file):
@@ -172,6 +186,12 @@ def FlagsForFile(filename):
         include_flags = FlagsForInclude(root)
         if include_flags:
             final_flags = final_flags + include_flags
+    
+    if os.path.splitext(root)[1] in CUDA_SOURCE_EXTENSIONS:
+        final_flags = final_flags + CUDA_FLAGS
+    else:
+        final_flags = final_flags + CPP_FLAGS
+
     return {
             'flags': final_flags,
             'do_cache': True

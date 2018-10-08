@@ -25,6 +25,8 @@ silent! endwhile
 " ycm config
 let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
 map <F9> :YcmCompleter FixIt<CR>
+let g:ycm_max_diagnostics_to_display = 0 " Removes ycm diagnostics limit
+
 
 " Vundle configuration
 filetype off
