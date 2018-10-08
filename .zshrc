@@ -78,6 +78,12 @@ export EDITOR='vim'
 export PATH="${PATH}:/opt/cuda/bin"
 export CPATH="${CPATH}:/opt/cuda/include"
 
+# Sets up pkg-config path
+export PKG_CONFIG_PATH="${PKG_CONFIG_PATH}/usr/local/lib64/pkgconfig/"
+
+# Sets up lib64 path
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib64/
+
 # Python virtualenv
 export WORKON_HOME=~/.virtualenvs
 source /usr/bin/virtualenvwrapper.sh
