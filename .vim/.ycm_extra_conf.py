@@ -23,9 +23,8 @@ CPP_FLAGS = [
         ]
 
 CUDA_FLAGS = [
-    '-x',
-    'cuda',
-    '--cuda-path=/opt/cuda',
+    '-xcuda',
+    '--cuda-path=/opt/cuda'
     ]
 
 CUDA_SOURCE_EXTENSIONS = [
