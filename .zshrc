@@ -65,6 +65,7 @@ plugins=(
   git
   virtualenv
   virtualenvwrapper
+  ssh-agent
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -80,11 +81,6 @@ export CPATH="${CPATH}:/opt/cuda/include"
 # Python virtualenv
 export WORKON_HOME=~/.virtualenvs
 source /usr/bin/virtualenvwrapper.sh
-
-# Starts ssh-agent
-if ! pgrep -u "$USER" ssh-agent > /dev/null; then
-	eval "$(ssh-agent -s)" > ~/.ssh-agent-thing
-fi
 
 ### Examples:
 # export MANPATH="/usr/local/man:$MANPATH"
