@@ -246,7 +246,7 @@ set $i-border-color #666666
 set $text-color     #ffffff
 set $i-text-color   #cecece
 
-exec --no-startup-id polybar main
+exec --no-startup-id polybar -r main
 
 # Start i3bar to display a workspace bar
 #bar {
