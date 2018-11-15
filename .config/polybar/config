@@ -275,7 +275,7 @@ label-disconnected-underline = ${colors.network}
 
 [module/upload]
 type = internal/network
-interface = wlp6s0
+interface = wlp5s0
 interval = 1.0
 
 format-connected = <label-connected>
@@ -295,7 +295,7 @@ label-disconnected-underline = ${colors.network}
 
 [module/download]
 type = internal/network
-interface = wlp6s0
+interface = wlp5s0
 interval = 1.0
 
 format-connected = <label-connected>
@@ -319,7 +319,7 @@ label-disconnected-underline = ${colors.network}
 
 [module/wlan]
 type = internal/network
-interface = wlp6s0
+interface = wlp5s0
 interval = 3.0
 
 format-connected = <label-connected>
