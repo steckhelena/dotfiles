@@ -216,6 +216,9 @@ bindsym $mod+Shift+d exec ~/.config/i3/scripts/kbdlayout.sh
 # Network manger GUI
 exec --no-startup-id nm-applet
 
+# Bluetooth manager
+exec --no-startup-id blueman-applet
+
 # Nextcloud sync clien
 exec --no-startup-id nextcloud
 
