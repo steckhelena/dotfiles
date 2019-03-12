@@ -252,7 +252,7 @@ ramp-4 = 
 
 [module/ip]
 type = internal/network
-interface = wlp6s0
+interface = wlp5s0
 interval = 3.0
 
 format-connected = <label-connected>
