@@ -2,7 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-  export ZSH="/home/steckmarco/.oh-my-zsh"
+  export ZSH="/home/steckhelena/.oh-my-zsh"
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
@@ -55,7 +55,7 @@ COMPLETION_WAITING_DOTS="true"
 # HIST_STAMPS="mm/dd/yyyy"
 
 # Would you like to use another custom folder than $ZSH/custom?
-ZSH_CUSTOM=/home/steckmarco/.oh-my-custom-zsh
+ZSH_CUSTOM=/home/steckhelena/.oh-my-custom-zsh
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
@@ -71,7 +71,7 @@ plugins=(
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
-export DEFAULT_USER=steckmarco
+export DEFAULT_USER=steckhelena
 export EDITOR='vim'
 
 # Cuda directories

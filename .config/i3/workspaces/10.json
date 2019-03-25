@@ -3,7 +3,7 @@
     "border": "pixel",
     "current_border_width": 2,
     "floating": "auto_off",
-    "name": "Terminal - steckmarco@Fenrir:/home/steckmarco",
+    "name": "Terminal - steckhelena@Fenrir:/home/steckhelena",
     "percent": 0.5,
     "swallows": [
        {
@@ -38,7 +38,7 @@
             "border": "pixel",
             "current_border_width": 2,
             "floating": "auto_off",
-            "name": "Terminal - steckmarco@Fenrir:/home/steckmarco",
+            "name": "Terminal - steckhelena@Fenrir:/home/steckhelena",
             "percent": 0.5,
             "swallows": [
                {
