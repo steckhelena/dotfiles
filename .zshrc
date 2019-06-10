@@ -90,3 +90,6 @@ source /usr/bin/virtualenvwrapper.sh
 
 # Useful aliases
 alias tpr="tput reset"
+
+# Pipx
+export PATH="/home/$DEFAULT_USER/.local/bin:$PATH"
