@@ -36,6 +36,12 @@ floating_modifier $mod
 # start a terminal
 bindsym $mod+Return exec "xfce4-terminal --hide-menubar"
 
+# Fullscreen screenshot by pressing printscreen
+bindsym Print exec xfce4-screenshooter -f -s $HOME/Downloads/screenshot_`date +%Y-%m-%d_%H:%M:%S`.png
+
+# Screenshot menu by pressing $mod+printscreen 
+bindsym $mod+Print exec xfce4-screenshooter
+
 # kill focused window
 bindsym $mod+Shift+q kill
 
