@@ -292,8 +292,8 @@ for_window [window_role="task_dialog"] floating enable;border normal
 # Apps
 ###################################################################
 #Open applications on specific workspaces
-assign [class="Firefox"] $ws1
-for_window [class="Firefox"] layout tabbed
+assign [class="^[Ff][Ii][Rr][Ee][Ff][Oo][Xx]$"] $ws1
+for_window [class="^[Ff][Ii][Rr][Ee][Ff][Oo][Xx]$"] layout tabbed
 for_window [class="Spotify"] move to workspace $ws2
 assign [title="Deluge"] $ws3
 assign [title="calibre"] $ws3
