@@ -2,7 +2,7 @@
 
 #icon="$HOME/.xlock/icon.png"
 tmpimg="/tmp/screen.png"
-tmpln="$HOME/.cache/i3lock/l_blur.png"
+tmpln="$HOME/.cache/i3lock/current/l_blur.png"
 
 #(( $# )) && { icon=$1; }
 
