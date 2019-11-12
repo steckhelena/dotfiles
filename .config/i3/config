@@ -326,3 +326,6 @@ exec --no-startup-id "i3-msg 'workspace \"10\"; append_layout ~/.config/i3/works
 exec --no-startup-id xfce4-terminal --hide-menubar --role="terminal-1"
 exec --no-startup-id xfce4-terminal --hide-menubar --role="terminal-2" -e ranger
 exec --no-startup-id xfce4-terminal --hide-menubar --role="terminal-3"
+
+# Default startup workspace
+exec --no-startup-id i3-msg workspace 1
