@@ -15,6 +15,9 @@
 !.Xresources
 !.XCompose
 
+# Picom
+!.config/picom.conf
+
 # Bash
 !.bashrc
 !.bash_profile
