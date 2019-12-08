@@ -37,3 +37,6 @@ TextBlinkMode=TERMINAL_TEXT_BLINK_MODE_FOCUSED
 ShortcutsNoHelpkey=TRUE
 ShortcutsNoMenukey=TRUE
 ShortcutsNoMnemonics=TRUE
+MiscSearchDialogOpacity=100
+MiscShowUnsafePasteDialog=FALSE
+
