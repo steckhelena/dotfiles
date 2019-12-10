@@ -66,6 +66,7 @@ plugins=(
   virtualenv
   virtualenvwrapper
   ssh-agent
+  docker
 )
 
 source $ZSH/oh-my-zsh.sh
