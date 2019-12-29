@@ -24,6 +24,12 @@ Plug 'tpope/vim-fugitive'
 " in visual mode.
 Plug 'tpope/vim-commentary'
 
+" This plugin automatically closes brackets after pressing return
+Plug 'rstacruz/vim-closer'
+
+" This plugin automatically closes tags
+Plug 'alvan/vim-closetag'
+
 " This substitutes the standard vim directory browser with a better and more
 " responsive alternative. I also binded it to toggle with <C-n> for faster browsing.
 Plug 'scrooloose/nerdtree'
@@ -67,6 +73,7 @@ set ruler		" show the cursor position all the time
 set showcmd		" display incomplete commands
 set wildmenu		" display completion matches in a status line
 set incsearch	" Do incremental searching.
+set inccommand=nosplit " Shows live search and replace command changes(sexy)
 
 " Indenting options
 set tabstop=4
