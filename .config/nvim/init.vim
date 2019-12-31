@@ -25,7 +25,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-commentary'
 
 " This plugin automatically closes brackets after pressing return
-Plug 'rstacruz/vim-closer'
+Plug 'cohama/lexima.vim'
 
 " This plugin automatically closes tags
 Plug 'alvan/vim-closetag'
@@ -74,6 +74,16 @@ set showcmd		" display incomplete commands
 set wildmenu		" display completion matches in a status line
 set incsearch	" Do incremental searching.
 set inccommand=nosplit " Shows live search and replace command changes(sexy)
+
+" " This sets persistent undo
+if !isdirectory('$HOME/.config/nvim/undo')
+	" Creates undo directory if it does not exist
+    call mkdir('$HOME/.config/nvim/undo', "p")
+endif
+set undofile                " Save undos after file closes
+set undodir=$HOME/.config/nvim/undo " where to save undo histories
+set undolevels=1000         " How many undos
+set undoreload=10000        " number of lines to save for undo
 
 " Indenting options
 set tabstop=4
@@ -143,6 +153,12 @@ let g:airline_theme='oceanicnext'	" Using solarized theme
 let g:airline_powerline_fonts = 1	" Uses the beautiful powerline fonts
 let g:airline#extensions#tabline#enabled = 1	" Shows buffer tabline
 let g:airline#extensions#tabline#buffer_nr_show = 1	" Shows buffer number in tabline
+let g:airline#extensions#ale#enabled = 1 " Shows ALE errors and warning in tabline
+
+" Lexima to only close like endwise or after pressing <CR>
+let g:lexima_enable_endwise_rules = 1
+let g:lexima_enable_newline_rules = 1
+let g:lexima_enable_basic_rules = 0
 
 " NERDTree mapping toggle with ctrl+n
 map <C-n> :NERDTreeToggle<CR>
@@ -163,8 +179,24 @@ autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.gra
 " Enables deoplete
 let g:deoplete#enable_at_startup = 1
 
+" Registers ALE as a deoplete autocomplete source
+call deoplete#custom#source('ale', 'dup', v:false)
+
 " Disables ale autocomplete
 let g:ale_completion_enabled = 0
+
+" Enables some fixers for ale
+let g:ale_fixers = {
+\   '*': ['remove_trailing_lines', 'trim_whitespace'],
+\   'javascript': ['prettier', 'eslint'],
+\   'typescript': ['prettier', 'eslint'],
+\}
+
+" Enables autoimport for ts files
+let g:ale_completion_tsserver_autoimport = 1
+
+" Set this variable to 1 to fix files when you save them.
+let g:ale_fix_on_save = 1
 
 " Makes json show quotes because that default config is quite dumb
 let g:vim_json_syntax_conceal = 0
