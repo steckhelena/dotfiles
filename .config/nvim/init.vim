@@ -54,6 +54,7 @@ Plug 'othree/html5.vim'
 Plug 'MaxMEllon/vim-jsx-pretty'
 Plug 'jparise/vim-graphql'
 Plug 'elzr/vim-json'
+Plug 'neoclide/jsonc.vim'
 
 " This enables me using prettier for code fixing and formatting.
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
