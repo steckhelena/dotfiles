@@ -77,9 +77,9 @@ set incsearch	" Do incremental searching.
 set inccommand=nosplit " Shows live search and replace command changes(sexy)
 
 " " This sets persistent undo
-if !isdirectory('$HOME/.config/nvim/undo')
+if !isdirectory(glob ($HOME . '/.config/nvim/undo'))
 	" Creates undo directory if it does not exist
-    call mkdir('$HOME/.config/nvim/undo', "p")
+    call mkdir(glob ($HOME . '/.config/nvim/undo'), "p")
 endif
 set undofile                " Save undos after file closes
 set undodir=$HOME/.config/nvim/undo " where to save undo histories
