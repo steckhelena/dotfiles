@@ -30,6 +30,9 @@ Plug 'cohama/lexima.vim'
 " This plugin automatically closes tags
 Plug 'alvan/vim-closetag'
 
+" This plugin automatically adjusts indent options based on file type
+Plug 'tpope/vim-sleuth'
+
 " This substitutes the standard vim directory browser with a better and more
 " responsive alternative. I also binded it to toggle with <C-n> for faster browsing.
 Plug 'scrooloose/nerdtree'
@@ -197,7 +200,7 @@ let g:ale_fixers = {
 let g:ale_completion_tsserver_autoimport = 1
 
 " Set this variable to 1 to fix files when you save them.
-let g:ale_fix_on_save = 1
+let g:ale_fix_on_save = 0
 
 " Makes json show quotes because that default config is quite dumb
 let g:vim_json_syntax_conceal = 0
