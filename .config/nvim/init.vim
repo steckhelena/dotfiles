@@ -67,6 +67,9 @@ Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 Plug 'dense-analysis/ale'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
+" This adds a preview server to nvim for markdown files
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
+
 call plug#end()
 
 " Allow backspacing over everything in insert mode.
@@ -204,6 +207,10 @@ let g:ale_fix_on_save = 0
 
 " Makes json show quotes because that default config is quite dumb
 let g:vim_json_syntax_conceal = 0
+
+" Disables indentLine for markdown files, as it annoys the shit out of me this
+" conceal setting
+autocmd FileType markdown let g:indentLine_enabled = 0
 
 " Enable file type detection.
 " Use the default filetype settings, so that mail gets 'tw' set to 72,
