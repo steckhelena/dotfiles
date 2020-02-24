@@ -1,13 +1,20 @@
 [user]
-	name = Helena Steck
-	email = steckhelena@gmail.com
-
+  name = Helena Steck
+  email = steckhelena@gmail.com
 [core]
-	editor = vim
-	fileMode = false
-	excludesfile = /home/steckhelena/.gitignore_global
-	quotepath = false
-[diff]
-	tool = vimdiff
+  editor = vim
+  fileMode = false
+  excludesfile = /home/steckhelena/.gitignore_global
+  quotepath = false
 [merge]
-	tool = vimdiff
+  tool = vimdiff
+  keepBackup = false
+[mergetool]
+  prompt = false
+[mergetool "vimdiff"]
+  cmd = nvim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
+[difftool]
+  prompt = false
+[diff]
+  tool = vimdiff
+  keepBackup = false
