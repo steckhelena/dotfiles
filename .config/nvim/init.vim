@@ -54,7 +54,7 @@ Plug 'elzr/vim-json'
 Plug 'neoclide/jsonc.vim'
 
 " Use coc as language server client
-let g:coc_global_extensions = ['coc-vimlsp', 'coc-prettier', 'coc-tsserver', 'coc-html', 'coc-css', 'coc-yaml', 'coc-python', 'coc-xml', 'coc-git', 'coc-clangd', 'coc-actions']
+let g:coc_global_extensions = ['coc-vimlsp', 'coc-prettier', 'coc-tsserver', 'coc-html', 'coc-css', 'coc-yaml', 'coc-python', 'coc-xml', 'coc-git', 'coc-clangd', 'coc-actions', 'coc-eslint', 'coc-tslint']
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " This adds a preview server to nvim for markdown files
