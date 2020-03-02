@@ -41,6 +41,10 @@
 !.vim/
 !.vim/.ycm_extra_conf.py
 
+# Nvim
+!.config/nvim/
+!.config/nvim/init.vim
+
 # rofi
 !.config/rofi/
 !.config/rofi/*
