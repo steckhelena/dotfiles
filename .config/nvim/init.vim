@@ -1,21 +1,15 @@
 " This automatically installs the vim-plug plugin manager if
 " it is not already installed.
 if empty(glob('~/.config/nvim/autoload/plug.vim'))
-	silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
-				\ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-	autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+  silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
 " Initializing plugins
 call plug#begin('~/.config/nvim/plugged')
 " This is a color scheme for my nvim
 Plug 'mhartington/oceanic-next'
-
-" This plugin enables me using cs'" substitute ' with "
-" it also enables me to use ysiw" to surround a word with "
-" and to use ds" to remove surrounding ", also works with tags
-" and S in visual mode, yss" to surround whole line with ".
-Plug 'tpope/vim-surround'
 
 " This enables using git commands from nvim
 Plug 'tpope/vim-fugitive'
@@ -59,13 +53,9 @@ Plug 'jparise/vim-graphql'
 Plug 'elzr/vim-json'
 Plug 'neoclide/jsonc.vim'
 
-" This enables me using prettier for code fixing and formatting.
-Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
-
-" I use deoplete for autocomplete and ale for linting only(probably should
-" change this in the future)
-Plug 'dense-analysis/ale'
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+" Use coc as language server client
+let g:coc_global_extensions = ['coc-vimlsp', 'coc-prettier', 'coc-tsserver', 'coc-html', 'coc-css', 'coc-yaml', 'coc-python', 'coc-xml', 'coc-git', 'coc-clangd', 'coc-actions']
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " This adds a preview server to nvim for markdown files
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
@@ -84,8 +74,8 @@ set inccommand=nosplit " Shows live search and replace command changes(sexy)
 
 " " This sets persistent undo
 if !isdirectory(glob ($HOME . '/.config/nvim/undo'))
-	" Creates undo directory if it does not exist
-    call mkdir(glob ($HOME . '/.config/nvim/undo'), "p")
+  " Creates undo directory if it does not exist
+  call mkdir(glob ($HOME . '/.config/nvim/undo'), "p")
 endif
 set undofile                " Save undos after file closes
 set undodir=$HOME/.config/nvim/undo " where to save undo histories
@@ -119,7 +109,7 @@ set scrolloff=5
 " In many terminal emulators the mouse works just fine.
 " Position the cursor, Visually select and scroll with the mouse.
 if has('mouse')
-	set mouse=a
+  set mouse=a
 endif
 
 " Do not recognize octal numbers for Ctrl-A and Ctrl-X
@@ -130,7 +120,7 @@ let c_comment_strings=1
 
 " This sets the OceanicNext as color theme
 if (has("termguicolors"))
-	set termguicolors
+  set termguicolors
 endif
 syntax enable
 colorscheme OceanicNext
@@ -138,6 +128,88 @@ colorscheme OceanicNext
 " Make ctrl-U and ctrl-W allow to undo changes
 inoremap <c-u> <c-g>u<c-u>
 inoremap <c-w> <c-g>u<c-w>
+
+"""
+" Coc.nvim configurations
+"""
+" Enable using tab to activate completion
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Give more space for displaying messages.
+set cmdheight=2
+
+" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
+" delays and poor user experience.
+set updatetime=300
+
+" Don't pass messages to |ins-completion-menu|.
+set shortmess+=c
+
+" Always show the signcolumn, otherwise it would shift the text each time
+" diagnostics appear/become resolved.
+set signcolumn=yes
+
+" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
+" position. Coc only does snippet and additional edit on confirm.
+if has('patch8.1.1068')
+  " Use `complete_info` if your (Neo)Vim version supports it.
+  inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+else
+  imap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+endif
+
+" Use `[g` and `]g` to navigate diagnostics
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+" GoTo code navigation.
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Use K to show documentation in preview window.
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+" Highlight the symbol and its references when holding the cursor.
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Remap for do codeAction of selected region
+function! s:cocActionsOpenFromSelected(type) abort
+  execute 'CocCommand actions.open ' . a:type
+endfunction
+xmap <silent> <leader>a :<C-u>execute 'CocCommand actions.open ' . visualmode()<CR>
+nmap <silent> <leader>a :<C-u>set operatorfunc=<SID>cocActionsOpenFromSelected<CR>g@
+
+" Remap keys for applying codeAction to the current line.
+nmap <leader>ac  <Plug>(coc-codeaction)
+" Apply AutoFix to problem on the current line.
+nmap <leader>qf  <Plug>(coc-fix-current)
+
+" Sets up the ":Prettier" command
+command! -nargs=0 Prettier :CocCommand prettier.formatFile
+
+" Add `:Format` command to format current buffer.
+command! -nargs=0 Format :call CocAction('format')
+
+"""
 
 " This unsets the "last search pattern" register by hitting return
 nnoremap <silent> <CR> :noh<CR><CR>
@@ -151,16 +223,11 @@ nnoremap <silent> <F5> :let _s=@/ <Bar> :%s/\s\+$//e <Bar> :let @/=_s <Bar> :noh
 " This lets me write :cd to go to the current file's directory
 nnoremap <leader>cd :cd %:p:h<CR>:pwd<CR>
 
-" This enables me using tab in the ALE autocomplete
-inoremap <silent><expr> <Tab> pumvisible() ? "\<C-n>" : "\<TAB>"
-inoremap <silent><expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-TAB>"
-
 " Airline configurations
 let g:airline_theme='oceanicnext'	" Using solarized theme
 let g:airline_powerline_fonts = 1	" Uses the beautiful powerline fonts
 let g:airline#extensions#tabline#enabled = 1	" Shows buffer tabline
 let g:airline#extensions#tabline#buffer_nr_show = 1	" Shows buffer number in tabline
-let g:airline#extensions#ale#enabled = 1 " Shows ALE errors and warning in tabline
 
 " Lexima to only close like endwise or after pressing <CR>
 let g:lexima_enable_endwise_rules = 1
@@ -176,34 +243,6 @@ nnoremap \d :bp<cr>:bd #<cr>
 
 " Sets CtrlP to find root directory
 let g:ctrlp_working_path_mode = 'ra'
-
-" Makes prettier execute on save and async
-let g:prettier#exec_cmd_async = 1
-let g:prettier#quickfix_enabled = 0
-let g:prettier#autoformat = 0
-autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html PrettierAsync
-
-" Enables deoplete
-let g:deoplete#enable_at_startup = 1
-
-" Registers ALE as a deoplete autocomplete source
-call deoplete#custom#source('ale', 'dup', v:false)
-
-" Disables ale autocomplete
-let g:ale_completion_enabled = 0
-
-" Enables some fixers for ale
-let g:ale_fixers = {
-\   '*': ['remove_trailing_lines', 'trim_whitespace'],
-\   'javascript': ['prettier', 'eslint'],
-\   'typescript': ['prettier', 'eslint'],
-\}
-
-" Enables autoimport for ts files
-let g:ale_completion_tsserver_autoimport = 1
-
-" Set this variable to 1 to fix files when you save them.
-let g:ale_fix_on_save = 0
 
 " Makes json show quotes because that default config is quite dumb
 let g:vim_json_syntax_conceal = 0
@@ -222,16 +261,16 @@ filetype plugin indent on
 " Put these in an autocmd group, so that you can revert them with:
 " ":augroup vimStartup | au! | augroup END"
 augroup vimStartup
-	au!
+  au!
 
-	" When editing a file, always jump to the last known cursor position.
-	" Don't do it when the position is invalid, when inside an event handler
-	" (happens when dropping a file on gvim) and for a commit message (it's
-	" likely a different one than last time).
-	autocmd BufReadPost *
-				\ if line("'\"") >= 1 && line("'\"") <= line("$") && &ft !~# 'commit'
-				\ |   exe "normal! g`\""
-				\ | endif
+  " When editing a file, always jump to the last known cursor position.
+  " Don't do it when the position is invalid, when inside an event handler
+  " (happens when dropping a file on gvim) and for a commit message (it's
+  " likely a different one than last time).
+  autocmd BufReadPost *
+    \ if line("'\"") >= 1 && line("'\"") <= line("$") && &ft !~# 'commit'
+    \ |   exe "normal! g`\""
+    \ | endif
 
 augroup END
 
