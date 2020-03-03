@@ -465,9 +465,9 @@ menu-0-0-foreground = ${colors.alert}
 ;----------------------------------------------------------
 [module/player-mpris-tail]
 type = custom/script
-exec = ~/.config/polybar/player-mpris-tail.py
+exec = ~/.config/polybar/player-mpris-tail.py --icon-playing ' ' --icon-paused ' ' --icon-stopped ' '
 tail = true
-click-left = ~/.config/polybar/player-ctrl.sh play-pause
+click-left = ~/.config/polybar/player-mpris-tail.py play-pause &
 format-underline = ${colors.spotify}
 
 ;----------------------------------------------------------
