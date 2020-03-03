@@ -94,3 +94,10 @@ alias tpr="tput reset"
 
 # Pipx
 export PATH="/home/$DEFAULT_USER/.local/bin:$PATH"
+
+# Perl config
+PATH="/home/$DEFAULT_USER/perl5/bin${PATH:+:${PATH}}"; export PATH;
+PERL5LIB="/home/$DEFAULT_USER/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
+PERL_LOCAL_LIB_ROOT="/home/$DEFAULT_USER/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
+PERL_MB_OPT="--install_base \"/home/$DEFAULT_USER/perl5\""; export PERL_MB_OPT;
+PERL_MM_OPT="INSTALL_BASE=/home/$DEFAULT_USER/perl5"; export PERL_MM_OPT;
