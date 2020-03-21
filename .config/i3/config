@@ -205,7 +205,7 @@ bindsym XF86AudioPrev exec --no-startup-id "playerctl previous"
 exec_always --no-startup-id numlockx on
 
 # Composite manager
-exec --no-startup-id compton -f
+exec --no-startup-id picom
 
 # Enables autolock after 15mins
 exec --no-startup-id "xautolock -time 15 -locker '~/.config/i3/scripts/lock.sh'"
@@ -224,9 +224,6 @@ exec --no-startup-id nm-applet
 
 # Bluetooth manager
 exec --no-startup-id blueman-applet
-
-# Nextcloud sync clien
-exec --no-startup-id nextcloud
 
 # Enables redshift, to make display warmer
 exec --no-startup-id redshift-gtk
