@@ -180,6 +180,13 @@ nmap <silent> gr <Plug>(coc-references)
 " Symbol renaming.
 nmap <leader>rn <Plug>(coc-rename)
 
+" Format selecttion
+nmap <leader>f  <Plug>(coc-format-selected)
+
+" Set auto formating for some languages
+autocmd FileType c,cpp setl formatexpr=CocAction('formatSelected')
+autocmd FileType c,cpp autocmd BufWritePre,InsertLeave <buffer> call CocAction('format')
+
 " Use K to show documentation in preview window.
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 
