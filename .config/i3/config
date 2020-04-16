@@ -326,3 +326,6 @@ exec --no-startup-id xfce4-terminal --hide-menubar --role="terminal-3"
 
 # Default startup workspace
 exec --no-startup-id i3-msg workspace 1
+
+# Fix origin interface
+for_window [instance="origin.exe"] floating enable
