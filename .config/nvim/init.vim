@@ -184,8 +184,8 @@ nmap <leader>rn <Plug>(coc-rename)
 nmap <leader>f  <Plug>(coc-format-selected)
 
 " Set auto formating for some languages
-autocmd FileType c,cpp setl formatexpr=CocAction('formatSelected')
-autocmd FileType c,cpp autocmd BufWritePre,InsertLeave <buffer> call CocAction('format')
+autocmd FileType c,cpp,python setl formatexpr=CocAction('formatSelected')
+autocmd FileType c,cpp,python autocmd BufWritePre,InsertLeave <buffer> call CocAction('format')
 
 " Use K to show documentation in preview window.
 nnoremap <silent> K :call <SID>show_documentation()<CR>
