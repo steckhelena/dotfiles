@@ -96,6 +96,9 @@ set number
 highlight LineNr ctermfg=grey
 highlight LineNr ctermbg=None
 
+" Show color column
+set colorcolumn=81
+
 set ttimeout		" time out for key codes
 set ttimeoutlen=100	" wait up to 100ms after Esc for special key
 
