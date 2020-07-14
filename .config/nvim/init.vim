@@ -71,6 +71,7 @@ set showcmd		" display incomplete commands
 set wildmenu		" display completion matches in a status line
 set incsearch	" Do incremental searching.
 set inccommand=nosplit " Shows live search and replace command changes(sexy)
+set backupcopy=yes
 
 " " This sets persistent undo
 if !isdirectory(glob ($HOME . '/.config/nvim/undo'))
