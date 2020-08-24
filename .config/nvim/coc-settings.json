@@ -1,5 +1,17 @@
 {
-	"coc.preferences.formatOnSaveFiletypes": ["css", "Markdown", "javascript", "tsx", "graphql", "vue", "html", "javascriptreact", "typescript", "json", "python"],
+	"coc.preferences.formatOnSaveFiletypes": [
+		"css",
+		"Markdown",
+		"javascript",
+		"tsx",
+		"graphql",
+		"vue",
+		"html",
+		"javascriptreact",
+		"typescript",
+		"json",
+		"python",
+	],
 	"prettier.eslintIntegration": true,
 	"prettier.requireConfig": true,
 	"eslint.autoFixOnSave": true,
