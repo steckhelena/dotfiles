@@ -11,6 +11,7 @@
 		"typescript",
 		"json",
 		"python",
+		"cpp",
 	],
 	"prettier.eslintIntegration": true,
 	"prettier.requireConfig": true,
