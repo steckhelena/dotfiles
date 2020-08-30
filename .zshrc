@@ -71,6 +71,7 @@ plugins=(
   virtualenvwrapper
   ssh-agent
   docker
+  yarn
   zsh-completions
 )
 
