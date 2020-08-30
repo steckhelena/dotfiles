@@ -71,9 +71,8 @@ plugins=(
   virtualenvwrapper
   ssh-agent
   docker
+  zsh-completions
 )
-
-source $ZSH/oh-my-zsh.sh
 
 # Cuda directories
 export PATH="${PATH}:/opt/cuda/bin"
@@ -101,3 +100,9 @@ PERL5LIB="/home/$DEFAULT_USER/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export 
 PERL_LOCAL_LIB_ROOT="/home/$DEFAULT_USER/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
 PERL_MB_OPT="--install_base \"/home/$DEFAULT_USER/perl5\""; export PERL_MB_OPT;
 PERL_MM_OPT="INSTALL_BASE=/home/$DEFAULT_USER/perl5"; export PERL_MM_OPT;
+
+# source oh-my-zsh
+source $ZSH/oh-my-zsh.sh
+
+# reload zsh completions
+autoload -U compinit && compinit
