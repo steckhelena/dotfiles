@@ -6,6 +6,7 @@
 
 # Git
 !.gitconfig
+!.gitmodules
 
 # Common folders
 !.config/
@@ -28,6 +29,8 @@
 !.oh-my-custom-zsh/
 !.oh-my-custom-zsh/themes/
 !.oh-my-custom-zsh/themes/my_agnoster.zsh-theme
+!.oh-my-custom-zsh/plugins/
+!.oh-my-custom-zsh/plugins/zsh-completions
 
 # Lock image
 !.xlock/
