@@ -20,3 +20,5 @@
 [diff]
   tool = vimdiff
   keepBackup = false
+[pull]
+  ff = only
