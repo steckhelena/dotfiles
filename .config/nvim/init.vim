@@ -31,6 +31,9 @@ Plug 'tpope/vim-sleuth'
 " responsive alternative. I also binded it to toggle with <C-n> for faster browsing.
 Plug 'scrooloose/nerdtree'
 
+" This plugin shows git status on nerdtree
+Plug 'Xuyuanp/nerdtree-git-plugin'
+
 " This starts a fuzzy finder in the current root dir
 Plug 'kien/ctrlp.vim'
 
@@ -52,6 +55,9 @@ Plug 'MaxMEllon/vim-jsx-pretty'
 Plug 'jparise/vim-graphql'
 Plug 'elzr/vim-json'
 Plug 'neoclide/jsonc.vim'
+
+" This plugin lets me use beautiful icons
+Plug 'ryanoasis/vim-devicons'
 
 " Use coc as language server client
 let g:coc_global_extensions = [
@@ -257,6 +263,9 @@ let g:airline#extensions#tabline#buffer_nr_show = 1	" Shows buffer number in tab
 let g:lexima_enable_endwise_rules = 1
 let g:lexima_enable_newline_rules = 1
 let g:lexima_enable_basic_rules = 0
+
+" NERDTree config
+let g:NERDTreeGitStatusUseNerdFonts = 1
 
 " NERDTree mapping toggle with ctrl+n
 map <C-n> :NERDTreeToggle<CR>
