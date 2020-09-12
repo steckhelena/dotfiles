@@ -1,6 +1,6 @@
 #!/bin/bash
 
-res=$(echo "	Headphone;	Speakers" | rofi -sep ";" -dmenu -p "Select audio device:" -hide-scrollbar -i -theme AudioSelMenu)
+res=$(echo "	Headphone;	Speakers" | rofi -sep ";" -dmenu -p "Select audio device:" -i -theme AudioSelMenu)
 
 if [[ "$res" = *"Headphone"* ]]
 then
