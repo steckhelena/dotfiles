@@ -2,7 +2,7 @@
   name = Helena Steck
   email = steckhelena@gmail.com
 [core]
-  editor = vim
+  editor = nvim
   fileMode = false
   excludesfile = /home/steckhelena/.gitignore_global
   quotepath = false
