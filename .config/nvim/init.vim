@@ -55,6 +55,7 @@ Plug 'MaxMEllon/vim-jsx-pretty'
 Plug 'jparise/vim-graphql'
 Plug 'elzr/vim-json'
 Plug 'neoclide/jsonc.vim'
+Plug 'cespare/vim-toml'
 
 " This plugin lets me use beautiful icons
 Plug 'ryanoasis/vim-devicons'
