@@ -7,7 +7,7 @@
   excludesfile = /home/steckhelena/.gitignore_global
   quotepath = false
 [alias]
-	g = log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(yellow)%h%C(reset) %s%C(reset) %C(dim white)<%an>%C(reset) %C(bold blue)%ar%C(reset)%C(bold yellow)%d%C(reset)'
+  g = log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(yellow)%h%C(reset) %s%C(reset) %C(dim white)<%an>%C(reset) %C(bold blue)%ar%C(reset)%C(bold yellow)%d%C(reset)'
 [merge]
   tool = vimdiff
   keepBackup = false
