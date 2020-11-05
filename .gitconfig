@@ -22,3 +22,5 @@
   keepBackup = false
 [pull]
   ff = only
+[add "interactive"]
+  useBuiltin = true
