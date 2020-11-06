@@ -67,3 +67,6 @@
 !.config/i3/workspaces/*
 !.config/polybar/
 !.config/polybar/*
+
+# tig
+!.tigrc
