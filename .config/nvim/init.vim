@@ -108,6 +108,7 @@ set undoreload=10000        " number of lines to save for undo
 set expandtab
 set shiftwidth=2
 set softtabstop=2
+set tabstop=4
 
 " Instead of failing a command raise a dialog asking for confirm on saving the
 " file
