@@ -64,6 +64,7 @@ Plug 'ryanoasis/vim-devicons'
 let g:coc_global_extensions = [
       \'coc-actions',
       \'coc-clangd',
+      \'coc-cmake',
       \'coc-css',
       \'coc-eslint',
       \'coc-git',
