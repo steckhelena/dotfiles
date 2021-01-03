@@ -19,6 +19,9 @@
 # Picom
 !.config/picom.conf
 
+# Shell
+!.profile
+
 # Bash
 !.bashrc
 !.bash_profile
