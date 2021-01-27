@@ -70,7 +70,7 @@ let g:coc_global_extensions = [
       \'coc-git',
       \'coc-html',
       \'coc-prettier', 
-      \'coc-python',
+      \'coc-pyright',
       \'coc-tslint',
       \'coc-tsserver',
       \'coc-vimlsp', 
