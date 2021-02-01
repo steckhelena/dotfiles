@@ -54,6 +54,9 @@ bindsym $mod+Shift+p exec "~/.config/i3/scripts/sysmenu.sh &"
 # Audio output menu
 bindsym $mod+Shift+m exec "~/.config/i3/scripts/sel_audio_dev.sh &"
 
+# Network interface selection menu
+bindsym $mod+Shift+n exec "~/.config/i3/scripts/sel_polybar_net_iface.sh &"
+
 # start rofi (a program launcher)
 bindsym $mod+space exec rofi -show combi -theme LaunchMenu
 
