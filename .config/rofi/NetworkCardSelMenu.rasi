@@ -1,0 +1,11 @@
+window {
+    anchor:     north west;
+    location:   north west;
+    width:      12%;
+    children:   [ vertibox ];
+}
+
+vertibox {
+    orientation: vertical;
+    children:   [ prompt, listview ];
+}
