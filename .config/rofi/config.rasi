@@ -1,3 +1,8 @@
+configuration {
+    kb-row-up: "Up,k";
+    kb-row-down: "Down,j";
+}
+
 * {
     background-color: #181818;
     text-color:       #d3d7cfFF;
