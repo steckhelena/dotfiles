@@ -67,6 +67,10 @@ listview {
     cycle:   true;
 }
 
+prompt {
+    padding: 10px;
+}
+
 element { 
     padding: 10px;
 }
