@@ -7,7 +7,7 @@ window {
 
 vertibox {
     orientation: vertical;
-    children:   [ listview ];
+    children:   [ prompt, listview ];
 }
 
 listview {
