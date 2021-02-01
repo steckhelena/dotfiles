@@ -15,7 +15,7 @@
 		"c",
 	],
 	"prettier.eslintIntegration": true,
-	"prettier.requireConfig": true,
+	"prettier.requireConfig": false,
 	"eslint.autoFixOnSave": true,
 	"python.formatting.provider": "black",
 	"python.formatting.blackArgs": ["-l", "80"]
