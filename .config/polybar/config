@@ -52,6 +52,7 @@ padding-right = 2
 module-margin-left = 1
 module-margin-right = 2
 
+enable-ipc = true
 
 ;----------------------------------------------------------
 ;			F O N T S
@@ -70,7 +71,7 @@ font-3 = Hack Nerd Font Mono:size=8;0
 
 modules-left = i3 player-mpris-tail pulseaudio
 modules-center = date
-modules-right = filesystem cpu memory temperature ip download upload
+modules-right = filesystem cpu memory temperature ifname ip download upload
 
 tray-position = right
 tray-padding = 2
@@ -210,12 +211,34 @@ ramp-4 = 
 
 
 ;----------------------------------------------------------
+;	      N E T W O R K   I F   N A M E
+;----------------------------------------------------------
+
+[module/ifname]
+type = internal/network
+interface = ${file:~/.cache/polybar_net_iface}
+interval = 3.0
+
+format-connected = <label-connected>
+format-disconnected = <label-disconnected>
+format-connected-foreground = ${colors.foreground}
+format-connected-underline = ${colors.network}
+
+label-connected = %ifname%
+label-connected-foreground = ${colors.foreground}
+label-connected-underline = ${colors.network}
+label-disconnected = %ifname%
+label-disconnected-foreground = ${colors.alert}
+label-disconnected-underline = ${colors.network}
+
+
+;----------------------------------------------------------
 ;	      N E T W O R K   I P
 ;----------------------------------------------------------
 
 [module/ip]
 type = internal/network
-interface = ${env:DEFAULT_NETWORK_INTERFACE}
+interface = ${file:~/.cache/polybar_net_iface}
 interval = 3.0
 
 format-connected = <label-connected>
@@ -229,7 +252,7 @@ label-connected = %local_ip%
 label-connected-foreground = ${colors.foreground}
 label-connected-underline = ${colors.network}
 label-disconnected = ---
-label-disconnected-foreground = ${colors.foreground}
+label-disconnected-foreground = ${colors.alert}
 label-disconnected-underline = ${colors.network}
 
 
@@ -239,7 +262,7 @@ label-disconnected-underline = ${colors.network}
 
 [module/upload]
 type = internal/network
-interface = ${env:DEFAULT_NETWORK_INTERFACE}
+interface = ${file:~/.cache/polybar_net_iface}
 interval = 1.0
 
 format-connected = <label-connected>
@@ -253,12 +276,12 @@ label-connected = %upspeed%
 label-connected-foreground = ${colors.foreground}
 label-connected-underline = ${colors.network}
 label-disconnected = ---
-label-disconnected-foreground = ${colors.foreground}
+label-disconnected-foreground = ${colors.alert}
 label-disconnected-underline = ${colors.network}
 
 [module/download]
 type = internal/network
-interface = ${env:DEFAULT_NETWORK_INTERFACE}
+interface = ${file:~/.cache/polybar_net_iface}
 interval = 1.0
 
 format-connected = <label-connected>
@@ -272,7 +295,7 @@ label-connected = %downspeed%
 label-connected-foreground = ${colors.foreground}
 label-connected-underline = ${colors.network}
 label-disconnected = ---
-label-disconnected-foreground = ${colors.foreground}
+label-disconnected-foreground = ${colors.alert}
 label-disconnected-underline = ${colors.network}
 
 
