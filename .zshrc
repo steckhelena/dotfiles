@@ -67,8 +67,6 @@ ZSH_CUSTOM=/home/$DEFAULT_USER/.oh-my-custom-zsh
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
   git
-  virtualenv
-  virtualenvwrapper
   ssh-agent
   docker
   yarn
@@ -85,10 +83,6 @@ export PKG_CONFIG_PATH="${PKG_CONFIG_PATH}/usr/local/lib64/pkgconfig/"
 
 # Sets up lib64 path
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib64/
-
-# Python virtualenv
-export WORKON_HOME=~/.virtualenvs
-source /usr/bin/virtualenvwrapper.sh
 
 # Useful aliases
 alias tpr="tput reset"
