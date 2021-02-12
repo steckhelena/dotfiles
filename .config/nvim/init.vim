@@ -71,7 +71,6 @@ let g:coc_global_extensions = [
       \'coc-html',
       \'coc-prettier', 
       \'coc-pyright',
-      \'coc-tslint',
       \'coc-tsserver',
       \'coc-vimlsp', 
       \'coc-xml',
