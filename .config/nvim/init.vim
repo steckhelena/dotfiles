@@ -34,8 +34,9 @@ Plug 'scrooloose/nerdtree'
 " This plugin shows git status on nerdtree
 Plug 'Xuyuanp/nerdtree-git-plugin'
 
-" This starts a fuzzy finder in the current root dir
-Plug 'kien/ctrlp.vim'
+" This plugin allows me to use fzf, Ag or ripgrep to grep inside files
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 
 " This changes automatically the root dir to the file I am working on
 Plug 'airblade/vim-rooter'
