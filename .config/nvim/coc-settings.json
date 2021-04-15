@@ -1,22 +1,22 @@
 {
-	"coc.preferences.formatOnSaveFiletypes": [
-		"css",
-		"Markdown",
-		"javascript",
-		"tsx",
-		"graphql",
-		"vue",
-		"html",
-		"javascriptreact",
-		"typescript",
-		"json",
-		"python",
-		"cpp",
-		"c",
-	],
-	"prettier.eslintIntegration": true,
-	"prettier.requireConfig": false,
-	"eslint.autoFixOnSave": true,
-	"python.formatting.provider": "black",
-	"python.formatting.blackArgs": ["-l", "80"]
+  "coc.preferences.formatOnSaveFiletypes": [
+    "css",
+    "Markdown",
+    "javascript",
+    "tsx",
+    "graphql",
+    "vue",
+    "html",
+    "javascriptreact",
+    "typescript",
+    "json",
+    "python",
+    "cpp",
+    "c"
+  ],
+  "prettier.eslintIntegration": true,
+  "prettier.requireConfig": false,
+  "eslint.autoFixOnSave": true,
+  "python.formatting.provider": "black",
+  "python.formatting.blackArgs": ["-l", "80"]
 }
