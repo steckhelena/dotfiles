@@ -12,7 +12,8 @@
     "json",
     "python",
     "cpp",
-    "c"
+    "c",
+    "svelte"
   ],
   "prettier.eslintIntegration": true,
   "prettier.requireConfig": false,

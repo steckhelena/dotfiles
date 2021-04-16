@@ -58,6 +58,7 @@ Plug 'elzr/vim-json'
 Plug 'neoclide/jsonc.vim'
 Plug 'cespare/vim-toml'
 Plug 'glench/vim-jinja2-syntax'
+Plug 'evanleck/vim-svelte'
 
 " This plugin lets me use beautiful icons
 Plug 'ryanoasis/vim-devicons'
@@ -73,6 +74,7 @@ let g:coc_global_extensions = [
       \'coc-html',
       \'coc-prettier', 
       \'coc-pyright',
+      \'coc-svelte',
       \'coc-tsserver',
       \'coc-vimlsp', 
       \'coc-xml',
