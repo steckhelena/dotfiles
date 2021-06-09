@@ -24,3 +24,5 @@
   ff = only
 [add "interactive"]
   useBuiltin = true
+[init]
+  defaultBranch = main
