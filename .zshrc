@@ -2,11 +2,11 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # User configuration
-export DEFAULT_USER=steckhelena
+export DEFAULT_USER=helenasteck
 export EDITOR='nvim'
 
 # Path to your oh-my-zsh installation.
-export ZSH="/home/$DEFAULT_USER/.oh-my-zsh"
+export ZSH="/Users/$DEFAULT_USER/.oh-my-zsh"
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
@@ -59,7 +59,7 @@ COMPLETION_WAITING_DOTS="true"
 # HIST_STAMPS="mm/dd/yyyy"
 
 # Would you like to use another custom folder than $ZSH/custom?
-ZSH_CUSTOM=/home/$DEFAULT_USER/.oh-my-custom-zsh
+ZSH_CUSTOM=/Users/$DEFAULT_USER/.oh-my-custom-zsh
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
@@ -98,7 +98,5 @@ PERL_MB_OPT="--install_base \"/home/$DEFAULT_USER/perl5\""; export PERL_MB_OPT;
 PERL_MM_OPT="INSTALL_BASE=/home/$DEFAULT_USER/perl5"; export PERL_MM_OPT;
 
 # source oh-my-zsh
+export ZSH_DISABLE_COMPFIX="true"
 source $ZSH/oh-my-zsh.sh
-
-# reload zsh completions
-autoload -U compinit && compinit
