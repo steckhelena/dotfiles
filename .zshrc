@@ -87,16 +87,17 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib64/
 # Useful aliases
 alias tpr="tput reset"
 
-# Pipx
-export PATH="/home/$DEFAULT_USER/.local/bin:$PATH"
-
-# Perl config
-PATH="/home/$DEFAULT_USER/perl5/bin${PATH:+:${PATH}}"; export PATH;
-PERL5LIB="/home/$DEFAULT_USER/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
-PERL_LOCAL_LIB_ROOT="/home/$DEFAULT_USER/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
-PERL_MB_OPT="--install_base \"/home/$DEFAULT_USER/perl5\""; export PERL_MB_OPT;
-PERL_MM_OPT="INSTALL_BASE=/home/$DEFAULT_USER/perl5"; export PERL_MM_OPT;
-
 # source oh-my-zsh
 export ZSH_DISABLE_COMPFIX="true"
 source $ZSH/oh-my-zsh.sh
+
+# THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="/Users/helenasteck/.sdkman"
+[[ -s "/Users/helenasteck/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/helenasteck/.sdkman/bin/sdkman-init.sh"
+
+# NVM
+export NVM_DIR="$HOME/.nvm"
+[ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+
+source "$HOME/.5AExports"

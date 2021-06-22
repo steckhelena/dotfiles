@@ -73,6 +73,7 @@ let g:coc_global_extensions = [
       \'coc-eslint',
       \'coc-git',
       \'coc-html',
+      \'coc-java',
       \'coc-prettier', 
       \'coc-pyright',
       \'coc-svelte',
