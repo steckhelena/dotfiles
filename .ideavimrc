@@ -1,0 +1,15 @@
+source ~/.config/nvim/init.vim
+
+" GoTo code navigation.
+nmap <silent> gd :action GotoDeclaration<CR>
+nmap <silent> gy :action GotoTypeDeclaration<CR>
+nmap <silent> gi :action GotoImplementation<CR>
+nmap <silent> gr :action ShowUsages<CR>
+
+" navigate forward and backward
+nnoremap <C-i> :action Forward<CR>
+nnoremap <C-o> :action Back<CR>
+
+set incsearch
+set hlsearch
+set ideajoin

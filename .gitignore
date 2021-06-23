@@ -52,6 +52,9 @@
 !.config/nvim/init.vim
 !.config/nvim/coc-settings.json
 
+# ideavim
+!.ideavimrc
+
 # rofi
 !.config/rofi/
 !.config/rofi/*
