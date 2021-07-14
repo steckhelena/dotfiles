@@ -25,5 +25,14 @@
     "typescriptreact"
   ],
   "python.formatting.provider": "black",
-  "python.formatting.blackArgs": ["-l", "80"]
+  "python.formatting.blackArgs": ["-l", "80"],
+  "languageserver": {
+    "terraform": {
+      "command": "terraform-ls",
+      "args": ["serve"],
+      "filetypes": ["terraform", "tf"],
+      "initializationOptions": {},
+      "settings": {}
+    }
+  }
 }
