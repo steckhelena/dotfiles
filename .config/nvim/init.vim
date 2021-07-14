@@ -68,6 +68,7 @@ let g:coc_global_extensions = [
       \'coc-actions',
       \'coc-clangd',
       \'coc-cmake',
+      \'coc-coverage',
       \'coc-css',
       \'coc-eslint',
       \'coc-git',
