@@ -72,6 +72,7 @@ plugins=(
   yarn
   zsh-completions
   docker-compose
+  extract
 )
 
 # Cuda directories
