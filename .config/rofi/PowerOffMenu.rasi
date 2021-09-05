@@ -1,7 +1,6 @@
 configuration {
 	kb-row-up: "Up,k";
 	kb-row-down: "Down,j";
-   lines: 5;
 }
 
 window {
@@ -19,6 +18,7 @@ vertibox {
 
 listview {
     border: 2px dash 0px 0px ;
+    lines: 5;
 }
 
 @import "config.rasi"
