@@ -1,3 +1,8 @@
+configuration {
+	kb-row-up: "Up,k";
+	kb-row-down: "Down,j";
+}
+
 window {
     anchor:     center;
     location:   center;
@@ -8,5 +13,12 @@ window {
 
 vertibox {
     orientation: vertical;
-    children:   [ listview ];
+    children:   [ prompt, listview ];
 }
+
+listview {
+    border: 2px dash 0px 0px ;
+    lines:  2;
+}
+
+@import "config.rasi"
