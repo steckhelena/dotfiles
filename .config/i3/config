@@ -42,6 +42,9 @@ bindsym Print exec xfce4-screenshooter -f -s $HOME/Downloads/screenshot_`date +%
 # Screenshot menu by pressing $mod+printscreen 
 bindsym $mod+Print exec xfce4-screenshooter
 
+# Screenshot of selected area to clipboard
+bindsym $mod+Shift+Control+4 exec "maim -s --format=png /dev/stdout | xclip -selection clipboard -t image/png -i"
+
 # kill focused window
 bindsym $mod+Shift+q kill
 
