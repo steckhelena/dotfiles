@@ -103,3 +103,5 @@ source $ZSH/oh-my-zsh.sh
 
 # reload zsh completions
 autoload -U compinit && compinit
+
+neofetch
