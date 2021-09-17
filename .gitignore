@@ -66,6 +66,14 @@
 !.config/kitty/kitty.conf
 !.config/kitty/theme.conf
 
+# ranger file manager
+!.config/ranger/
+!.config/ranger/commands_full.py
+!.config/ranger/commands.py
+!.config/ranger/rc.conf
+!.config/ranger/rifle.conf
+!.config/ranger/scope.sh
+
 # i3
 !.config/i3/
 !.config/i3/config
