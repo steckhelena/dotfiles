@@ -61,6 +61,11 @@
 !.config/xfce4/terminal/
 !.config/xfce4/terminal/terminalrc
 
+# kitty terminal
+!.config/kitty/
+!.config/kitty/kitty.conf
+!.config/kitty/theme.conf
+
 # i3
 !.config/i3/
 !.config/i3/config
