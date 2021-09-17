@@ -11,6 +11,9 @@ call plug#begin('~/.config/nvim/plugged')
 " This is a color scheme for my nvim
 Plug 'mhartington/oceanic-next'
 
+" This colors html color codes
+Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
+
 " This enables using git commands from nvim
 Plug 'tpope/vim-fugitive'
 
@@ -87,6 +90,9 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 
 call plug#end()
+
+" Initialize Hexokinase to display html color codes as colors on every line
+let g:Hexokinase_highlighters = ['virtual']
 
 " Allow backspacing over everything in insert mode.
 set backspace=indent,eol,start
