@@ -272,6 +272,9 @@ exec --no-startup-id ~/.config/i3/scripts/wallpaperslide.sh
 for_window [window_role="pop-up"] floating enable;border normal
 for_window [window_role="task_dialog"] floating enable;border normal
 
+# Start polybar
+exec --no-startup-id polybar -r main
+
 ###################################################################
 # Apps
 ###################################################################
