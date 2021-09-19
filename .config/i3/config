@@ -311,7 +311,7 @@ exec --no-startup-id kitty --class="htop-terminal" -e htop
 # Workspace 10: Terminal
 exec --no-startup-id "i3-msg 'workspace \"10\"; append_layout ~/.config/i3/workspaces/10.json'"
 exec --no-startup-id kitty --class="terminal-1"
-exec --no-startup-id kitty --class="terminal-2" -e ranger
+exec --no-startup-id kitty --class="terminal-2" -e zsh -c ranger
 exec --no-startup-id kitty --class="terminal-3"
 
 # Default startup workspace
