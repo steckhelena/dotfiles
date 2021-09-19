@@ -29,6 +29,7 @@
 
 # Zsh
 !.zshrc
+!.zshenv
 !.oh-my-custom-zsh/
 !.oh-my-custom-zsh/themes/
 !.oh-my-custom-zsh/themes/my_agnoster.zsh-theme
