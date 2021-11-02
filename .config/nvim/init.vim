@@ -11,10 +11,8 @@ scriptencoding utf-8
 
 " Initializing plugins
 call plug#begin('~/.config/nvim/plugged')
-" This is a color scheme for my nvim
-Plug 'mhartington/oceanic-next'
 
-" This is a new color scheme
+" This is my color scheme
 Plug 'rose-pine/neovim'
 
 " This colors html color codes
