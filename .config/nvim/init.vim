@@ -25,8 +25,10 @@ Plug 'tpope/vim-fugitive'
 " in visual mode.
 Plug 'tpope/vim-commentary'
 
-" This is a tab bar for my buffers
+" Add devicons
 Plug 'kyazdani42/nvim-web-devicons'
+
+" This is a tab bar for my buffers
 Plug 'romgrk/barbar.nvim'
 
 " This plugin automatically closes brackets after pressing return
@@ -53,8 +55,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'airblade/vim-rooter'
 
 " This gives me those sexy bars under my screen with all kinds of info.
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+Plug 'nvim-lualine/lualine.nvim'
 
 " This plugin displays the line indentation for better visualization of code.
 Plug 'lukas-reineke/indent-blankline.nvim'
@@ -286,11 +287,10 @@ nnoremap <silent> <F5> :let _s=@/ <Bar> :%s/\s\+$//e <Bar> :let @/=_s <Bar> :noh
 " This lets me write :cd to go to the current file's directory
 nnoremap <leader>cd :cd %:p:h<CR>:pwd<CR>
 
-" Airline configurations
-let g:airline_theme='oceanicnext'	" Using solarized theme
-let g:airline_powerline_fonts = 1	" Uses the beautiful powerline fonts
-let g:airline#extensions#tabline#enabled = 1	" Shows buffer tabline
-let g:airline#extensions#tabline#buffer_nr_show = 1	" Shows buffer number in tabline
+" Status line configurations
+lua << END
+require'lualine'.setup()
+END
 
 " If barbar's option dict isn't created yet, create it
 let bufferline = get(g:, 'bufferline', {})
