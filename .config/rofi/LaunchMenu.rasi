@@ -1,21 +1,49 @@
 configuration {
-	display-drun:    "";
-	display-run:	 "";
-	show-icons:      true;
-	modi:            "combi";
-	combi-modi:      "drun,run";
+	modi: "combi";
+	show-icons: true;
+	combi-modi: "drun,run";
+	theme: "LaunchMenu";
+	display-run: "";
+	display-drun: "";
+	kb-row-up: "Up";
+	kb-row-down: "Down";
 }
-
+listview {
+    fixed-height: 0;
+    padding:      2px 0px 0px ;
+    scrollbar:    true;
+    cycle:        true;
+    dynamic:      false;
+    border-color: var(separatorcolor);
+    border:       2px dash 0px 0px ;
+    spacing:      10px 5px;
+}
+scrollbar {
+    padding:      0px 0px 2em;
+    handle-width: 8px ;
+    handle-color: var(alternate-normal-background);
+}
+entry {
+    text-color:        var(normal-foreground);
+    cursor:            text;
+    placeholder-color: rgba ( 128, 128, 128, 100 % );
+    vertical-align:    0.5;
+    margin:            10px;
+    expand:            false;
+    placeholder:       "Type to filter";
+}
 window {
-	location:	 north west;
-	anchor:		 north west;
-	height:		 100%;
-	width:		 22%;
-	orientation: horizontal;
-	children:	 [mainbox];
+    background-color: var(background);
+    margin:           27px 0px 0px ;
+    width:       22.0000% ;
+    orientation: horizontal;
+    location:    northwest;
+    anchor:      northwest;
+    height:      100.0000% ;
+    children:    [ mainbox ];
+}
+mainbox {
+    children: [ entry,listview ];
 }
 
-mainbox {
-	spacing:  0.8em;
-	children: [ entry,listview ];
-}
+@import "config.rasi"

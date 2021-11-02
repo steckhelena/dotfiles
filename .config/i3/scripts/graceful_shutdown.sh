@@ -2,7 +2,7 @@
 
 trap 'echo "ignoring sigterm"' SIGTERM
 
-gracefully="spotify|atom"
+gracefully="spotify|atom|firefox"
 
 ps ax | egrep $gracefully | cut -b1-06 | xargs -t kill
 

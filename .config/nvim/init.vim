@@ -6,10 +6,17 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
+set encoding=utf-8
+scriptencoding utf-8
+
 " Initializing plugins
 call plug#begin('~/.config/nvim/plugged')
-" This is a color scheme for my nvim
-Plug 'mhartington/oceanic-next'
+
+" This is my color scheme
+Plug 'rose-pine/neovim'
+
+" This colors html color codes
+Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
 
 " This enables using git commands from nvim
 Plug 'tpope/vim-fugitive'
@@ -17,6 +24,12 @@ Plug 'tpope/vim-fugitive'
 " This enables me using gcc to comment out a line or gc with a motion or
 " in visual mode.
 Plug 'tpope/vim-commentary'
+
+" Add devicons
+Plug 'kyazdani42/nvim-web-devicons'
+
+" This is a tab bar for my buffers
+Plug 'romgrk/barbar.nvim'
 
 " This plugin automatically closes brackets after pressing return
 Plug 'cohama/lexima.vim'
@@ -42,11 +55,10 @@ Plug 'junegunn/fzf.vim'
 Plug 'airblade/vim-rooter'
 
 " This gives me those sexy bars under my screen with all kinds of info.
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+Plug 'nvim-lualine/lualine.nvim'
 
 " This plugin displays the line indentation for better visualization of code.
-Plug 'Yggdroot/indentLine'
+Plug 'lukas-reineke/indent-blankline.nvim'
 
 " These are all plugins used for better syntax highlighting
 Plug 'yuezk/vim-js'
@@ -88,6 +100,9 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 
 call plug#end()
+
+" Initialize Hexokinase to display html color codes as colors on every line
+let g:Hexokinase_highlighters = ['virtual']
 
 " Allow backspacing over everything in insert mode.
 set backspace=indent,eol,start
@@ -138,6 +153,10 @@ set display=truncate
 " text scroll if you mouse-click near the start or end of the window.
 set scrolloff=5
 
+" Configuring my listchars to show characters which are invisible
+set list
+let &listchars="tab:> ,trail:-,nbsp:+,eol:↴"
+
 " In many terminal emulators the mouse works just fine.
 " Position the cursor, Visually select and scroll with the mouse.
 if has('mouse')
@@ -150,12 +169,20 @@ set nrformats-=octal
 " I like highlighting strings inside C comments.
 let c_comment_strings=1
 
-" This sets the OceanicNext as color theme
-if (has("termguicolors"))
-  set termguicolors
-endif
+" This sets the rose-pine as color theme
+set termguicolors
 syntax enable
-colorscheme OceanicNext
+let g:rose_pine_variant='moon'
+colorscheme rose-pine
+
+" Configuring the indent lines
+highlight IndentBlanklineIndent1 guifg=#393552 gui=nocombine
+let g:indent_blankline_char="|"
+let g:indent_blankline_space_char_blankline=" "
+let g:indent_blankline_char_highlight_list = ['IndentBlanklineIndent1']
+let g:indent_blankline_space_char_highlight_list = ['IndentBlanklineIndent1']
+let g:indent_blankline_show_trailing_blankline_indent = 0
+let g:indent_blankline_show_end_of_line = 0
 
 " Make ctrl-U and ctrl-W allow to undo changes
 inoremap <c-u> <c-g>u<c-u>
@@ -261,11 +288,14 @@ nnoremap <silent> <F5> :let _s=@/ <Bar> :%s/\s\+$//e <Bar> :let @/=_s <Bar> :noh
 " This lets me write :cd to go to the current file's directory
 nnoremap <leader>cd :cd %:p:h<CR>:pwd<CR>
 
-" Airline configurations
-let g:airline_theme='oceanicnext'	" Using solarized theme
-let g:airline_powerline_fonts = 1	" Uses the beautiful powerline fonts
-let g:airline#extensions#tabline#enabled = 1	" Shows buffer tabline
-let g:airline#extensions#tabline#buffer_nr_show = 1	" Shows buffer number in tabline
+" Status line configurations
+lua << END
+require'lualine'.setup()
+END
+
+" If barbar's option dict isn't created yet, create it
+let bufferline = get(g:, 'bufferline', {})
+let bufferline.auto_hide = v:true
 
 " Lexima to only close like endwise or after pressing <CR>
 let g:lexima_enable_endwise_rules = 1
@@ -280,7 +310,8 @@ map <C-n> :NERDTreeToggle<CR>
 
 " This allows me to close a buffer without making NERDTree take up the whole
 " window space
-nnoremap \d :bp<cr>:bd #<cr>
+nnoremap \d :BufferClose<cr>
+nnoremap <silent> <C-s>    :BufferPick<CR>
 
 " Sets CtrlP to find root directory
 let g:ctrlp_working_path_mode = 'ra'

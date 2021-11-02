@@ -33,7 +33,7 @@
     "percent": 0.5,
     "swallows": [
        {
-           "window_role": "^htop\\-terminal$"
+           "class": "^htop\\-terminal$"
        }
     ],
     "type": "con"

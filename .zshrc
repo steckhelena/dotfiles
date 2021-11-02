@@ -4,7 +4,6 @@
 # User configuration
 export DEFAULT_USER=helenasteck
 export EDITOR='nvim'
-
 # Path to your oh-my-zsh installation.
 export ZSH="/Users/$DEFAULT_USER/.oh-my-zsh"
 
@@ -72,6 +71,7 @@ plugins=(
   yarn
   zsh-completions
   docker-compose
+  extract
 )
 
 # Cuda directories

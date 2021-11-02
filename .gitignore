@@ -29,6 +29,7 @@
 
 # Zsh
 !.zshrc
+!.zshenv
 !.oh-my-custom-zsh/
 !.oh-my-custom-zsh/themes/
 !.oh-my-custom-zsh/themes/my_agnoster.zsh-theme
@@ -63,6 +64,19 @@
 !.config/xfce4/
 !.config/xfce4/terminal/
 !.config/xfce4/terminal/terminalrc
+
+# kitty terminal
+!.config/kitty/
+!.config/kitty/kitty.conf
+!.config/kitty/theme.conf
+
+# ranger file manager
+!.config/ranger/
+!.config/ranger/commands_full.py
+!.config/ranger/commands.py
+!.config/ranger/rc.conf
+!.config/ranger/rifle.conf
+!.config/ranger/scope.sh
 
 # i3
 !.config/i3/
