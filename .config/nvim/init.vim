@@ -6,10 +6,16 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
+set encoding=utf-8
+scriptencoding utf-8
+
 " Initializing plugins
 call plug#begin('~/.config/nvim/plugged')
 " This is a color scheme for my nvim
 Plug 'mhartington/oceanic-next'
+
+" This is a new color scheme
+Plug 'rose-pine/neovim'
 
 " This colors html color codes
 Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
@@ -49,7 +55,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
 " This plugin displays the line indentation for better visualization of code.
-Plug 'Yggdroot/indentLine'
+Plug 'lukas-reineke/indent-blankline.nvim'
 
 " These are all plugins used for better syntax highlighting
 Plug 'yuezk/vim-js'
@@ -143,6 +149,10 @@ set display=truncate
 " text scroll if you mouse-click near the start or end of the window.
 set scrolloff=5
 
+" Configuring my listchars to show characters which are invisible
+set list
+let &listchars="tab:> ,trail:-,nbsp:+,eol:↴"
+
 " In many terminal emulators the mouse works just fine.
 " Position the cursor, Visually select and scroll with the mouse.
 if has('mouse')
@@ -155,12 +165,20 @@ set nrformats-=octal
 " I like highlighting strings inside C comments.
 let c_comment_strings=1
 
-" This sets the OceanicNext as color theme
-if (has("termguicolors"))
-  set termguicolors
-endif
+" This sets the rose-pine as color theme
+set termguicolors
 syntax enable
-colorscheme OceanicNext
+let g:rose_pine_variant='moon'
+colorscheme rose-pine
+
+" Configuring the indent lines
+highlight IndentBlanklineIndent1 guifg=#393552 gui=nocombine
+let g:indent_blankline_char="|"
+let g:indent_blankline_space_char_blankline=" "
+let g:indent_blankline_char_highlight_list = ['IndentBlanklineIndent1']
+let g:indent_blankline_space_char_highlight_list = ['IndentBlanklineIndent1']
+let g:indent_blankline_show_trailing_blankline_indent = 0
+let g:indent_blankline_show_end_of_line = 0
 
 " Make ctrl-U and ctrl-W allow to undo changes
 inoremap <c-u> <c-g>u<c-u>
