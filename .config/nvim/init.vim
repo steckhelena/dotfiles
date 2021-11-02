@@ -25,6 +25,10 @@ Plug 'tpope/vim-fugitive'
 " in visual mode.
 Plug 'tpope/vim-commentary'
 
+" This is a tab bar for my buffers
+Plug 'kyazdani42/nvim-web-devicons'
+Plug 'romgrk/barbar.nvim'
+
 " This plugin automatically closes brackets after pressing return
 Plug 'cohama/lexima.vim'
 
@@ -288,6 +292,10 @@ let g:airline_powerline_fonts = 1	" Uses the beautiful powerline fonts
 let g:airline#extensions#tabline#enabled = 1	" Shows buffer tabline
 let g:airline#extensions#tabline#buffer_nr_show = 1	" Shows buffer number in tabline
 
+" If barbar's option dict isn't created yet, create it
+let bufferline = get(g:, 'bufferline', {})
+let bufferline.auto_hide = v:true
+
 " Lexima to only close like endwise or after pressing <CR>
 let g:lexima_enable_endwise_rules = 1
 let g:lexima_enable_newline_rules = 1
@@ -301,7 +309,8 @@ map <C-n> :NERDTreeToggle<CR>
 
 " This allows me to close a buffer without making NERDTree take up the whole
 " window space
-nnoremap \d :bp<cr>:bd #<cr>
+nnoremap \d :BufferClose<cr>
+nnoremap <silent> <C-s>    :BufferPick<CR>
 
 " Sets CtrlP to find root directory
 let g:ctrlp_working_path_mode = 'ra'
