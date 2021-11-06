@@ -34,7 +34,7 @@ font pango:DejaVu Sans Mono 8
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec "kitty"
+bindsym $mod+Return exec "kitty --single-instance"
 
 # Fullscreen screenshot by pressing printscreen
 bindsym Print exec xfce4-screenshooter -f -s $HOME/Downloads/screenshot_`date +%Y-%m-%d_%H:%M:%S`.png
@@ -306,13 +306,13 @@ exec --no-startup-id "i3-msg 'workspace \"4\"; append_layout ~/.config/i3/worksp
 # Workspace 9: Config
 exec --no-startup-id "i3-msg 'workspace \"9\"; append_layout ~/.config/i3/workspaces/9.json'"
 exec --no-startup-id pavucontrol
-exec --no-startup-id kitty --class="htop-terminal" -e htop
+exec --no-startup-id kitty --single-instance --class="htop-terminal" -e htop
 
 # Workspace 10: Terminal
 exec --no-startup-id "i3-msg 'workspace \"10\"; append_layout ~/.config/i3/workspaces/10.json'"
-exec --no-startup-id kitty --class="terminal-1"
-exec --no-startup-id kitty --class="terminal-2" -e zsh -c ranger
-exec --no-startup-id kitty --class="terminal-3"
+exec --no-startup-id kitty --single-instance --class="terminal-1"
+exec --no-startup-id kitty --single-instance --class="terminal-2" -e zsh -c ranger
+exec --no-startup-id kitty --single-instance --class="terminal-3"
 
 # Default startup workspace
 exec --no-startup-id i3-msg workspace 1

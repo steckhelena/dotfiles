@@ -11,20 +11,26 @@
 ;			C O L O R S
 ;----------------------------------------------------------
 
+; %%base16_template: polybar##default %%
 [colors]
-background = #a6080808
-background-alt = #215d9c
-foreground = #d3d7cf
-foreground-alt = #26c6da
+base00 = ee232136
+base01 = 2a273f
+base02 = 393552
+base03 = 59546d
+base04 = 817c9c
+base05 = e0def4
+base06 = f5f5f7
+base07 = d9d7e1
+base08 = ecebf0
+base09 = eb6f92
+base0A = f6c177
+base0B = ea9a97
+base0C = 3e8fb0
+base0D = 9ccfd8
+base0E = c4a7e7
+base0F = b9b9bc
 
-advanced = #ff9966
-network = #6699ff
-simple = #99ff66
-green = #1db954
-
-primary = #215d9c
-secondary = #e60053
-alert = #bd2c40
+; %%base16_template_end%%
 
 
 ;----------------------------------------------------------
@@ -37,11 +43,11 @@ height = 27
 radius = 0
 fixed-center = true
 
-background = ${colors.background}
-foreground = ${colors.foreground}
+background = ${colors.base00}
+foreground = ${colors.base05}
 
 line-size = 3
-line-color = #f00
+line-color = {$colors.base03}
 
 border-size = 0
 border-color = #00000000
@@ -53,6 +59,7 @@ module-margin-left = 1
 module-margin-right = 2
 
 enable-ipc = true
+
 
 ;----------------------------------------------------------
 ;			F O N T S
@@ -66,7 +73,7 @@ font-3 = Hack Nerd Font Mono:size=8;0
 
 
 ;----------------------------------------------------------
-;  	    M A I N   M O D U L E    L A Y O U T
+;			M A I N   M O D U L E    L A Y O U T
 ;----------------------------------------------------------
 
 modules-left = i3 player-mpris-tail pulseaudio
@@ -75,11 +82,11 @@ modules-right = filesystem cpu memory temperature ifname ip download upload
 
 tray-position = right
 tray-padding = 2
-tray-backgroud = ${colors.background}
+tray-backgroud = ${colors.base00}
 
 
 ;----------------------------------------------------------
-;		i 3   M O D U L E
+;			i 3   M O D U L E
 ;----------------------------------------------------------
 
 [module/i3]
@@ -106,12 +113,12 @@ ws-icon-default = 
 
 label-mode = %mode%
 label-mode-padding = 2
-label-mode-foreground = ${colors.foreground}
-label-mode-background = ${colors.primary}
+label-mode-foreground = ${colors.base05}
+label-mode-background = ${colors.base01}
 
 ; focused = Active workspace on focused monitor
 label-focused = %icon%
-label-focused-underline = ${colors.primary}
+label-focused-underline = ${colors.base05}
 label-focused-padding = 4
 
 ; unfocused = Inactive workspace on any monitor
@@ -120,7 +127,7 @@ label-unfocused-padding = 4
 
 ; visible = Active workspace on unfocused monitor
 label-visible = %icon%
-label-visible-underline = ${colors.primary}
+label-visible-underline = ${colors.base05}
 label-visible-padding = 4
 
 ; urgent = Workspace with urgency hint set
@@ -129,7 +136,7 @@ label-urgent-padding = 4
 
 
 ;----------------------------------------------------------
-;		   F I L E S Y S T E M
+;			F I L E S Y S T E M
 ;----------------------------------------------------------
 
 [module/filesystem]
@@ -142,19 +149,19 @@ mount-0 = /
 
 format-mounted = <label-mounted>
 format-mounted-prefix = "  "
-format-mounted-foreground = ${colors.foreground}
-format-mounted-underline = ${colors.advanced}
+format-mounted-foreground = ${colors.base05}
+format-mounted-underline = ${colors.base0B}
 
 label-mounted = %percentage_used%%
-label-mounted-foreground = ${colors.foreground}
-label-mounted-underline = ${colors.advanced}
+label-mounted-foreground = ${colors.05}
+label-mounted-underline = ${colors.base0B}
 label-unmounted = %mountpoint%: not mounted
-label-unmounted-foreground = ${colors.advanced}
-label-unmounted-underline = ${colors.advanced}
+label-unmounted-foreground = ${colors.base0B}
+label-unmounted-underline = ${colors.base0B}
 
 
 ;----------------------------------------------------------
-;			   C P U
+;			C P U
 ;----------------------------------------------------------
 
 [module/cpu]
@@ -162,8 +169,8 @@ type = internal/cpu
 interval = 1
 
 format-prefix = "  "
-format-foreground = ${colors.foreground}
-format-underline = ${colors.advanced}
+format-foreground = ${colors.base05}
+format-underline = ${colors.base0B}
 
 label = %percentage%%
 
@@ -177,28 +184,28 @@ type = internal/memory
 interval = 1
 
 format-prefix = "  "
-format-foreground = ${colors.foreground}
-format-underline = ${colors.advanced}
+format-foreground = ${colors.base05}
+format-underline = ${colors.base0B}
 format-margin-top = -5
 
 label = %percentage_used%%
 
 
 ;----------------------------------------------------------
-;		    T E M P E R A T U R E
+;			T E M P E R A T U R E
 ;----------------------------------------------------------
 
 [module/temperature]
 type = internal/temperature
 thermal-zone = 0
-warn-temperature = 65
+warn-temperature = 70
 interval = 2
 
 format = <ramp> <label>
 format-warn = <ramp> <label-warn>
-format-foreground = ${colors.foreground}
-format-underline = ${colors.advanced}
-format-warn-foreground = ${colors.alert}
+format-foreground = ${colors.base05}
+format-underline = ${colors.base0B}
+format-warn-foreground = ${colors.base08}
 
 label = %temperature-c%
 label-warn = %temperature-c%
@@ -211,7 +218,7 @@ ramp-4 = 
 
 
 ;----------------------------------------------------------
-;	      N E T W O R K   I F   N A M E
+;			N E T W O R K   I F   N A M E
 ;----------------------------------------------------------
 
 [module/ifname]
@@ -221,19 +228,19 @@ interval = 3.0
 
 format-connected = <label-connected>
 format-disconnected = <label-disconnected>
-format-connected-foreground = ${colors.foreground}
-format-connected-underline = ${colors.network}
+format-connected-foreground = ${colors.base05}
+format-connected-underline = ${colors.base0E}
 
 label-connected = %ifname%
-label-connected-foreground = ${colors.foreground}
-label-connected-underline = ${colors.network}
+label-connected-foreground = ${colors.base05}
+label-connected-underline = ${colors.base0E}
 label-disconnected = %ifname%
-label-disconnected-foreground = ${colors.alert}
-label-disconnected-underline = ${colors.network}
+label-disconnected-foreground = ${colors.base08}
+label-disconnected-underline = ${colors.base0E}
 
 
 ;----------------------------------------------------------
-;	      N E T W O R K   I P
+;			N E T W O R K   I P
 ;----------------------------------------------------------
 
 [module/ip]
@@ -245,19 +252,19 @@ format-connected = <label-connected>
 format-disconnected = <label-disconnected>
 format-connected-prefix = "  "
 ;format-connected-prefix = " net"
-format-connected-foreground = ${colors.foreground}
-format-connected-underline = ${colors.network}
+format-connected-foreground = ${colors.base05}
+format-connected-underline = ${colors.base0E}
 
 label-connected = %local_ip%
-label-connected-foreground = ${colors.foreground}
-label-connected-underline = ${colors.network}
+label-connected-foreground = ${colors.base05}
+label-connected-underline = ${colors.base0E}
 label-disconnected = ---
-label-disconnected-foreground = ${colors.alert}
-label-disconnected-underline = ${colors.network}
+label-disconnected-foreground = ${colors.base08}
+label-disconnected-underline = ${colors.base0E}
 
 
 ;----------------------------------------------------------
-;	      W I R E L E S S   T R A F F I C
+;			W I R E L E S S   T R A F F I C
 ;----------------------------------------------------------
 
 [module/upload]
@@ -269,15 +276,15 @@ format-connected = <label-connected>
 format-disconnected = <label-disconnected>
 format-connected-prefix = "  "
 format-disconnected-prefix = "  "
-format-connected-foreground = ${colors.foreground}
-format-connected-underline = ${colors.network}
+format-connected-foreground = ${colors.base05}
+format-connected-underline = ${colors.base0E}
 
 label-connected = %upspeed%
-label-connected-foreground = ${colors.foreground}
-label-connected-underline = ${colors.network}
+label-connected-foreground = ${colors.base05}
+label-connected-underline = ${colors.base0E}
 label-disconnected = ---
-label-disconnected-foreground = ${colors.alert}
-label-disconnected-underline = ${colors.network}
+label-disconnected-foreground = ${colors.base08}
+label-disconnected-underline = ${colors.base0E}
 
 [module/download]
 type = internal/network
@@ -288,19 +295,19 @@ format-connected = <label-connected>
 format-disconnected = <label-disconnected>
 format-connected-prefix = "  "
 format-disconnected-prefix = "  "
-format-connected-foreground = ${colors.foreground}
-format-connected-underline = ${colors.network}
+format-connected-foreground = ${colors.base05}
+format-connected-underline = ${colors.base0E}
 
 label-connected = %downspeed%
-label-connected-foreground = ${colors.foreground}
-label-connected-underline = ${colors.network}
+label-connected-foreground = ${colors.base05}
+label-connected-underline = ${colors.base0E}
 label-disconnected = ---
-label-disconnected-foreground = ${colors.alert}
-label-disconnected-underline = ${colors.network}
+label-disconnected-foreground = ${colors.base08}
+label-disconnected-underline = ${colors.base0E}
 
 
 ;----------------------------------------------------------
-;   		      E T H E R N E T
+;   			E T H E R N E T
 ;----------------------------------------------------------
 
 [module/eth]
@@ -309,12 +316,16 @@ interface = ${env:DEFAULT_NETWORK_INTERFACE}
 interval = 1.0
 
 format-connected-prefix = "  "
-format-foreground = ${colors.foreground}
-format-underline = ${colors.network}
+format-foreground = ${colors.base05}
+format-underline = ${colors.base0E}
 
 label-connected = %local_ip%
 label-disconnected = %ifname% disconnected
 
+
+;----------------------------------------------------------
+;   			D A T E
+;----------------------------------------------------------
 
 [module/date]
 type = internal/date
@@ -327,9 +338,15 @@ time = %H:%M:%S
 time-alt = %H:%M:%S
 
 format-prefix = 
-format-prefix-foreground = ${colors.foreground-alt}
-format-underline = ${colors.primary}
+format-foreground = ${colors.base05}
+format-prefix-foreground = ${colors.base04}
+format-underline = ${colors.base05}
 label = %date% %time%
+
+
+;----------------------------------------------------------
+;   			V O L U M E
+;----------------------------------------------------------
 
 [module/pulseaudio]
 type = internal/pulseaudio
@@ -344,13 +361,13 @@ interval = 5
 
 format-volume = <ramp-volume> <bar-volume> <label-volume>
 label-muted = muted
-label-muted-foreground = ${colors.green}
+label-muted-foreground = ${colors.base08}
 
 ; Only applies if <ramp-volume> is used
 ramp-volume-0 = 
 
 bar-volume-width = 50
-bar-volume-foreground-0 = ${colors.green}
+bar-volume-foreground-0 = ${colors.base04}
 bar-volume-gradient = true
 bar-volume-indicator = |
 bar-volume-indicator-font = 4
@@ -358,7 +375,7 @@ bar-volume-fill = ■
 bar-volume-fill-font = 3
 bar-volume-empty = ■
 bar-volume-empty-font = 3
-bar-volume-empty-foreground = ${colors.foreground}
+bar-volume-empty-foreground = ${colors.base06}
 
 
 ;----------------------------------------------------------
@@ -369,4 +386,3 @@ type = custom/script
 exec = ~/.config/polybar/player-mpris-tail.py --icon-playing ' ' --icon-paused ' ' --icon-stopped ' '
 tail = true
 click-left = ~/.config/polybar/player-mpris-tail.py play-pause &
-format-underline = ${colors.green}

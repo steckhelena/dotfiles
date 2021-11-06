@@ -12,11 +12,8 @@ scriptencoding utf-8
 " Initializing plugins
 call plug#begin('~/.config/nvim/plugged')
 
-" This is my color scheme
-Plug 'rose-pine/neovim'
-
 " This colors html color codes
-Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
+Plug 'norcalli/nvim-colorizer.lua'
 
 " This enables using git commands from nvim
 Plug 'tpope/vim-fugitive'
@@ -100,8 +97,7 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 
 call plug#end()
 
-" Initialize Hexokinase to display html color codes as colors on every line
-let g:Hexokinase_highlighters = ['virtual']
+set termguicolors
 
 " Allow backspacing over everything in insert mode.
 set backspace=indent,eol,start
@@ -142,6 +138,10 @@ highlight LineNr ctermbg=None
 " Show color column
 set colorcolumn=81
 
+lua << EOF
+require'colorizer'.setup()
+EOF
+
 set ttimeout		" time out for key codes
 set ttimeoutlen=100	" wait up to 100ms after Esc for special key
 
@@ -168,18 +168,10 @@ set nrformats-=octal
 " I like highlighting strings inside C comments.
 let c_comment_strings=1
 
-" This sets the rose-pine as color theme
-set termguicolors
-syntax enable
-let g:rose_pine_variant='moon'
-colorscheme rose-pine
 
 " Configuring the indent lines
-highlight IndentBlanklineIndent1 guifg=#393552 gui=nocombine
 let g:indent_blankline_char="|"
 let g:indent_blankline_space_char_blankline=" "
-let g:indent_blankline_char_highlight_list = ['IndentBlanklineIndent1']
-let g:indent_blankline_space_char_highlight_list = ['IndentBlanklineIndent1']
 let g:indent_blankline_show_trailing_blankline_indent = 0
 let g:indent_blankline_show_end_of_line = 0
 
@@ -357,3 +349,6 @@ autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
 " Sets jsonc filetype
 autocmd BufNewFile,BufRead *.jsonc set ft=jsonc
+
+let path = expand('<sfile>:p:h')
+exec 'source' path . '/theme.vim'
