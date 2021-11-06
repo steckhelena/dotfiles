@@ -21,12 +21,12 @@ listview {
 scrollbar {
     padding:      0px 0px 2em;
     handle-width: 8px ;
-    handle-color: var(alternate-normal-background);
+    handle-color: var(normal-foreground);
 }
 entry {
     text-color:        var(normal-foreground);
     cursor:            text;
-    placeholder-color: rgba ( 128, 128, 128, 100 % );
+    placeholder-color: var(alternate-active-foreground);
     vertical-align:    0.5;
     margin:            10px;
     expand:            false;

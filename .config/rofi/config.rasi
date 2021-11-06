@@ -1,45 +1,43 @@
+// %%base16_template: rofi##colors %%
+/**
+ * Base16 Rosé Pine Moon ROFI Color theme
+ *
+ * Authors
+ *  Scheme: Emilia Dunfelt &lt;sayhi@dunfelt.se&gt;
+ *  Template: Jordi Pakey-Rodriguez (https://github.com/0xdec), Andrea Scarpino (https://github.com/ilpianista)
+ */
+
 * {
-    alternate-urgent-background: var(lightbg);
-    alternate-active-foreground: var(blue);
-    selected-active-background:  var(actbg);
-    selected-urgent-foreground:  var(background-color);
-    hide-scrollbar:              "true";
-    padding:                     0;
-    normal-foreground:           var(text-color);
-    text-color:                  rgba ( 211, 215, 207, 100 % );
-    line-padding:                2;
-    background:                  rgba ( 253, 246, 227, 100 % );
-    line-margin:                 2;
-    alternate-normal-foreground: var(foreground);
-    urgent-foreground:           var(text-color);
-    active-background:           var(selbg);
-    selected-normal-background:  var(actbg);
-    blue:                        rgba ( 38, 139, 210, 100 % );
-    selected-urgent-background:  var(urgbg);
-    selected-active-foreground:  var(winbg);
-    font:                        "Cantarell 18";
-    separatorcolor:              var(foreground);
-    urgbg:                       rgba ( 229, 57, 53, 100 % );
-    lightfg:                     rgba ( 88, 104, 117, 100 % );
-    alternate-active-background: var(lightbg);
-    separator-style:             "none";
-    selbg:                       rgba ( 33, 93, 156, 100 % );
-    spacing:                     2;
-    winbg:                       rgba ( 38, 198, 218, 100 % );
-    actbg:                       rgba ( 38, 38, 38, 100 % );
-    alternate-urgent-foreground: var(red);
-    margin:                      0;
-    lightbg:                     rgba ( 238, 232, 213, 100 % );
-    red:                         rgba ( 220, 50, 47, 100 % );
-    background-color:            rgba ( 24, 24, 24, 100 % );
-    normal-background:           var(background-color);
-    border-color:                var(foreground);
-    foreground:                  rgba ( 0, 43, 54, 100 % );
-    alternate-normal-background: var(lightbg);
-    urgent-background:           var(background-color);
-    selected-normal-foreground:  var(winbg);
-    active-foreground:           var(text-color);
+    red:                         rgba ( 236, 235, 240, 100 % );
+    blue:                        rgba ( 156, 207, 216, 100 % );
+    lightfg:                     rgba ( 245, 245, 247, 100 % );
+    lightbg:                     rgba ( 42, 39, 63, 100 % );
+    foreground:                  rgba ( 224, 222, 244, 100 % );
+    background:                  rgba ( 35, 33, 54, 100 % );
+    background-color:            rgba ( 35, 33, 54, 0 % );
+    separatorcolor:              @foreground;
+    border-color:                @foreground;
+    selected-normal-foreground:  @lightbg;
+    selected-normal-background:  @lightfg;
+    selected-active-foreground:  @background;
+    selected-active-background:  @blue;
+    selected-urgent-foreground:  @background;
+    selected-urgent-background:  @red;
+    normal-foreground:           @foreground;
+    normal-background:           @background;
+    active-foreground:           @blue;
+    active-background:           @background;
+    urgent-foreground:           @red;
+    urgent-background:           @background;
+    alternate-normal-foreground: @foreground;
+    alternate-normal-background: @lightbg;
+    alternate-active-foreground: @blue;
+    alternate-active-background: @lightbg;
+    alternate-urgent-foreground: @red;
+    alternate-urgent-background: @lightbg;
 }
+
+// %%base16_template_end%%
 
 element {
     padding: 10px ;
@@ -98,5 +96,13 @@ element-icon {
     text-color:       inherit;
 }
 textbox {
-    text-color: var(foreground);
+    background-color: var(active-background);
+    text-color: var(active-foreground);
+}
+prompt {
+    background-color: var(normal-background);
+    text-color: var(normal-foreground);
+}
+window {
+    background-color: var(normal-background);
 }
