@@ -243,6 +243,9 @@ exec_always --no-startup-id numlockx on
 # Composite manager
 exec --no-startup-id picom
 
+# live reload of gtk themes
+exec --no-startup-id xsettingsd
+
 # Enables autolock after 15mins
 exec --no-startup-id "xautolock -time 15 -locker '~/.config/i3/scripts/lock.sh'"
 
