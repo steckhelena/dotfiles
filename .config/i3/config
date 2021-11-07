@@ -172,7 +172,7 @@ bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # select themes
-bindsym $mod+Shift+t exec "~/.config/i3/scripts/change_theme.sh $HOME &> $HOME/asdf"
+bindsym $mod+Shift+t exec "~/.config/i3/scripts/change_theme.sh $HOME"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
