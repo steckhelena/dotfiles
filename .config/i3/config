@@ -64,7 +64,7 @@ set $base0F #b9b9bc
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec "kitty --single-instance"
+bindsym $mod+Return exec "kitty --single-instance --listen-on unix:/tmp/mykitten"
 
 # Fullscreen screenshot by pressing printscreen
 bindsym Print exec xfce4-screenshooter -f -s $HOME/Downloads/screenshot_`date +%Y-%m-%d_%H:%M:%S`.png
@@ -171,6 +171,8 @@ bindsym $mod+Shift+0 move container to workspace $ws10; workspace $ws10
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
+# select themes
+bindsym $mod+Shift+t exec "~/.config/i3/scripts/change_theme.sh $HOME &> $HOME/asdf"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -338,13 +340,13 @@ exec --no-startup-id "i3-msg 'workspace \"4\"; append_layout ~/.config/i3/worksp
 # Workspace 9: Config
 exec --no-startup-id "i3-msg 'workspace \"9\"; append_layout ~/.config/i3/workspaces/9.json'"
 exec --no-startup-id pavucontrol
-exec --no-startup-id kitty --single-instance --class="htop-terminal" -e htop
+exec --no-startup-id kitty --single-instance --listen-on unix:/tmp/mykitten --class="htop-terminal" -e htop
 
 # Workspace 10: Terminal
 exec --no-startup-id "i3-msg 'workspace \"10\"; append_layout ~/.config/i3/workspaces/10.json'"
-exec --no-startup-id kitty --single-instance --class="terminal-1"
-exec --no-startup-id kitty --single-instance --class="terminal-2" -e zsh -c ranger
-exec --no-startup-id kitty --single-instance --class="terminal-3"
+exec --no-startup-id kitty --single-instance --listen-on unix:/tmp/mykitten --class="terminal-1"
+exec --no-startup-id kitty --single-instance --listen-on unix:/tmp/mykitten --class="terminal-2" -e zsh -c ranger
+exec --no-startup-id kitty --single-instance --listen-on unix:/tmp/mykitten --class="terminal-3"
 
 # Default startup workspace
 exec --no-startup-id i3-msg workspace 1

@@ -1,7 +1,10 @@
 #!/bin/bash
 
-current_filename=~/.current_pybase16_theme
-themes_dir=~/.config/pybase16
+current_filename=$1/.current_pybase16_theme
+config_dir=$1/.config
+themes_dir=$config_dir/pybase16
+kitty_conf=$config_dir/kitty/kitty.conf
+gtk_config_dir=$1/.themes
 
 # recover currently selected theme
 current=$(cat $current_filename 2>/dev/null || echo '(not initialized)');
@@ -19,9 +22,13 @@ if [[ -z "$themes" ]]; then
         rofi -no-fixed-num-lines -sep '|' -dmenu -i \
           -p "Do you wish to install the themes?" \
           -theme YesNo)
-    pip install pybase16-builder
+
+    if [[ "$res" = "No" ]]; then
+        exit 0;
+    fi
+
     mkdir -p $themes_dir
-    (cd $themes_dir; pybase16 update)
+    (cd $themes_dir; pybase16 update; pybase16 build)
     res=$(echo 'Ok' | \
         rofi -sep '|' -dmenu -i \
           -p "Done!" -l 1\
@@ -36,11 +43,13 @@ res=$(echo $themes | \
 
 if [[ "$res" ]]; then
     (cd $themes_dir;
-    pybase16 inject -s $res -f ../kitty/theme.conf -f ../nvim/theme.vim -f ../polybar/config -f ../rofi/config.rasi -f ../i3/config -f ~/.themes/FlatColor/colors2 -f ~/.themes/FlatColor/colors3)
+    pybase16 inject -s $res -f $config_dir/kitty/theme.conf -f $config_dir/nvim/theme.vim \
+    -f $config_dir/polybar/config -f $config_dir/rofi/config.rasi -f $config_dir/i3/config \
+    -f $gtk_config_dir/FlatColor/colors2 -f $gtk_config_dir/FlatColor/colors3)
 
     echo $res > $current_filename
     i3-msg reload
-    kitty @ set-colors --all --configured ~/.config/kitty/kitty.conf
+    kitty @ --to 'unix:/tmp/mykitten' set-colors --all --configured $kitty_conf
     killall -HUP xsettingsd
 fi
 
