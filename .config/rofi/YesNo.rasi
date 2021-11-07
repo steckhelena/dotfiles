@@ -1,0 +1,50 @@
+window {
+    anchor:     center;
+    location:   center;
+    children:   [ vertibox ];
+    width: 25em;
+    height: 5em;
+}
+
+centerbox {
+    orientation: horizontal;
+    children: [dummy, listview, dummy];
+}
+
+centerprompt {
+    orientation: horizontal;
+    children: [dummy, prompt, dummy];
+}
+
+vertibox {
+    orientation: vertical;
+    expand: true;
+    children:   [ centerprompt, sep, centerbox ];
+}
+listview {
+    layout: horizontal;
+}
+dummy {
+    expand: true;
+}
+
+sep {
+    expand: false;
+    border: 0px 0px 2px dash 0px;
+}
+
+prompt {
+    horizontal-align: 0.5;
+    vertical-align: 0.5;
+    width: 25em;
+}
+
+element {
+    expand: false;
+    width: 4em;
+    spacing: 0;
+    padding: 0;
+}
+
+@import "config.rasi"
+
