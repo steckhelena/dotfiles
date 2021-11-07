@@ -13,8 +13,10 @@ current=$(cat $current_filename 2>/dev/null || echo '(not initialized)');
 # list themes
 themes=$(find $themes_dir/schemes/ -regextype posix-extended -regex '.*\.yaml|.*\.yml' -type f  \
         | xargs -n1 basename \
+        | sed 's/^base16-//' \
         | sed 's/\.yaml$\|\.yml$//' \
-        | sort \
+        | sed 's/-256$//' \
+        | sort -u \
         | sed -z 's/\n/|/g;s/|$/\n/')
 
 if [[ -z "$themes" ]]; then
