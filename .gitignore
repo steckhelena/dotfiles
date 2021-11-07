@@ -88,3 +88,9 @@
 
 # tig
 !.tigrc
+
+# gtk themes
+!.themes/
+!.themes/FlatColor
+!.themes/dummy
+!.xsettingsd

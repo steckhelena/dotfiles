@@ -1,3 +1,6 @@
 [submodule ".oh-my-custom-zsh/plugins/zsh-completions"]
 	path = .oh-my-custom-zsh/plugins/zsh-completions
 	url = https://github.com/zsh-users/zsh-completions
+[submodule "/home/steckhelena/.themes/FlatColor"]
+	path = /home/steckhelena/.themes/FlatColor
+	url = https://github.com/jasperro/FlatColor
