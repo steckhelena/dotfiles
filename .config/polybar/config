@@ -118,7 +118,7 @@ label-mode-background = ${colors.base01}
 
 ; focused = Active workspace on focused monitor
 label-focused = %icon%
-label-focused-underline = ${colors.base05}
+label-focused-underline = ${colors.base0A}
 label-focused-padding = 4
 
 ; unfocused = Inactive workspace on any monitor
@@ -340,7 +340,7 @@ time-alt = %H:%M:%S
 format-prefix = 
 format-foreground = ${colors.base05}
 format-prefix-foreground = ${colors.base04}
-format-underline = ${colors.base05}
+format-underline = ${colors.base0D}
 label = %date% %time%
 
 
@@ -367,7 +367,7 @@ label-muted-foreground = ${colors.base08}
 ramp-volume-0 = 
 
 bar-volume-width = 50
-bar-volume-foreground-0 = ${colors.base04}
+bar-volume-foreground-0 = ${colors.base0B}
 bar-volume-gradient = true
 bar-volume-indicator = |
 bar-volume-indicator-font = 4
