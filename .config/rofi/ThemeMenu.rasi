@@ -1,0 +1,51 @@
+configuration {
+	modi: "drun";
+	theme: "ThemeMenu";
+	display-run: "";
+	kb-row-up: "Up";
+	kb-row-down: "Down";
+}
+listview {
+    fixed-height: 0;
+    padding:      2px 0px 0px ;
+    scrollbar:    true;
+    cycle:        true;
+    dynamic:      false;
+    border-color: var(separatorcolor);
+    border:       2px dash 0px 0px ;
+    spacing:      10px 5px;
+}
+scrollbar {
+    padding:      0px 0px 2em;
+    handle-width: 8px ;
+    handle-color: var(normal-foreground);
+}
+entry {
+    text-color:        var(normal-foreground);
+    cursor:            text;
+    placeholder-color: var(alternate-active-foreground);
+    vertical-align:    0.5;
+    margin:            10px;
+    expand:            false;
+    placeholder:       "Type to filter";
+}
+prompt {
+  margin: 10px;
+  }
+window {
+    background-color: var(background);
+    margin:           27px 0px 0px ;
+    width:       30.0000% ;
+    orientation: horizontal;
+    location:    center;
+    anchor:      center;
+    height:      30.0000% ;
+    children:    [ mainbox ];
+    border: 1px;
+}
+mainbox {
+    children: [ prompt, entry,listview ];
+}
+
+@import "config.rasi"
+
