@@ -5,6 +5,7 @@ config_dir=$1/.config
 themes_dir=$config_dir/pybase16
 kitty_conf=$config_dir/kitty/kitty.conf
 gtk_config_dir=$1/.themes
+xsettingsd_config=$1/.xsettingsd
 
 # recover currently selected theme
 current=$(cat $current_filename 2>/dev/null || echo '(not initialized)');
@@ -47,9 +48,15 @@ if [[ "$res" ]]; then
     -f $config_dir/polybar/config -f $config_dir/rofi/config.rasi -f $config_dir/i3/config \
     -f $gtk_config_dir/FlatColor/colors2 -f $gtk_config_dir/FlatColor/colors3)
 
-    echo $res > $current_filename
-    i3-msg reload
-    kitty @ --to 'unix:/tmp/mykitten' set-colors --all --configured $kitty_conf
+    rm $gtk_config_dir/$current
+    ln -Ts $gtk_config_dir/FlatColor $gtk_config_dir/$res
+    echo "Net/ThemeName \"$res\"" > $xsettingsd_config
     killall -HUP xsettingsd
+
+    i3-msg reload
+
+    kitty @ --to 'unix:/tmp/mykitten' set-colors --all --configured $kitty_conf
+
+    echo $res > $current_filename
 fi
 
