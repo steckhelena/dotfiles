@@ -26,6 +26,36 @@ font pango:DejaVu Sans Mono 8
 # X core fonts rendering does not support right-to-left and this being a bitmap
 # font, it doesn’t scale on retina/hidpi displays.
 
+
+###################################################################
+# Colors
+###################################################################
+
+# %%base16_template: i3##colors %%
+## Base16 Rosé Pine Moon
+# Author: Emilia Dunfelt &lt;sayhi@dunfelt.se&gt;
+#
+# You can use these variables anywhere in the i3 configuration file.
+
+set $base00 #232136
+set $base01 #2a273f
+set $base02 #393552
+set $base03 #59546d
+set $base04 #817c9c
+set $base05 #e0def4
+set $base06 #f5f5f7
+set $base07 #d9d7e1
+set $base08 #ecebf0
+set $base09 #eb6f92
+set $base0A #f6c177
+set $base0B #ea9a97
+set $base0C #3e8fb0
+set $base0D #9ccfd8
+set $base0E #c4a7e7
+set $base0F #b9b9bc
+
+# %%base16_template_end%%
+
 ###################################################################
 # Keyboard
 ###################################################################
@@ -256,14 +286,13 @@ gaps outer 0
 smart_gaps on
 smart_borders on
 
-# class                 border  backgr. text    indicator child_border
-client.focused          #4c7899 #285577 #ffffff #2e9ef4   #285577
-client.focused_inactive #333333 #5f676a #ffffff #484e50   #5f676a
-client.unfocused        #333333 #222222 #888888 #292d2e   #222222
-client.urgent           #2f343a #900000 #ffffff #900000   #900000
-client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
-
-client.background       #ffffff
+# Property Name         Border  BG      Text    Indicator Child Border
+client.focused          $base05 $base0D $base00 $base0D $base0C
+client.focused_inactive $base01 $base01 $base05 $base03 $base01
+client.unfocused        $base01 $base00 $base05 $base01 $base01
+client.urgent           $base08 $base08 $base00 $base08 $base08
+client.placeholder      $base00 $base00 $base05 $base00 $base00
+client.background       $base07
 
 # Enables desktop background manager
 exec --no-startup-id ~/.config/i3/scripts/wallpaperslide.sh
