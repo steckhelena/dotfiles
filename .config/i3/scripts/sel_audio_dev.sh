@@ -4,33 +4,31 @@ res=$(echo "	Headphone;	Speakers" | rofi -sep ";" -dmenu -p "Select audio 
 
 if [[ "$res" = *"Headphone"* ]]
 then
-	pacmd set-card-profile alsa_card.pci-0000_00_1b.0 output:iec958-stereo
+	pactl set-card-profile alsa_card.usb-Astro_Gaming_Astro_A50-00 output:stereo-game+output:stereo-chat+input:mono-chat
 	while read -r line
 	do 
-		if [[ "$line" = *"iec958-stereo"* ]] 
+		if [[ "$line" = *"alsa_output.usb-Astro_Gaming_Astro_A50-00.stereo-game"* ]] 
 		then
-			name=${line##* <}
-			name=${name%>*}
+			name=${line##Name: }
 			echo $name
-			pacmd set-default-sink $name
+			pactl set-default-sink $name
 			break
 		fi
-	done <<<$(pacmd list-sinks)
+	done <<<$(pactl list sinks)
 fi
 
 if [[ $res = *"Speakers"* ]]
 then
-	pacmd set-card-profile alsa_card.pci-0000_00_1b.0 output:analog-stereo+input:analog-stereo
+	pactl set-card-profile alsa_card.pci-0000_00_1b.0 output:analog-stereo+input:analog-stereo
 	while read -r line
 	do 
 		if [[ "$line" = *"alsa_output.pci-0000_00_1b.0.analog-stereo"* ]] 
 		then
-			name=${line##* <}
-			name=${name%>*}
+			name=${line##Name:}
 			echo $name
-			pacmd set-default-sink $name
+			pactl set-default-sink $name
 			break
 		fi
-	done <<<$(pacmd list-sinks)
+	done <<<$(pactl list sinks)
 fi
 exit 0
