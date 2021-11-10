@@ -4,10 +4,10 @@ res=$(echo "	Headphone;	Speakers" | rofi -sep ";" -dmenu -p "Select audio 
 
 if [[ "$res" = *"Headphone"* ]]
 then
-	pactl set-card-profile alsa_card.usb-Astro_Gaming_Astro_A50-00 output:stereo-game+output:stereo-chat+input:mono-chat
+	pactl set-card-profile alsa_card.pci-0000_00_1b.0 output:iec958-stereo+input:analog-stereo
 	while read -r line
 	do 
-		if [[ "$line" = *"alsa_output.usb-Astro_Gaming_Astro_A50-00.stereo-game"* ]] 
+		if [[ "$line" = *"iec958"* ]] 
 		then
 			name=${line##Name: }
 			echo $name
