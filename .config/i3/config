@@ -316,6 +316,7 @@ exec --no-startup-id polybar -r main
 assign [class="^[Ff][Ii][Rr][Ee][Ff][Oo][Xx]$"] $ws1
 for_window [class="^[Ff][Ii][Rr][Ee][Ff][Oo][Xx]$"] layout tabbed
 for_window [class="Spotify"] move to workspace $ws2
+for_window [class="Deezer"] move to workspace $ws2
 assign [title="Deluge"] $ws3
 assign [title="calibre"] $ws3
 assign [class="Steam"] $ws4
@@ -328,8 +329,8 @@ assign [class="streamlink-twitch-gui"] $ws8
 exec --no-startup-id "i3-msg 'workspace \"1\"; append_layout ~/.config/i3/workspaces/1.json'"
 exec --no-startup-id firefox
 
-# Workspace 2: Spotify
-exec --no-startup-id spotify
+# Workspace 2: Music
+exec --no-startup-id deezer
 
 # Workspace 3: Deluge
 #exec --no-startup-id deluge-gtk
