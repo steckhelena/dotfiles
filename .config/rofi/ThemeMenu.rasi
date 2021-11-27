@@ -1,6 +1,5 @@
 configuration {
 	modi: "drun";
-	theme: "ThemeMenu";
 	display-run: "";
 	kb-row-up: "Up";
 	kb-row-down: "Down";

@@ -2,7 +2,6 @@ configuration {
 	modi: "combi";
 	show-icons: true;
 	combi-modi: "drun,run";
-	theme: "LaunchMenu";
 	display-run: "";
 	display-drun: "";
 	kb-row-up: "Up";
