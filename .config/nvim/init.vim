@@ -264,7 +264,8 @@ command! -nargs=0 Prettier :CocCommand prettier.formatFile
 " Add `:Format` command to format current buffer.
 command! -nargs=0 Format :call CocAction('format')
 
-"""
+" This lets me use C-b to build makefiles
+nnoremap <C-b> :make<CR>
 
 " This unsets the "last search pattern" register by hitting return
 nnoremap <silent> <CR> :noh<CR><CR>
@@ -335,6 +336,9 @@ augroup vimStartup
     \ | endif
 
 augroup END
+
+" use tabs on Makefiles
+autocmd FileType make set noexpandtab
 
 " Sets rasi as a css file
 autocmd BufNewFile,BufRead *.rasi   set syntax=css
