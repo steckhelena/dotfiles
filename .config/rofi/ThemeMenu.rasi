@@ -1,9 +1,6 @@
 configuration {
-	modi: "combi";
-	show-icons: true;
-	combi-modi: "drun,run";
+	modi: "drun";
 	display-run: "";
-	display-drun: "";
 	kb-row-up: "Up";
 	kb-row-down: "Down";
 }
@@ -31,18 +28,23 @@ entry {
     expand:            false;
     placeholder:       "Type to filter";
 }
+prompt {
+  margin: 10px;
+  }
 window {
     background-color: var(background);
     margin:           27px 0px 0px ;
-    width:       22.0000% ;
+    width:       30.0000% ;
     orientation: horizontal;
-    location:    northwest;
-    anchor:      northwest;
-    height:      100.0000% ;
+    location:    center;
+    anchor:      center;
+    height:      30.0000% ;
     children:    [ mainbox ];
+    border: 1px;
 }
 mainbox {
-    children: [ entry,listview ];
+    children: [ prompt, entry,listview ];
 }
 
 @import "config.rasi"
+

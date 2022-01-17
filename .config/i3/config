@@ -26,6 +26,36 @@ font pango:DejaVu Sans Mono 8
 # X core fonts rendering does not support right-to-left and this being a bitmap
 # font, it doesn’t scale on retina/hidpi displays.
 
+
+###################################################################
+# Colors
+###################################################################
+
+# %%base16_template: i3##colors %%
+## Base16 Rosé Pine Moon
+# Author: Emilia Dunfelt &lt;sayhi@dunfelt.se&gt;
+#
+# You can use these variables anywhere in the i3 configuration file.
+
+set $base00 #232136
+set $base01 #2a273f
+set $base02 #393552
+set $base03 #59546d
+set $base04 #817c9c
+set $base05 #e0def4
+set $base06 #f5f5f7
+set $base07 #d9d7e1
+set $base08 #ecebf0
+set $base09 #eb6f92
+set $base0A #f6c177
+set $base0B #ea9a97
+set $base0C #3e8fb0
+set $base0D #9ccfd8
+set $base0E #c4a7e7
+set $base0F #b9b9bc
+
+# %%base16_template_end%%
+
 ###################################################################
 # Keyboard
 ###################################################################
@@ -34,7 +64,7 @@ font pango:DejaVu Sans Mono 8
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec "kitty"
+bindsym $mod+Return exec "kitty --single-instance --listen-on unix:/tmp/mykitten"
 
 # Fullscreen screenshot by pressing printscreen
 bindsym Print exec xfce4-screenshooter -f -s $HOME/Downloads/screenshot_`date +%Y-%m-%d_%H:%M:%S`.png
@@ -43,7 +73,7 @@ bindsym Print exec xfce4-screenshooter -f -s $HOME/Downloads/screenshot_`date +%
 bindsym $mod+Print exec xfce4-screenshooter
 
 # Screenshot of selected area to clipboard
-bindsym $mod+Shift+Control+4 exec "maim -s --format=png /dev/stdout | xclip -selection clipboard -t image/png -i"
+bindsym $mod+Shift+Control+4 exec "maim --hidecursor -s --format=png /dev/stdout | xclip -selection clipboard -t image/png -i"
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -141,6 +171,8 @@ bindsym $mod+Shift+0 move container to workspace $ws10; workspace $ws10
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
+# select themes
+bindsym $mod+Shift+t exec "~/.config/i3/scripts/change_theme.sh $HOME"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -172,9 +204,9 @@ bindsym $mod+r mode "resize"
 # Multimedia Keys
 ###################################################################
 # Pulse Audio controls
-bindsym XF86AudioRaiseVolume exec --no-startup-id pulseaudio-ctl up 1 #increase sound volume
-bindsym XF86AudioLowerVolume exec --no-startup-id pulseaudio-ctl down 1 #decrease sound volume
-bindsym XF86AudioMute exec --no-startup-id pulseaudio-ctl mute # mute sound
+bindsym XF86AudioRaiseVolume exec --no-startup-id ~/.config/i3/scripts/pactl_wrapper.sh 1 #increase sound volume
+bindsym XF86AudioLowerVolume exec --no-startup-id ~/.config/i3/scripts/pactl_wrapper.sh -1 #decrease sound volume
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle # mute sound
 
 # Media player controls
 bindsym XF86AudioPlay exec --no-startup-id "playerctl play-pause"
@@ -212,6 +244,9 @@ exec_always --no-startup-id numlockx on
 
 # Composite manager
 exec --no-startup-id picom
+
+# live reload of gtk themes
+exec --no-startup-id xsettingsd
 
 # Enables autolock after 15mins
 exec --no-startup-id "xautolock -time 15 -locker '~/.config/i3/scripts/lock.sh'"
@@ -256,14 +291,13 @@ gaps outer 0
 smart_gaps on
 smart_borders on
 
-# class                 border  backgr. text    indicator child_border
-client.focused          #4c7899 #285577 #ffffff #2e9ef4   #285577
-client.focused_inactive #333333 #5f676a #ffffff #484e50   #5f676a
-client.unfocused        #333333 #222222 #888888 #292d2e   #222222
-client.urgent           #2f343a #900000 #ffffff #900000   #900000
-client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
-
-client.background       #ffffff
+# Property Name         Border  BG      Text    Indicator Child Border
+client.focused          $base05 $base0D $base00 $base0D $base0C
+client.focused_inactive $base01 $base01 $base05 $base03 $base01
+client.unfocused        $base01 $base00 $base05 $base01 $base01
+client.urgent           $base08 $base08 $base00 $base08 $base08
+client.placeholder      $base00 $base00 $base05 $base00 $base00
+client.background       $base07
 
 # Enables desktop background manager
 exec --no-startup-id ~/.config/i3/scripts/wallpaperslide.sh
@@ -282,6 +316,7 @@ exec --no-startup-id polybar -r main
 assign [class="^[Ff][Ii][Rr][Ee][Ff][Oo][Xx]$"] $ws1
 for_window [class="^[Ff][Ii][Rr][Ee][Ff][Oo][Xx]$"] layout tabbed
 for_window [class="Spotify"] move to workspace $ws2
+for_window [class="Deezer"] move to workspace $ws2
 assign [title="Deluge"] $ws3
 assign [title="calibre"] $ws3
 assign [class="Steam"] $ws4
@@ -294,8 +329,8 @@ assign [class="streamlink-twitch-gui"] $ws8
 exec --no-startup-id "i3-msg 'workspace \"1\"; append_layout ~/.config/i3/workspaces/1.json'"
 exec --no-startup-id firefox
 
-# Workspace 2: Spotify
-exec --no-startup-id spotify
+# Workspace 2: Music
+exec --no-startup-id deezer
 
 # Workspace 3: Deluge
 #exec --no-startup-id deluge-gtk
@@ -306,13 +341,13 @@ exec --no-startup-id "i3-msg 'workspace \"4\"; append_layout ~/.config/i3/worksp
 # Workspace 9: Config
 exec --no-startup-id "i3-msg 'workspace \"9\"; append_layout ~/.config/i3/workspaces/9.json'"
 exec --no-startup-id pavucontrol
-exec --no-startup-id kitty --class="htop-terminal" -e htop
+exec --no-startup-id kitty --single-instance --listen-on unix:/tmp/mykitten --class="htop-terminal" -e htop
 
 # Workspace 10: Terminal
 exec --no-startup-id "i3-msg 'workspace \"10\"; append_layout ~/.config/i3/workspaces/10.json'"
-exec --no-startup-id kitty --class="terminal-1"
-exec --no-startup-id kitty --class="terminal-2" -e zsh -c ranger
-exec --no-startup-id kitty --class="terminal-3"
+exec --no-startup-id kitty --single-instance --listen-on unix:/tmp/mykitten --class="terminal-1"
+exec --no-startup-id kitty --single-instance --listen-on unix:/tmp/mykitten --class="terminal-2" -e zsh -c ranger
+exec --no-startup-id kitty --single-instance --listen-on unix:/tmp/mykitten --class="terminal-3"
 
 # Default startup workspace
 exec --no-startup-id i3-msg workspace 1

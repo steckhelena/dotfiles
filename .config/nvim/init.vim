@@ -12,11 +12,8 @@ scriptencoding utf-8
 " Initializing plugins
 call plug#begin('~/.config/nvim/plugged')
 
-" This is my color scheme
-Plug 'rose-pine/neovim'
-
 " This colors html color codes
-Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
+Plug 'norcalli/nvim-colorizer.lua'
 
 " This enables using git commands from nvim
 Plug 'tpope/vim-fugitive'
@@ -69,7 +66,6 @@ Plug 'jparise/vim-graphql'
 Plug 'elzr/vim-json'
 Plug 'neoclide/jsonc.vim'
 Plug 'cespare/vim-toml'
-Plug 'glench/vim-jinja2-syntax'
 Plug 'evanleck/vim-svelte'
 
 " This plugin lets me use beautiful icons
@@ -101,8 +97,7 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 
 call plug#end()
 
-" Initialize Hexokinase to display html color codes as colors on every line
-let g:Hexokinase_highlighters = ['virtual']
+set termguicolors
 
 " Allow backspacing over everything in insert mode.
 set backspace=indent,eol,start
@@ -143,6 +138,10 @@ highlight LineNr ctermbg=None
 " Show color column
 set colorcolumn=81
 
+lua << EOF
+require'colorizer'.setup()
+EOF
+
 set ttimeout		" time out for key codes
 set ttimeoutlen=100	" wait up to 100ms after Esc for special key
 
@@ -169,18 +168,10 @@ set nrformats-=octal
 " I like highlighting strings inside C comments.
 let c_comment_strings=1
 
-" This sets the rose-pine as color theme
-set termguicolors
-syntax enable
-let g:rose_pine_variant='moon'
-colorscheme rose-pine
 
 " Configuring the indent lines
-highlight IndentBlanklineIndent1 guifg=#393552 gui=nocombine
 let g:indent_blankline_char="|"
 let g:indent_blankline_space_char_blankline=" "
-let g:indent_blankline_char_highlight_list = ['IndentBlanklineIndent1']
-let g:indent_blankline_space_char_highlight_list = ['IndentBlanklineIndent1']
 let g:indent_blankline_show_trailing_blankline_indent = 0
 let g:indent_blankline_show_end_of_line = 0
 
@@ -274,7 +265,8 @@ command! -nargs=0 Prettier :CocCommand prettier.formatFile
 " Add `:Format` command to format current buffer.
 command! -nargs=0 Format :call CocAction('format')
 
-"""
+" This lets me use C-b to build makefiles
+nnoremap <C-b> :make<CR>
 
 " This unsets the "last search pattern" register by hitting return
 nnoremap <silent> <CR> :noh<CR><CR>
@@ -346,6 +338,9 @@ augroup vimStartup
 
 augroup END
 
+" use tabs on Makefiles
+autocmd FileType make set noexpandtab
+
 " Sets rasi as a css file
 autocmd BufNewFile,BufRead *.rasi   set syntax=css
 
@@ -358,3 +353,29 @@ autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
 " Sets jsonc filetype
 autocmd BufNewFile,BufRead *.jsonc set ft=jsonc
+
+let path = expand('<sfile>:p:h')
+exec 'source' path . '/theme.vim'
+
+lua << EOF
+local colorFile = vim.fn.expand('<sfile>:p:h').. '/theme.vim'
+local function reload() 
+	vim.cmd("source ".. colorFile)
+end
+
+local w = vim.loop.new_fs_event()
+local on_change
+local function watch_file(fname)
+	w:start(fname, {}, vim.schedule_wrap(on_change))
+end
+on_change = function()
+	reload()
+	-- Debounce: stop/start.
+	w:stop()
+	watch_file(colorFile)
+end
+
+-- reload vim config when background changes
+watch_file(colorFile)
+reload()
+EOF
