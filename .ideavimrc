@@ -1,4 +1,8 @@
-source ~/.config/nvim/init.vim
+" Initializing plugins
+Plug 'scrooloose/nerdtree'
+
+" NERDTree mapping toggle with ctrl+n
+map <C-n> :NERDTreeToggle<CR>
 
 " GoTo code navigation.
 nmap <silent> gd :action GotoDeclaration<CR>
@@ -9,6 +13,9 @@ nmap <silent> gr :action ShowUsages<CR>
 " navigate forward and backward
 nnoremap <C-i> :action Forward<CR>
 nnoremap <C-o> :action Back<CR>
+
+" disable search highlight
+nnoremap <silent> <CR> :noh<CR><CR>
 
 set incsearch
 set hlsearch
