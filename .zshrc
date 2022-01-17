@@ -72,6 +72,7 @@ plugins=(
   zsh-completions
   docker-compose
   extract
+  gradle
 )
 
 # Cuda directories
