@@ -83,6 +83,7 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib64/
 
 # Useful aliases
 alias tpr="tput reset"
+alias rm="rmtrash"
 
 # Pipx
 export PATH="$HOME/.local/bin:$PATH"
