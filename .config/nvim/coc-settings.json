@@ -26,6 +26,7 @@
   ],
   "python.formatting.provider": "black",
   "python.formatting.blackArgs": ["-l", "80"],
+  "python.pythonPath": "/usr/bin/python3",
   "languageserver": {
     "terraform": {
       "command": "terraform-ls",
