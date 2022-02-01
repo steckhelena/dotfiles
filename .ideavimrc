@@ -1,5 +1,6 @@
 " Initializing plugins
-Plug 'scrooloose/nerdtree'
+set nerdtree
+set commentary
 
 " NERDTree mapping toggle with ctrl+n
 map <C-n> :NERDTreeToggle<CR>
@@ -10,9 +11,9 @@ nmap <silent> gy :action GotoTypeDeclaration<CR>
 nmap <silent> gi :action GotoImplementation<CR>
 nmap <silent> gr :action ShowUsages<CR>
 
-" navigate forward and backward
-nnoremap <C-i> :action Forward<CR>
-nnoremap <C-o> :action Back<CR>
+" " navigate forward and backward
+nmap <C-i> <Action>(Forward)
+nmap <C-o> <Action>(Back)
 
 " disable search highlight
 nnoremap <silent> <CR> :noh<CR><CR>
