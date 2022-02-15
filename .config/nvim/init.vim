@@ -85,6 +85,9 @@ Plug 'saadparwaiz1/cmp_luasnip'
 Plug 'L3MON4D3/LuaSnip' 
 Plug 'hrsh7th/cmp-path'
 
+" Use nvim-treesitter for better syntax trees
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+
 " This adds a preview server to nvim for markdown files
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 
@@ -290,7 +293,25 @@ cmp.setup {
   },
 }
 
-
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = "maintained",
+  highlight = {
+    enable = true,
+    additional_vim_regex_highlighting = false,
+  },
+  incremental_selection = {
+    enable = true,
+    keymaps = {
+      init_selection = "gnn",
+      node_incremental = "grn",
+      scope_incremental = "grc",
+      node_decremental = "grm",
+    },
+  },
+  indent = {
+    enable = true
+  },
+}
 
 END
 
