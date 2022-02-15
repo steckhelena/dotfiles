@@ -52,7 +52,6 @@
 !.config/nvim/
 !.config/nvim/init.vim
 !.config/nvim/theme.vim
-!.config/nvim/coc-settings.json
 
 # rofi
 !.config/rofi/
