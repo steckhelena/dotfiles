@@ -315,6 +315,10 @@ require'nvim-treesitter.configs'.setup {
 
 END
 
+" set foldmethod to use nvim treesitter
+set foldmethod=expr
+set foldexpr=nvim_treesitter#foldexpr()
+set foldlevelstart=20
 
 " Give more space for displaying messages.
 set cmdheight=2
