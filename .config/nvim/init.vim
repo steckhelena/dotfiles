@@ -1,97 +1,5 @@
-" This automatically installs the vim-plug plugin manager if
-" it is not already installed.
-if empty(glob('~/.config/nvim/autoload/plug.vim'))
-  silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-endif
-
 set encoding=utf-8
 scriptencoding utf-8
-
-" Initializing plugins
-call plug#begin('~/.config/nvim/plugged')
-
-" This colors html color codes
-Plug 'norcalli/nvim-colorizer.lua'
-
-" This enables using git commands from nvim
-Plug 'tpope/vim-fugitive'
-
-" This enables me using gcc to comment out a line or gc with a motion or
-" in visual mode.
-Plug 'tpope/vim-commentary'
-
-" Add devicons
-Plug 'kyazdani42/nvim-web-devicons'
-
-" This is a tab bar for my buffers
-Plug 'romgrk/barbar.nvim'
-
-" This plugin automatically closes brackets after pressing return
-Plug 'cohama/lexima.vim'
-
-" This plugin automatically closes tags
-Plug 'alvan/vim-closetag'
-
-" This plugin automatically adjusts indent options based on file type
-Plug 'tpope/vim-sleuth'
-
-" This substitutes the standard vim directory browser with a better and more
-" responsive alternative. I also binded it to toggle with <C-n> for faster browsing.
-Plug 'scrooloose/nerdtree'
-
-" This plugin shows git status on nerdtree
-Plug 'Xuyuanp/nerdtree-git-plugin'
-
-" This plugin allows me to use fzf, Ag or ripgrep to grep inside files
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-
-" This changes automatically the root dir to the file I am working on
-Plug 'airblade/vim-rooter'
-
-" This gives me those sexy bars under my screen with all kinds of info.
-Plug 'nvim-lualine/lualine.nvim'
-
-" This plugin displays the line indentation for better visualization of code.
-Plug 'lukas-reineke/indent-blankline.nvim'
-
-" These are all plugins used for better syntax highlighting
-Plug 'yuezk/vim-js'
-Plug 'HerringtonDarkholme/yats.vim'
-Plug 'othree/html5.vim'
-Plug 'MaxMEllon/vim-jsx-pretty'
-Plug 'jparise/vim-graphql'
-Plug 'elzr/vim-json'
-Plug 'neoclide/jsonc.vim'
-Plug 'cespare/vim-toml'
-Plug 'evanleck/vim-svelte'
-
-" This plugin lets me use beautiful icons
-Plug 'ryanoasis/vim-devicons'
-
-" Use nvim-lsp as language server client
-Plug 'neovim/nvim-lspconfig'
-Plug 'williamboman/nvim-lsp-installer'
-
-" Lua lsp
-Plug 'folke/lua-dev.nvim'
-
-" Use nvim-cmp as autocomplete
-Plug 'hrsh7th/nvim-cmp' 
-Plug 'hrsh7th/cmp-nvim-lsp' 
-Plug 'saadparwaiz1/cmp_luasnip' 
-Plug 'L3MON4D3/LuaSnip' 
-Plug 'hrsh7th/cmp-path'
-
-" Use nvim-treesitter for better syntax trees
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-
-" This adds a preview server to nvim for markdown files
-Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
-
-call plug#end()
 
 set termguicolors
 
@@ -179,6 +87,9 @@ inoremap <c-w> <c-g>u<c-w>
 " nvim-lsp config
 """
 lua << END
+
+require('plugins')
+
 -- Mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
 local opts = { noremap=true, silent=true }
@@ -212,7 +123,7 @@ capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { 'pyright', 'clangd', 'tsserver', 'sumneko_lua' }
+local servers = { 'pyright', 'clangd', 'tsserver', 'sumneko_lua', 'efm' }
 local lsp_installer_servers = require('nvim-lsp-installer.servers')
 
 -- Loop through the servers listed above and set them up. If a server is
@@ -231,9 +142,26 @@ for _, server_name in pairs(servers) do
         }
       }
 
+    local extra_opts = {}
+
     if server_name == 'sumneko_lua' then
       opts = require("lua-dev").setup({lspconfig = opts})
     end
+
+    if server_name == 'efm' then
+      extra_opts = {
+        init_options = { documentFormatting = true },
+        root_dir = vim.loop.cwd,
+        settings = {
+          rootMarkers = { ".git/" },
+          languages = {
+            lua = { require('efm/stylua') },
+          }
+        },
+      }
+    end
+
+    for k,v in pairs(extra_opts) do opts[k] = v end
 
     server:setup(opts)
   end)
@@ -314,6 +242,8 @@ require'nvim-treesitter.configs'.setup {
 }
 
 END
+
+autocmd BufWritePre *.lua lua vim.lsp.buf.formatting_sync(nil, 100)
 
 " set foldmethod to use nvim treesitter
 set foldmethod=expr
