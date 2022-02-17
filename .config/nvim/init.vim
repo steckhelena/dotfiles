@@ -6,12 +6,12 @@ require('plugins')
 require('lsp')
 require('theme')
 require('settings')
+require('mappings')
 
 END
 
 " I like highlighting strings inside C comments.
 let c_comment_strings=1
-
 
 " Configuring the indent lines
 let g:indent_blankline_char="|"
@@ -19,31 +19,10 @@ let g:indent_blankline_space_char_blankline=" "
 let g:indent_blankline_show_trailing_blankline_indent = 0
 let g:indent_blankline_show_end_of_line = 0
 
-" Make ctrl-U and ctrl-W allow to undo changes
-inoremap <c-u> <c-g>u<c-u>
-inoremap <c-w> <c-g>u<c-w>
-
-autocmd BufWritePre *.lua lua vim.lsp.buf.formatting_sync(nil, 100)
-
 " set foldmethod to use nvim treesitter
 set foldmethod=expr
 set foldexpr=nvim_treesitter#foldexpr()
 set foldlevelstart=20
-
-" This lets me use C-b to build makefiles
-nnoremap <C-b> :make<CR>
-
-" This unsets the "last search pattern" register by hitting return
-nnoremap <silent> <CR> :noh<CR><CR>
-
-" This lets me use gb to switch buffers
-nnoremap gb :ls<CR>:b<Space>
-
-" This enables removing trailing whitespace from files using F5
-nnoremap <silent> <F5> :let _s=@/ <Bar> :%s/\s\+$//e <Bar> :let @/=_s <Bar> :nohl <Bar> :unlet _s <CR>
-
-" This lets me write :cd to go to the current file's directory
-nnoremap <leader>cd :cd %:p:h<CR>:pwd<CR>
 
 " If barbar's option dict isn't created yet, create it
 let bufferline = get(g:, 'bufferline', {})
@@ -56,14 +35,6 @@ let g:lexima_enable_basic_rules = 0
 
 " NERDTree config
 let g:NERDTreeGitStatusUseNerdFonts = 1
-
-" NERDTree mapping toggle with ctrl+n
-map <C-n> :NERDTreeToggle<CR>
-
-" This allows me to close a buffer without making NERDTree take up the whole
-" window space
-nnoremap \d :BufferClose<cr>
-nnoremap <silent> <C-s>    :BufferPick<CR>
 
 " Sets CtrlP to find root directory
 let g:ctrlp_working_path_mode = 'ra'
@@ -113,3 +84,5 @@ autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
 " Sets jsonc filetype
 autocmd BufNewFile,BufRead *.jsonc set ft=jsonc
+
+autocmd BufWritePre *.lua lua vim.lsp.buf.formatting_sync(nil, 100)
