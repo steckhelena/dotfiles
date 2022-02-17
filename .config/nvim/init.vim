@@ -1,6 +1,14 @@
 set encoding=utf-8
 scriptencoding utf-8
 
+lua << END
+
+require('plugins')
+require('lsp')
+require('theme')
+
+END
+
 set termguicolors
 
 " Allow backspacing over everything in insert mode.
@@ -42,10 +50,6 @@ highlight LineNr ctermbg=None
 " Show color column
 set colorcolumn=81
 
-lua << EOF
-require'colorizer'.setup()
-EOF
-
 set ttimeout		" time out for key codes
 set ttimeoutlen=100	" wait up to 100ms after Esc for special key
 
@@ -83,166 +87,6 @@ let g:indent_blankline_show_end_of_line = 0
 inoremap <c-u> <c-g>u<c-u>
 inoremap <c-w> <c-g>u<c-w>
 
-"""
-" nvim-lsp config
-"""
-lua << END
-
-require('plugins')
-
--- Mappings.
--- See `:help vim.diagnostic.*` for documentation on any of the below functions
-local opts = { noremap=true, silent=true }
-vim.api.nvim_set_keymap('n', '<space>e', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
-vim.api.nvim_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
-vim.api.nvim_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
-vim.api.nvim_set_keymap('n', '<space>q', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
-
--- Use an on_attach function to only map the following keys
--- after the language server attaches to the current buffer
-local on_attach = function(client, bufnr)
-  -- Mappings.
-  -- See `:help vim.lsp.*` for documentation on any of the below functions
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
-end
-
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
-
--- Use a loop to conveniently call 'setup' on multiple servers and
--- map buffer local keybindings when the language server attaches
-local servers = { 'pyright', 'clangd', 'tsserver', 'sumneko_lua', 'efm' }
-local lsp_installer_servers = require('nvim-lsp-installer.servers')
-
--- Loop through the servers listed above and set them up. If a server is
--- not already installed, install it.
-for _, server_name in pairs(servers) do
-  local server_available, server = lsp_installer_servers.get_server(server_name)
-
-  if server_available then
-    server:on_ready(function ()
-    local opts = {
-      on_attach = on_attach,
-      capabilities = capabilities,
-      flags = {
-        -- This will be the default in neovim 0.7+
-        debounce_text_changes = 150,
-        }
-      }
-
-    local extra_opts = {}
-
-    if server_name == 'sumneko_lua' then
-      opts = require("lua-dev").setup({lspconfig = opts})
-    end
-
-    if server_name == 'efm' then
-      extra_opts = {
-        init_options = { documentFormatting = true },
-        root_dir = vim.loop.cwd,
-        settings = {
-          rootMarkers = { ".git/" },
-          languages = {
-            lua = { require('efm/stylua') },
-          }
-        },
-      }
-    end
-
-    for k,v in pairs(extra_opts) do opts[k] = v end
-
-    server:setup(opts)
-  end)
-
-  if not server:is_installed() then
-    server:install()
-  end
-
-end
-end
-
--- luasnip setup
-local luasnip = require 'luasnip'
-
--- nvim-cmp setup
-local cmp = require 'cmp'
-cmp.setup {
-  snippet = {
-    expand = function(args)
-      require('luasnip').lsp_expand(args.body)
-    end,
-  },
-  mapping = {
-    ['<C-p>'] = cmp.mapping.select_prev_item(),
-    ['<C-n>'] = cmp.mapping.select_next_item(),
-    ['<C-d>'] = cmp.mapping.scroll_docs(-4),
-    ['<C-f>'] = cmp.mapping.scroll_docs(4),
-    ['<C-Space>'] = cmp.mapping.complete(),
-    ['<C-e>'] = cmp.mapping.close(),
-    ['<CR>'] = cmp.mapping.confirm {
-      behavior = cmp.ConfirmBehavior.Replace,
-      select = true,
-    },
-    ['<Tab>'] = function(fallback)
-      if cmp.visible() then
-        cmp.select_next_item()
-      elseif luasnip.expand_or_jumpable() then
-        luasnip.expand_or_jump()
-      else
-        fallback()
-      end
-    end,
-    ['<S-Tab>'] = function(fallback)
-      if cmp.visible() then
-        cmp.select_prev_item()
-      elseif luasnip.jumpable(-1) then
-        luasnip.jump(-1)
-      else
-        fallback()
-      end
-    end,
-  },
-  sources = {
-    { name = 'path' },
-    { name = 'nvim_lsp' },
-    { name = 'luasnip' },
-  },
-}
-
-require'nvim-treesitter.configs'.setup {
-  ensure_installed = "maintained",
-  highlight = {
-    enable = true,
-    additional_vim_regex_highlighting = false,
-  },
-  incremental_selection = {
-    enable = true,
-    keymaps = {
-      init_selection = "gnn",
-      node_incremental = "grn",
-      scope_incremental = "grc",
-      node_decremental = "grm",
-    },
-  },
-  indent = {
-    enable = true
-  },
-}
-
-END
-
 autocmd BufWritePre *.lua lua vim.lsp.buf.formatting_sync(nil, 100)
 
 " set foldmethod to use nvim treesitter
@@ -278,11 +122,6 @@ nnoremap <silent> <F5> :let _s=@/ <Bar> :%s/\s\+$//e <Bar> :let @/=_s <Bar> :noh
 
 " This lets me write :cd to go to the current file's directory
 nnoremap <leader>cd :cd %:p:h<CR>:pwd<CR>
-
-" Status line configurations
-lua << END
-require'lualine'.setup()
-END
 
 " If barbar's option dict isn't created yet, create it
 let bufferline = get(g:, 'bufferline', {})
@@ -352,29 +191,3 @@ autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
 " Sets jsonc filetype
 autocmd BufNewFile,BufRead *.jsonc set ft=jsonc
-
-let path = expand('<sfile>:p:h')
-exec 'source' path . '/theme.vim'
-
-lua << EOF
-local colorFile = vim.fn.expand('<sfile>:p:h').. '/theme.vim'
-local function reload() 
-	vim.cmd("source ".. colorFile)
-end
-
-local w = vim.loop.new_fs_event()
-local on_change
-local function watch_file(fname)
-	w:start(fname, {}, vim.schedule_wrap(on_change))
-end
-on_change = function()
-	reload()
-	-- Debounce: stop/start.
-	w:stop()
-	watch_file(colorFile)
-end
-
--- reload vim config when background changes
-watch_file(colorFile)
-reload()
-EOF
