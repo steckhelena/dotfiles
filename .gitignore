@@ -94,3 +94,6 @@
 !.themes/
 !.themes/FlatColor
 !.xsettingsd
+
+# lua
+!stylua.toml

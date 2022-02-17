@@ -7,7 +7,7 @@ local function isdir(path)
     return exists(path .. "/")
 end
 
-local undodir = vim.fn.expand("~/.config/nvim/undo")
+local undodir = vim.fn.expand "~/.config/nvim/undo"
 
 if not isdir(undodir) then
     os.execute("mkdir -p " .. undodir)

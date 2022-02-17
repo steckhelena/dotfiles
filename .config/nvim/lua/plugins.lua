@@ -1,110 +1,110 @@
 local fn = vim.fn
-local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
+local install_path = fn.stdpath "data" .. "/site/pack/packer/start/packer.nvim"
 if fn.empty(fn.glob(install_path)) > 0 then
-    Packer_bootstrap = fn.system({
+    Packer_bootstrap = fn.system {
         "git",
         "clone",
         "--depth",
         "1",
         "https://github.com/wbthomason/packer.nvim",
         install_path,
-    })
+    }
 end
 
-vim.cmd([[
+vim.cmd [[
   augroup packer_user_config
     autocmd!
     autocmd BufWritePost */plugins.lua source <afile> | PackerCompile
   augroup end
-]])
+]]
 
 return require("packer").startup(function(use)
-    use("wbthomason/packer.nvim")
+    use "wbthomason/packer.nvim"
 
     -- This colors html color codes
-    use({
+    use {
         "norcalli/nvim-colorizer.lua",
         config = function()
             require("colorizer").setup()
         end,
-    })
+    }
 
     -- This enables using git commands from nvim
-    use("tpope/vim-fugitive")
+    use "tpope/vim-fugitive"
 
     -- This enables me using gcc to comment out a line or gc with a motion or
     -- in visual mode.
-    use("tpope/vim-commentary")
+    use "tpope/vim-commentary"
 
-    use("kyazdani42/nvim-web-devicons")
+    use "kyazdani42/nvim-web-devicons"
 
     -- This is a tab bar for my buffers
-    use("romgrk/barbar.nvim")
+    use "romgrk/barbar.nvim"
 
     -- This plugin automatically closes brackets after pressing return
-    use("cohama/lexima.vim")
+    use "cohama/lexima.vim"
 
     -- This plugin automatically closes tags
-    use("alvan/vim-closetag")
+    use "alvan/vim-closetag"
 
     -- This plugin automatically adjusts indent options based on file type
-    use("tpope/vim-sleuth")
+    use "tpope/vim-sleuth"
 
     -- This substitutes the standard vim directory browser with a better and
     -- more responsive alternative. I also binded it to toggle with <C-n>
     -- for faster browsing.
-    use("scrooloose/nerdtree")
+    use "scrooloose/nerdtree"
 
     -- This plugin shows git status on nerdtree
-    use("Xuyuanp/nerdtree-git-plugin")
+    use "Xuyuanp/nerdtree-git-plugin"
 
     -- This plugin allows me to use fzf, Ag or ripgrep to grep inside files
-    use({
+    use {
         "junegunn/fzf",
         run = function()
             vim.fn["fzf#install"]()
         end,
-    })
-    use("junegunn/fzf.vim")
+    }
+    use "junegunn/fzf.vim"
 
     -- This changes automatically the root dir to the file I am working on
-    use("airblade/vim-rooter")
+    use "airblade/vim-rooter"
 
     -- This gives me those sexy bars under my screen with all kinds of info.
-    use({
+    use {
         "nvim-lualine/lualine.nvim",
         config = function()
             require("lualine").setup()
         end,
-    })
+    }
 
     -- This plugin displays the line indentation for better visualization of
     -- code.
-    use("lukas-reineke/indent-blankline.nvim")
+    use "lukas-reineke/indent-blankline.nvim"
 
     -- These are all plugins used for better syntax highlighting
-    use("yuezk/vim-js")
-    use("HerringtonDarkholme/yats.vim")
-    use("othree/html5.vim")
-    use("MaxMEllon/vim-jsx-pretty")
-    use("jparise/vim-graphql")
-    use("elzr/vim-json")
-    use("neoclide/jsonc.vim")
-    use("cespare/vim-toml")
-    use("evanleck/vim-svelte")
+    use "yuezk/vim-js"
+    use "HerringtonDarkholme/yats.vim"
+    use "othree/html5.vim"
+    use "MaxMEllon/vim-jsx-pretty"
+    use "jparise/vim-graphql"
+    use "elzr/vim-json"
+    use "neoclide/jsonc.vim"
+    use "cespare/vim-toml"
+    use "evanleck/vim-svelte"
 
     -- This plugin lets me use beautiful icons
-    use("ryanoasis/vim-devicons")
+    use "ryanoasis/vim-devicons"
 
     -- Use nvim-lsp as language server client
-    use("neovim/nvim-lspconfig")
-    use("williamboman/nvim-lsp-installer")
+    use "neovim/nvim-lspconfig"
+    use "williamboman/nvim-lsp-installer"
 
     -- Lua lsp
-    use("folke/lua-dev.nvim")
+    use "folke/lua-dev.nvim"
 
     -- Use nvim-cmp as autocomplete
-    use({
+    use {
         "hrsh7th/nvim-cmp",
         requires = {
             "hrsh7th/cmp-nvim-lsp",
@@ -112,10 +112,10 @@ return require("packer").startup(function(use)
             "saadparwaiz1/cmp_luasnip",
         },
         config = function()
-            local luasnip = require("luasnip")
-            local cmp = require("cmp")
+            local luasnip = require "luasnip"
+            local cmp = require "cmp"
 
-            cmp.setup({
+            cmp.setup {
                 snippet = {
                     expand = function(args)
                         require("luasnip").lsp_expand(args.body)
@@ -128,10 +128,10 @@ return require("packer").startup(function(use)
                     ["<C-f>"] = cmp.mapping.scroll_docs(4),
                     ["<C-Space>"] = cmp.mapping.complete(),
                     ["<C-e>"] = cmp.mapping.close(),
-                    ["<CR>"] = cmp.mapping.confirm({
+                    ["<CR>"] = cmp.mapping.confirm {
                         behavior = cmp.ConfirmBehavior.Replace,
                         select = true,
-                    }),
+                    },
                     ["<Tab>"] = function(fallback)
                         if cmp.visible() then
                             cmp.select_next_item()
@@ -156,17 +156,17 @@ return require("packer").startup(function(use)
                     { name = "nvim_lsp" },
                     { name = "luasnip" },
                 },
-            })
+            }
         end,
-    })
-    use("L3MON4D3/LuaSnip")
+    }
+    use "L3MON4D3/LuaSnip"
 
     -- Use nvim-treesitter for better syntax trees
-    use({
+    use {
         "nvim-treesitter/nvim-treesitter",
         run = ":TSUpdate",
         config = function()
-            require("nvim-treesitter.configs").setup({
+            require("nvim-treesitter.configs").setup {
                 ensure_installed = "maintained",
                 highlight = {
                     enable = true,
@@ -184,12 +184,12 @@ return require("packer").startup(function(use)
                 indent = {
                     enable = true,
                 },
-            })
+            }
         end,
-    })
+    }
 
     -- This adds a preview server to nvim for markdown files
-    use({ "iamcco/markdown-preview.nvim", run = "cd app & yarn install" })
+    use { "iamcco/markdown-preview.nvim", run = "cd app & yarn install" }
 
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins
