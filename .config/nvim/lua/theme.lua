@@ -1,4 +1,9 @@
-local colorFile = vim.fn.expand("<sfile>:p:h") .. "/theme.vim"
+local function script_path()
+   local str = debug.getinfo(2, "S").source:sub(2)
+   return str:match("(.*/)")
+end
+
+local colorFile = script_path() .. "../theme.vim"
 
 local function reload()
     vim.cmd("source " .. colorFile)
