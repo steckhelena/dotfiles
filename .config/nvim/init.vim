@@ -1,4 +1,3 @@
-set encoding=utf-8
 scriptencoding utf-8
 
 lua << END
@@ -6,72 +5,9 @@ lua << END
 require('plugins')
 require('lsp')
 require('theme')
+require('settings')
 
 END
-
-set termguicolors
-
-" Allow backspacing over everything in insert mode.
-set backspace=indent,eol,start
-
-set history=200		" keep 200 lines of command line history
-set ruler		" show the cursor position all the time
-set showcmd		" display incomplete commands
-set wildmenu		" display completion matches in a status line
-set incsearch	" Do incremental searching.
-set inccommand=nosplit " Shows live search and replace command changes(sexy)
-set backupcopy=yes
-
-" " This sets persistent undo
-if !isdirectory(glob ($HOME . '/.config/nvim/undo'))
-  " Creates undo directory if it does not exist
-  call mkdir(glob ($HOME . '/.config/nvim/undo'), "p")
-endif
-set undofile                " Save undos after file closes
-set undodir=$HOME/.config/nvim/undo " where to save undo histories
-set undolevels=1000         " How many undos
-set undoreload=10000        " number of lines to save for undo
-
-" Indenting options
-set expandtab
-set shiftwidth=2
-set softtabstop=2
-set tabstop=4
-
-" Instead of failing a command raise a dialog asking for confirm on saving the
-" file
-set confirm
-
-" Show linenumbers
-set number
-highlight LineNr ctermfg=grey
-highlight LineNr ctermbg=None
-
-" Show color column
-set colorcolumn=81
-
-set ttimeout		" time out for key codes
-set ttimeoutlen=100	" wait up to 100ms after Esc for special key
-
-" Show @@@ in the last line if it is truncated.
-set display=truncate
-
-" Show a few lines of context around the cursor.  Note that this makes the
-" text scroll if you mouse-click near the start or end of the window.
-set scrolloff=5
-
-" Configuring my listchars to show characters which are invisible
-set list
-let &listchars="tab:> ,trail:-,nbsp:+,eol:↴"
-
-" In many terminal emulators the mouse works just fine.
-" Position the cursor, Visually select and scroll with the mouse.
-if has('mouse')
-  set mouse=a
-endif
-
-" Do not recognize octal numbers for Ctrl-A and Ctrl-X
-set nrformats-=octal
 
 " I like highlighting strings inside C comments.
 let c_comment_strings=1
@@ -93,20 +29,6 @@ autocmd BufWritePre *.lua lua vim.lsp.buf.formatting_sync(nil, 100)
 set foldmethod=expr
 set foldexpr=nvim_treesitter#foldexpr()
 set foldlevelstart=20
-
-" Give more space for displaying messages.
-set cmdheight=2
-
-" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
-" delays and poor user experience.
-set updatetime=300
-
-" Don't pass messages to |ins-completion-menu|.
-set shortmess+=c
-
-" Always show the signcolumn, otherwise it would shift the text each time
-" diagnostics appear/become resolved.
-set signcolumn=yes
 
 " This lets me use C-b to build makefiles
 nnoremap <C-b> :make<CR>
