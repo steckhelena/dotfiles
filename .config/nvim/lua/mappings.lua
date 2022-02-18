@@ -13,9 +13,6 @@ map("n", "<CR>", ":noh<CR><CR>")
 -- This lets me use gb to switch buffers
 map("n", "gb", ":ls<CR>:b<Space>")
 
--- NERDTree mapping toggle with ctrl+n
-map("n", "<C-n>", ":NERDTreeToggle<CR>", { noremap = false })
-
 -- This allows me to close a buffer without making NERDTree take up the whole
 -- window space
 map("n", "<leader>d", ":BufferClose<cr>")

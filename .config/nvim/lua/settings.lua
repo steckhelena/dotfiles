@@ -59,3 +59,6 @@ vim.wo.colorcolumn = "+1"
 vim.wo.signcolumn = "yes:1"
 
 vim.o.shortmess = vim.o.shortmess .. "c"
+
+vim.cmd [[filetype plugin indent on]]
+

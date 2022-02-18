@@ -39,13 +39,64 @@ return require("packer").startup(function(use)
     use "kyazdani42/nvim-web-devicons"
 
     -- This is a tab bar for my buffers
-    use "romgrk/barbar.nvim"
+    use {
+        "romgrk/barbar.nvim",
+        requires = { "kyazdani42/nvim-web-devicons" },
+        config = function()
+            local map = require("utils").map
+
+            -- Move to previous/next
+            map("n", "<A-,>", ":BufferPrevious<CR>")
+            map("n", "<A-.>", ":BufferNext<CR>")
+            -- Re-order to previous/next
+            map("n", "<A-<>", ":BufferMovePrevious<CR>")
+            map("n", "<A->>", " :BufferMoveNext<CR>")
+            -- Goto buffer in position...
+            map("n", "<A-1>", ":BufferGoto 1<CR>")
+            map("n", "<A-2>", ":BufferGoto 2<CR>")
+            map("n", "<A-3>", ":BufferGoto 3<CR>")
+            map("n", "<A-4>", ":BufferGoto 4<CR>")
+            map("n", "<A-5>", ":BufferGoto 5<CR>")
+            map("n", "<A-6>", ":BufferGoto 6<CR>")
+            map("n", "<A-7>", ":BufferGoto 7<CR>")
+            map("n", "<A-8>", ":BufferGoto 8<CR>")
+            map("n", "<A-9>", ":BufferGoto 9<CR>")
+            map("n", "<A-0>", ":BufferLast<CR>")
+            -- Close buffer
+            map("n", "<A-c>", ":BufferClose<CR>")
+            -- Magic buffer-picking mode
+            map("n", "<C-p>", ":BufferPick<CR>")
+            -- Sort automatically by...
+            map("n", "<leader>bb", ":BufferOrderByBufferNumber<CR>")
+            map("n", "<leader>bd", ":BufferOrderByDirectory<CR>")
+            map("n", "<leader>bl", ":BufferOrderByLanguage<CR>")
+
+            vim.g.bufferline = {
+                auto_hide = false,
+            }
+        end,
+    }
 
     -- This plugin automatically closes brackets after pressing return
-    use "cohama/lexima.vim"
+    use {
+        "windwp/nvim-autopairs",
+        config = function()
+            require("nvim-autopairs").setup {
+                check_ts = true,
+            }
+
+            local cmp_autopairs = require "nvim-autopairs.completion.cmp"
+            local cmp = require "cmp"
+
+            cmp.event:on(
+                "confirm_done",
+                cmp_autopairs.on_confirm_done { map_char = { tex = "" } }
+            )
+        end,
+    }
 
     -- This plugin automatically closes tags
-    use "alvan/vim-closetag"
+    use "windwp/nvim-ts-autotag"
 
     -- This plugin automatically adjusts indent options based on file type
     use "tpope/vim-sleuth"
@@ -53,10 +104,24 @@ return require("packer").startup(function(use)
     -- This substitutes the standard vim directory browser with a better and
     -- more responsive alternative. I also binded it to toggle with <C-n>
     -- for faster browsing.
-    use "scrooloose/nerdtree"
+    use {
+        "kyazdani42/nvim-tree.lua",
+        requires = {
+            "kyazdani42/nvim-web-devicons", -- optional, for file icon
+        },
+        config = function()
+            local map = require("utils").map
 
-    -- This plugin shows git status on nerdtree
-    use "Xuyuanp/nerdtree-git-plugin"
+            map("n", "<C-n>", ":NvimTreeToggle<CR>", { noremap = false })
+            map("n", "<leader>n", ":NvimTreeFindFile<CR>", { noremap = false })
+
+            vim.g.nvim_tree_git_hl = true
+
+            require("nvim-tree").setup {
+                open_on_setup = true,
+            }
+        end,
+    }
 
     -- This plugin allows me to use fzf, Ag or ripgrep to grep inside files
     use {
@@ -80,7 +145,17 @@ return require("packer").startup(function(use)
 
     -- This plugin displays the line indentation for better visualization of
     -- code.
-    use "lukas-reineke/indent-blankline.nvim"
+    use {
+        "lukas-reineke/indent-blankline.nvim",
+        config = function()
+            require("indent_blankline").setup {
+                show_current_context = true,
+                show_current_context_start = true,
+                show_end_of_line = true,
+                space_char_blank_line = " ",
+            }
+        end,
+    }
 
     -- These are all plugins used for better syntax highlighting
     use "yuezk/vim-js"
@@ -184,7 +259,14 @@ return require("packer").startup(function(use)
                 indent = {
                     enable = true,
                 },
+                autotag = {
+                    enable = true,
+                },
             }
+
+            vim.o.foldlevelstart = 20
+            vim.wo.foldexpr = "nvim_treesitter#foldexpr()"
+            vim.wo.foldmethod = "expr"
         end,
     }
 

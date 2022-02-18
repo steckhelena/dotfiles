@@ -50,7 +50,7 @@
 
 # Nvim
 !.config/nvim/
-!.config/nvim/init.vim
+!.config/nvim/init.lua
 !.config/nvim/theme.vim
 !.config/nvim/lua/
 !.config/nvim/lua/**/*
