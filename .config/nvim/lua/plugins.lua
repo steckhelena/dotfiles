@@ -112,8 +112,12 @@ return require("packer").startup(function(use)
         config = function()
             local map = require("utils").map
 
-            map("n", "<C-n>", ":NvimTreeToggle<CR>", { noremap = false })
-            map("n", "<leader>n", ":NvimTreeFindFile<CR>", { noremap = false })
+            map(
+                "n",
+                "<C-n>",
+                ":lua require'tree'.toggle_tree()<CR>",
+                { noremap = false }
+            )
 
             vim.g.nvim_tree_git_hl = true
 
