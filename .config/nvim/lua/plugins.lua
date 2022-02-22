@@ -31,6 +31,24 @@ return require("packer").startup(function(use)
 
     -- This enables using git commands from nvim
     use "tpope/vim-fugitive"
+    use {
+        "lewis6991/gitsigns.nvim",
+        requires = {
+            "nvim-lua/plenary.nvim",
+        },
+        config = function()
+            require("gitsigns").setup {
+                current_line_blame = true,
+                current_line_blame_opts = {
+                    virt_text = true,
+                    virt_text_pos = "eol",
+                    delay = 400,
+                    ignore_whitespace = false,
+                },
+                current_line_blame_formatter = "\t\t\t<author>, <author_time:%Y-%m-%d> - <summary>",
+            }
+        end,
+    }
 
     -- This enables me using gcc to comment out a line or gc with a motion or
     -- in visual mode.

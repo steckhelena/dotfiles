@@ -99,7 +99,7 @@ local on_attach = function(_, bufnr)
         bufnr,
         "n",
         "<leader>ca",
-        "<cmd>lua vim.lsp.buf.code_action()<CR>",
+        "<cmd>lua require'telescope.builtin'.lsp_code_actions()<CR>",
         opts
     )
     vim.api.nvim_buf_set_keymap(
