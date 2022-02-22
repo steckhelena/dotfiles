@@ -64,6 +64,7 @@ return require("packer").startup(function(use)
             map("n", "<A-0>", ":BufferLast<CR>")
             -- Close buffer
             map("n", "<A-c>", ":BufferClose<CR>")
+            map("n", "<leader>d", ":BufferClose<cr>")
             -- Magic buffer-picking mode
             map("n", "<C-p>", ":BufferPick<CR>")
             -- Sort automatically by...
@@ -127,14 +128,50 @@ return require("packer").startup(function(use)
         end,
     }
 
-    -- This plugin allows me to use fzf, Ag or ripgrep to grep inside files
+    -- This plugin allows me to list actions, files and other contexts
     use {
-        "junegunn/fzf",
-        run = function()
-            vim.fn["fzf#install"]()
+        "nvim-telescope/telescope.nvim",
+        requires = { { "nvim-lua/plenary.nvim" } },
+        config = function()
+            local map = require("utils").map
+
+            map(
+                "n",
+                "<leader>ff",
+                ":lua require'telescope.builtin'.find_files()<CR>"
+            )
+            map(
+                "n",
+                "<leader>fg",
+                ":lua require'telescope.builtin'.live_grep()<CR>"
+            )
+            map(
+                "n",
+                "<leader>fb",
+                ":lua require'telescope.builtin'.buffers()<CR>"
+            )
+            map(
+                "n",
+                "<leader><leader>",
+                ":lua require'telescope.builtin'.lsp_workspace_symbols()<CR>"
+            )
+
+            require("telescope").setup {
+                defaults = {
+                    mappings = {
+                        i = {
+                            ["<C-h>"] = "which_key",
+                        },
+                    },
+                },
+                pickers = {
+                    find_files = {
+                        hidden = true,
+                    },
+                },
+            }
         end,
     }
-    use "junegunn/fzf.vim"
 
     -- This changes automatically the root dir to the file I am working on
     use "airblade/vim-rooter"

@@ -9,11 +9,3 @@ map("n", "<C-b>", ":make<CR>")
 
 -- This unsets the "last search pattern" register by hitting return
 map("n", "<CR>", ":noh<CR><CR>")
-
--- This lets me use gb to switch buffers
-map("n", "gb", ":ls<CR>:b<Space>")
-
--- This allows me to close a buffer without making NERDTree take up the whole
--- window space
-map("n", "<leader>d", ":BufferClose<cr>")
-map("n", "<C-s>", ":BufferPick<CR>")

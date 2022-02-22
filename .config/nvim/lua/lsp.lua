@@ -36,7 +36,7 @@ local on_attach = function(_, bufnr)
         bufnr,
         "n",
         "gd",
-        "<cmd>lua vim.lsp.buf.definition()<CR>",
+        "<cmd>lua require'telescope.builtin'.lsp_definitions()<CR>",
         opts
     )
     vim.api.nvim_buf_set_keymap(
@@ -50,7 +50,7 @@ local on_attach = function(_, bufnr)
         bufnr,
         "n",
         "gi",
-        "<cmd>lua vim.lsp.buf.implementation()<CR>",
+        "<cmd>lua require'telescope.builtin'.lsp_implementation()<CR>",
         opts
     )
     vim.api.nvim_buf_set_keymap(
@@ -85,13 +85,13 @@ local on_attach = function(_, bufnr)
         bufnr,
         "n",
         "<leader>D",
-        "<cmd>lua vim.lsp.buf.type_definition()<CR>",
+        "<cmd>lua require'telescope.builtin'.lsp_type_definitions()<CR>",
         opts
     )
     vim.api.nvim_buf_set_keymap(
         bufnr,
         "n",
-        "rn",
+        "<leader>rn",
         "<cmd>lua vim.lsp.buf.rename()<CR>",
         opts
     )
@@ -106,7 +106,7 @@ local on_attach = function(_, bufnr)
         bufnr,
         "n",
         "gr",
-        "<cmd>lua vim.lsp.buf.references()<CR>",
+        "<cmd>lua require'telescope.builtin'.lsp_references()<CR>",
         opts
     )
     vim.api.nvim_buf_set_keymap(
