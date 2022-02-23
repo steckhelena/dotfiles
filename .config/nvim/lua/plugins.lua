@@ -267,6 +267,23 @@ return require("packer").startup(function(use)
         end,
     }
 
+    -- Use trouble for diagnostic messages
+    use {
+        "folke/trouble.nvim",
+        requires = "kyazdani42/nvim-web-devicons",
+        config = function()
+            local map = require("utils").map
+
+            map("n", "<leader>xx", "<cmd>Trouble<cr>")
+            map("n", "<leader>xw", "<cmd>Trouble workspace_diagnostics<cr>")
+            map("n", "<leader>xd", "<cmd>Trouble document_diagnostics<cr>")
+            map("n", "<leader>xl", "<cmd>Trouble loclist<cr>")
+            map("n", "<leader>qf", "<cmd>Trouble quickfix<cr>")
+
+            require("trouble").setup {}
+        end,
+    }
+
     -- Use nvim-cmp as autocomplete
     use {
         "hrsh7th/nvim-cmp",
