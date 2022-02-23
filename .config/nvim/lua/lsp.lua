@@ -76,6 +76,11 @@ local on_attach = function(client)
             "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>",
             { buffer = true }
         )
+        map(
+            "n",
+            "<leader><leader>",
+            ":lua require'telescope.builtin'.lsp_workspace_symbols()<CR>"
+        )
     end
 
     if client.resolved_capabilities.type_definition then

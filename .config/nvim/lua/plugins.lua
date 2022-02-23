@@ -168,11 +168,6 @@ return require("packer").startup(function(use)
                 "<leader>fb",
                 ":lua require'telescope.builtin'.buffers()<CR>"
             )
-            map(
-                "n",
-                "<leader><leader>",
-                ":lua require'telescope.builtin'.lsp_workspace_symbols()<CR>"
-            )
 
             require("telescope").setup {
                 defaults = {
