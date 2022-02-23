@@ -198,7 +198,11 @@ return require("packer").startup(function(use)
     use {
         "nvim-lualine/lualine.nvim",
         config = function()
-            require("lualine").setup()
+            require("lualine").setup {
+                sections = {
+                    lualine_c = { "filename", "require'lsp-status'.status()" },
+                },
+            }
         end,
     }
 
@@ -264,6 +268,8 @@ return require("packer").startup(function(use)
             }
         end,
     }
+
+    use { "nvim-lua/lsp-status.nvim" }
 
     -- Use nvim-cmp as autocomplete
     use {

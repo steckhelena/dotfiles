@@ -12,6 +12,10 @@ local lsp_installer_servers = require "nvim-lsp-installer.servers"
 
 local null_ls_formatting_override = { tsserver = true }
 
+local lsp_status = require "lsp-status"
+lsp_status.register_progress()
+vim.tbl_extend("keep", capabilities, lsp_status.capabilities)
+
 local on_attach = function(client)
     if client.resolved_capabilities.goto_definition then
         map(
@@ -123,6 +127,8 @@ local on_attach = function(client)
             client.resolved_capabilities.document_range_formatting = false
         end
     end
+
+    require("lsp-status").on_attach(client)
 end
 
 for _, server_name in pairs(servers) do
@@ -145,6 +151,15 @@ for _, server_name in pairs(servers) do
 
             if server_name == "sumneko_lua" then
                 opts = require("lua-dev").setup { lspconfig = opts }
+            end
+
+            if server_name == "clangd" then
+                extra_opts = {
+                    handlers = lsp_status.extensions.clangd.setup(),
+                    init_options = {
+                        clangdFileStatus = true,
+                    },
+                }
             end
 
             for k, v in pairs(extra_opts) do
