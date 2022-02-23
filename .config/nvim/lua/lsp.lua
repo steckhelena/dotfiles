@@ -1,133 +1,130 @@
--- Mappings.
--- See `:help vim.diagnostic.*` for documentation on any of the below functions
-local opts = { noremap = true, silent = true }
-vim.api.nvim_set_keymap(
-    "n",
-    "<leader>e",
-    "<cmd>lua vim.diagnostic.open_float()<CR>",
-    opts
-)
-vim.api.nvim_set_keymap(
-    "n",
-    "[d",
-    "<cmd>lua vim.diagnostic.goto_prev()<CR>",
-    opts
-)
-vim.api.nvim_set_keymap(
-    "n",
-    "]d",
-    "<cmd>lua vim.diagnostic.goto_next()<CR>",
-    opts
-)
+local map = require("utils").map
 
--- Use an on_attach function to only map the following keys
--- after the language server attaches to the current buffer
-local on_attach = function(_, bufnr)
-    -- Mappings.
-    -- See `:help vim.lsp.*` for documentation on any of the below functions
-    vim.api.nvim_buf_set_keymap(
-        bufnr,
-        "n",
-        "gD",
-        "<cmd>lua vim.lsp.buf.declaration()<CR>",
-        opts
-    )
-    vim.api.nvim_buf_set_keymap(
-        bufnr,
-        "n",
-        "gd",
-        "<cmd>lua require'telescope.builtin'.lsp_definitions()<CR>",
-        opts
-    )
-    vim.api.nvim_buf_set_keymap(
-        bufnr,
-        "n",
-        "K",
-        "<cmd>lua vim.lsp.buf.hover()<CR>",
-        opts
-    )
-    vim.api.nvim_buf_set_keymap(
-        bufnr,
-        "n",
-        "gi",
-        "<cmd>lua require'telescope.builtin'.lsp_implementation()<CR>",
-        opts
-    )
-    vim.api.nvim_buf_set_keymap(
-        bufnr,
-        "n",
-        "<C-k>",
-        "<cmd>lua vim.lsp.buf.signature_help()<CR>",
-        opts
-    )
-    vim.api.nvim_buf_set_keymap(
-        bufnr,
-        "n",
-        "<leader>wa",
-        "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>",
-        opts
-    )
-    vim.api.nvim_buf_set_keymap(
-        bufnr,
-        "n",
-        "<leader>wr",
-        "<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>",
-        opts
-    )
-    vim.api.nvim_buf_set_keymap(
-        bufnr,
-        "n",
-        "<leader>wl",
-        "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>",
-        opts
-    )
-    vim.api.nvim_buf_set_keymap(
-        bufnr,
-        "n",
-        "<leader>D",
-        "<cmd>lua require'telescope.builtin'.lsp_type_definitions()<CR>",
-        opts
-    )
-    vim.api.nvim_buf_set_keymap(
-        bufnr,
-        "n",
-        "<leader>rn",
-        "<cmd>lua vim.lsp.buf.rename()<CR>",
-        opts
-    )
-    vim.api.nvim_buf_set_keymap(
-        bufnr,
-        "n",
-        "<leader>ca",
-        "<cmd>lua require'telescope.builtin'.lsp_code_actions()<CR>",
-        opts
-    )
-    vim.api.nvim_buf_set_keymap(
-        bufnr,
-        "n",
-        "gr",
-        "<cmd>lua require'telescope.builtin'.lsp_references()<CR>",
-        opts
-    )
-    vim.api.nvim_buf_set_keymap(
-        bufnr,
-        "n",
-        "<leader>f",
-        "<cmd>lua vim.lsp.buf.formatting()<CR>",
-        opts
-    )
-end
+map("n", "<leader>e", "<cmd>lua vim.diagnostic.open_float()<CR>")
+map("n", "[d", "<cmd>lua vim.diagnostic.goto_prev()<CR>")
+map("n", "]d", "<cmd>lua vim.diagnostic.goto_next()<CR>")
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
 
--- Use a loop to conveniently call 'setup' on multiple servers and
--- map buffer local keybindings when the language server attaches
-local servers = { "pyright", "clangd", "tsserver", "sumneko_lua", "efm" }
-local lsp_installer_servers = require("nvim-lsp-installer.servers")
+local servers = { "pyright", "clangd", "tsserver", "sumneko_lua" }
+local lsp_installer_servers = require "nvim-lsp-installer.servers"
 
--- Loop through the servers listed above and set them up. If a server is
--- not already installed, install it.
+local null_ls_formatting_override = { tsserver = true }
+
+local on_attach = function(client)
+    if client.resolved_capabilities.goto_definition then
+        map(
+            "n",
+            "gd",
+            "<cmd>lua require'telescope.builtin'.lsp_definitions()<CR>",
+            { buffer = true }
+        )
+    end
+
+    if client.resolved_capabilities.declaration then
+        map(
+            "n",
+            "gD",
+            "<cmd>lua vim.lsp.buf.declaration()<CR>",
+            { buffer = true }
+        )
+    end
+
+    if client.resolved_capabilities.hover then
+        map("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", { buffer = true })
+    end
+
+    if client.resolved_capabilities.implementation then
+        map(
+            "n",
+            "gi",
+            "<cmd>lua require'telescope.builtin'.lsp_implementations()<CR>",
+            { buffer = true }
+        )
+    end
+
+    if client.resolved_capabilities.signature_help then
+        map(
+            "n",
+            "<C-k>",
+            "<cmd>lua vim.lsp.buf.signature_help()<CR>",
+            { buffer = true }
+        )
+    end
+
+    if client.resolved_capabilities.workspace_symbol then
+        map(
+            "n",
+            "<leader>wa",
+            "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>",
+            { buffer = true }
+        )
+        map(
+            "n",
+            "<leader>wr",
+            "<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>",
+            { buffer = true }
+        )
+        map(
+            "n",
+            "<leader>wl",
+            "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>",
+            { buffer = true }
+        )
+    end
+
+    if client.resolved_capabilities.type_definition then
+        map(
+            "n",
+            "<leader>D",
+            "<cmd>lua require'telescope.builtin'.lsp_type_definitions()<CR>",
+            { buffer = true }
+        )
+    end
+
+    if client.resolved_capabilities.rename then
+        map(
+            "n",
+            "<leader>rn",
+            "<cmd>lua vim.lsp.buf.rename()<CR>",
+            { buffer = true }
+        )
+    end
+
+    if client.resolved_capabilities.code_action then
+        map(
+            "n",
+            "<leader>ca",
+            "<cmd>lua require'telescope.builtin'.lsp_code_actions()<CR>",
+            { buffer = true }
+        )
+    end
+
+    if client.resolved_capabilities.find_references then
+        map(
+            "n",
+            "gr",
+            "<cmd>lua require'telescope.builtin'.lsp_references()<CR>",
+            { buffer = true }
+        )
+    end
+
+    if client.resolved_capabilities.document_formatting then
+        map(
+            "n",
+            "<leader>f",
+            "<cmd>lua vim.lsp.buf.formatting()<CR>",
+            { buffer = true }
+        )
+
+        if null_ls_formatting_override[client.name] then
+            client.resolved_capabilities.document_formatting = false
+            client.resolved_capabilities.document_range_formatting = false
+        end
+    end
+end
+
 for _, server_name in pairs(servers) do
     local server_available, server = lsp_installer_servers.get_server(
         server_name
@@ -147,20 +144,7 @@ for _, server_name in pairs(servers) do
             local extra_opts = {}
 
             if server_name == "sumneko_lua" then
-                opts = require("lua-dev").setup({ lspconfig = opts })
-            end
-
-            if server_name == "efm" then
-                extra_opts = {
-                    init_options = { documentFormatting = true },
-                    root_dir = vim.loop.cwd,
-                    settings = {
-                        rootMarkers = { ".git/" },
-                        languages = {
-                            lua = { require("efm/stylua") },
-                        },
-                    },
-                }
+                opts = require("lua-dev").setup { lspconfig = opts }
             end
 
             for k, v in pairs(extra_opts) do
@@ -175,4 +159,3 @@ for _, server_name in pairs(servers) do
         end
     end
 end
-

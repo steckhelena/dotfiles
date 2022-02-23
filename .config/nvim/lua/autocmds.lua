@@ -25,5 +25,3 @@ cmd [[autocmd FileType python setlocal expandtab]]
 
 -- Sets jsonc filetype
 cmd [[autocmd BufNewFile,BufRead *.jsonc set ft=jsonc]]
-
-cmd [[autocmd BufWritePre *.lua lua vim.lsp.buf.formatting_sync(nil, 100)]]

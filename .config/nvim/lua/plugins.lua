@@ -237,6 +237,33 @@ return require("packer").startup(function(use)
     -- Lua lsp
     use "folke/lua-dev.nvim"
 
+    -- Use null-ls for more lsp sources
+    use {
+        "jose-elias-alvarez/null-ls.nvim",
+        requires = {
+            "nvim-lua/plenary.nvim",
+        },
+        config = function()
+            require("null-ls").setup {
+                sources = {
+                    require("null-ls").builtins.formatting.stylua,
+                    require("null-ls").builtins.diagnostics.eslint,
+                    require("null-ls").builtins.formatting.prettierd,
+                },
+                on_attach = function(client)
+                    if client.resolved_capabilities.document_formatting then
+                        vim.cmd [[
+                            augroup LspFormatting
+                                autocmd! * <buffer>
+                                autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()
+                            augroup END
+                        ]]
+                    end
+                end,
+            }
+        end,
+    }
+
     -- Use nvim-cmp as autocomplete
     use {
         "hrsh7th/nvim-cmp",
