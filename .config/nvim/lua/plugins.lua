@@ -197,6 +197,9 @@ return require("packer").startup(function(use)
     -- This gives me those sexy bars under my screen with all kinds of info.
     use {
         "nvim-lualine/lualine.nvim",
+        requires = {
+            "nvim-lua/lsp-status.nvim",
+        },
         config = function()
             require("lualine").setup {
                 sections = {
@@ -268,8 +271,6 @@ return require("packer").startup(function(use)
             }
         end,
     }
-
-    use { "nvim-lua/lsp-status.nvim" }
 
     -- Use nvim-cmp as autocomplete
     use {
