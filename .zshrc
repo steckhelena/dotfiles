@@ -87,6 +87,7 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib64/
 
 # Useful aliases
 alias tpr="tput reset"
+alias rm="rmtrash"
 
 # source oh-my-zsh
 export ZSH_DISABLE_COMPFIX="true"
