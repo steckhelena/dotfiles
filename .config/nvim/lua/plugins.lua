@@ -252,6 +252,7 @@ return require("packer").startup(function(use)
                     require("null-ls").builtins.diagnostics.eslint,
                     require("null-ls").builtins.formatting.prettierd,
                     require("null-ls").builtins.code_actions.gitsigns,
+                    require("null-ls").null_ls.builtins.formatting.black,
                 },
                 on_attach = function(client)
                     if client.resolved_capabilities.document_formatting then
