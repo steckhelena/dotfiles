@@ -91,6 +91,9 @@ export PATH="$HOME/.local/bin:$PATH"
 # pyenv
 eval "$(pyenv init --path)"
 
+# poetry
+export PATH="$HOME/.poetry/bin:$PATH"
+
 # source oh-my-zsh
 source $ZSH/oh-my-zsh.sh
 
