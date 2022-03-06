@@ -255,6 +255,8 @@ return require("packer").startup(function(use)
                     null_ls.builtins.code_actions.gitsigns,
                     null_ls.builtins.formatting.black,
                     null_ls.builtins.diagnostics.pylint,
+                    null_ls.builtins.formatting.isort,
+                    null_ls.builtins.diagnostics.mypy,
                 },
                 on_attach = function(client)
                     if client.resolved_capabilities.document_formatting then
