@@ -31,14 +31,6 @@ vim.o.scrolloff = 5
 vim.o.sidescroll = 5
 vim.o.sidescrolloff = 15
 
-vim.opt.list = true
-vim.opt.listchars = {
-    tab = ">_<",
-    trail = "-",
-    nbsp = "+",
-    eol = "↴",
-}
-
 vim.o.mouse = "a"
 
 opt.undofile = true
@@ -49,7 +41,7 @@ vim.o.undoreload = 10000
 opt.expandtab = true
 opt.shiftwidth = 2
 opt.softtabstop = 2
-opt.tabstop = 4
+opt.tabstop = 2
 opt.textwidth = 80
 
 vim.o.confirm = true
@@ -59,6 +51,3 @@ vim.wo.colorcolumn = "+1"
 vim.wo.signcolumn = "yes:1"
 
 vim.o.shortmess = vim.o.shortmess .. "c"
-
-vim.cmd [[filetype plugin indent on]]
-

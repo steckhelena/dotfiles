@@ -246,12 +246,17 @@ return require("packer").startup(function(use)
             "nvim-lua/plenary.nvim",
         },
         config = function()
-            require("null-ls").setup {
+            local null_ls = require "null-ls"
+            null_ls.setup {
                 sources = {
-                    require("null-ls").builtins.formatting.stylua,
-                    require("null-ls").builtins.diagnostics.eslint,
-                    require("null-ls").builtins.formatting.prettierd,
-                    require("null-ls").builtins.code_actions.gitsigns,
+                    null_ls.builtins.formatting.stylua,
+                    null_ls.builtins.diagnostics.eslint,
+                    null_ls.builtins.formatting.prettierd,
+                    null_ls.builtins.code_actions.gitsigns,
+                    null_ls.builtins.formatting.black,
+                    null_ls.builtins.diagnostics.pylint,
+                    null_ls.builtins.formatting.isort,
+                    null_ls.builtins.diagnostics.mypy,
                 },
                 on_attach = function(client)
                     if client.resolved_capabilities.document_formatting then
