@@ -14,7 +14,19 @@ map("n", "]d", "<cmd>lua vim.diagnostic.goto_next()<CR>")
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
 
-local servers = { "pyright", "clangd", "tsserver", "sumneko_lua" }
+local servers = {
+    "pyright",
+    "clangd",
+    "tsserver",
+    "sumneko_lua",
+    "jsonls",
+    "yamlls",
+    "tflint",
+    "ltex",
+    "taplo",
+    "terraformls",
+    "svelte",
+}
 local lsp_installer_servers = require "nvim-lsp-installer.servers"
 
 local null_ls_formatting_override = { tsserver = true }
@@ -170,6 +182,16 @@ for _, server_name in pairs(servers) do
                     handlers = lsp_status.extensions.clangd.setup(),
                     init_options = {
                         clangdFileStatus = true,
+                    },
+                }
+            end
+
+            if server_name == "jsonls" then
+                extra_opts = {
+                    settings = {
+                        json = {
+                            schemas = require("schemastore").json.schemas(),
+                        },
                     },
                 }
             end

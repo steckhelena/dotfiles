@@ -228,6 +228,9 @@ return require("packer").startup(function(use)
     -- Lua lsp
     use "folke/lua-dev.nvim"
 
+    -- Use schemastore for json schemas
+    use "b0o/schemastore.nvim"
+
     -- Use null-ls for more lsp sources
     use {
         "jose-elias-alvarez/null-ls.nvim",
