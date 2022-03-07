@@ -218,17 +218,6 @@ return require("packer").startup(function(use)
         end,
     }
 
-    -- These are all plugins used for better syntax highlighting
-    use "yuezk/vim-js"
-    use "HerringtonDarkholme/yats.vim"
-    use "othree/html5.vim"
-    use "MaxMEllon/vim-jsx-pretty"
-    use "jparise/vim-graphql"
-    use "elzr/vim-json"
-    use "neoclide/jsonc.vim"
-    use "cespare/vim-toml"
-    use "evanleck/vim-svelte"
-
     -- This plugin lets me use beautiful icons
     use "ryanoasis/vim-devicons"
 
