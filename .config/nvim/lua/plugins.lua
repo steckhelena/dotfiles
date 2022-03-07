@@ -288,10 +288,12 @@ return require("packer").startup(function(use)
             "hrsh7th/cmp-nvim-lsp",
             "hrsh7th/cmp-path",
             "saadparwaiz1/cmp_luasnip",
+            "onsails/lspkind-nvim",
         },
         config = function()
             local luasnip = require "luasnip"
             local cmp = require "cmp"
+            local lspkind = require "lspkind"
 
             cmp.setup {
                 snippet = {
@@ -334,10 +336,19 @@ return require("packer").startup(function(use)
                     { name = "nvim_lsp" },
                     { name = "luasnip" },
                 },
+                formatting = {
+                    format = lspkind.cmp_format(),
+                },
             }
         end,
     }
-    use "L3MON4D3/LuaSnip"
+    use {
+        "L3MON4D3/LuaSnip",
+        requires = { "honza/vim-snippets" },
+        config = function()
+            require("luasnip.loaders.from_snipmate").load()
+        end,
+    }
 
     -- Use nvim-treesitter for better syntax trees
     use {
