@@ -31,12 +31,17 @@ if [[ -z "$themes" ]]; then
     fi
 
     mkdir -p $themes_dir
-    (cd $themes_dir; pybase16 update; pybase16 build)
+    (cd $themes_dir; pybase16 update)
+
+    # clone a better vim theme
+    (cd $themes_dir; git clone git@github.com:fnune/base16-vim.git templates/vim2; pybase16 build)
+
     res=$(echo 'Ok' | \
         rofi -sep '|' -dmenu -i \
           -p "Done!" -l 1\
           -theme YesNo)
     exit 0
+
 fi
 
 res=$(echo $themes | \
