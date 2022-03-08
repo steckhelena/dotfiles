@@ -9,3 +9,14 @@ map("n", "<C-b>", ":make<CR>")
 
 -- This unsets the "last search pattern" register by hitting return
 map("n", "<CR>", ":noh<CR><CR>")
+
+map(
+    "n",
+    "<C-u>",
+    "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1, '<c-u>')<cr>"
+)
+map(
+    "n",
+    "<C-d>",
+    "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(1, '<c-d>')<cr>"
+)
