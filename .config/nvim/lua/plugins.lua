@@ -218,17 +218,6 @@ return require("packer").startup(function(use)
         end,
     }
 
-    -- These are all plugins used for better syntax highlighting
-    use "yuezk/vim-js"
-    use "HerringtonDarkholme/yats.vim"
-    use "othree/html5.vim"
-    use "MaxMEllon/vim-jsx-pretty"
-    use "jparise/vim-graphql"
-    use "elzr/vim-json"
-    use "neoclide/jsonc.vim"
-    use "cespare/vim-toml"
-    use "evanleck/vim-svelte"
-
     -- This plugin lets me use beautiful icons
     use "ryanoasis/vim-devicons"
 
@@ -238,6 +227,9 @@ return require("packer").startup(function(use)
 
     -- Lua lsp
     use "folke/lua-dev.nvim"
+
+    -- Use schemastore for json schemas
+    use "b0o/schemastore.nvim"
 
     -- Use null-ls for more lsp sources
     use {
@@ -296,10 +288,12 @@ return require("packer").startup(function(use)
             "hrsh7th/cmp-nvim-lsp",
             "hrsh7th/cmp-path",
             "saadparwaiz1/cmp_luasnip",
+            "onsails/lspkind-nvim",
         },
         config = function()
             local luasnip = require "luasnip"
             local cmp = require "cmp"
+            local lspkind = require "lspkind"
 
             cmp.setup {
                 snippet = {
@@ -342,10 +336,44 @@ return require("packer").startup(function(use)
                     { name = "nvim_lsp" },
                     { name = "luasnip" },
                 },
+                formatting = {
+                    format = lspkind.cmp_format(),
+                },
             }
         end,
     }
-    use "L3MON4D3/LuaSnip"
+    use {
+        "L3MON4D3/LuaSnip",
+        requires = { "honza/vim-snippets" },
+        config = function()
+            require("luasnip.loaders.from_snipmate").load()
+        end,
+    }
+
+    -- Use lspsaga for prettier lsp interface
+    use {
+        "tami5/lspsaga.nvim",
+        config = function()
+            local saga = require "lspsaga"
+
+            saga.setup {
+                use_saga_diagnostic_sign = true,
+                use_diagnostic_virtual_text = false,
+                error_sign = "❌",
+                warn_sign = "⚠️",
+                hint_sign = "🤔",
+                infor_sign = "ℹ️",
+                code_action_keys = {
+                    quit = { "q", "<C-[>" },
+                    exec = "<CR>",
+                },
+                code_action_prompt = {
+                    enable = false,
+                    virtual_text = false,
+                },
+            }
+        end,
+    }
 
     -- Use nvim-treesitter for better syntax trees
     use {

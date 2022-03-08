@@ -7,21 +7,33 @@ vim.diagnostic.config {
     update_in_insert = false,
     severity_sort = false,
 }
-vim.cmd [[autocmd! CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]]
-map("n", "[d", "<cmd>lua vim.diagnostic.goto_prev()<CR>")
-map("n", "]d", "<cmd>lua vim.diagnostic.goto_next()<CR>")
+map("n", "<leader>e", "<cmd>Lspsaga show_line_diagnostics<cr>")
+map("n", "[d", "<cmd>Lspsaga diagnostic_jump_prev<cr>")
+map("n", "]d", "<cmd>Lspsaga diagnostic_jump_next<cr>")
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
 
-local servers = { "pyright", "clangd", "tsserver", "sumneko_lua" }
+local servers = {
+    "pyright",
+    "clangd",
+    "tsserver",
+    "sumneko_lua",
+    "jsonls",
+    "yamlls",
+    "tflint",
+    "ltex",
+    "taplo",
+    "terraformls",
+    "svelte",
+}
 local lsp_installer_servers = require "nvim-lsp-installer.servers"
 
 local null_ls_formatting_override = { tsserver = true }
 
 local lsp_status = require "lsp-status"
 lsp_status.register_progress()
-vim.tbl_extend("keep", capabilities, lsp_status.capabilities)
+capabilities = vim.tbl_extend("keep", capabilities, lsp_status.capabilities)
 
 local on_attach = function(client)
     if client.resolved_capabilities.goto_definition then
@@ -43,7 +55,7 @@ local on_attach = function(client)
     end
 
     if client.resolved_capabilities.hover then
-        map("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", { buffer = true })
+        map("n", "K", "<cmd>Lspsaga hover_doc<cr>", { buffer = true })
     end
 
     if client.resolved_capabilities.implementation then
@@ -100,19 +112,20 @@ local on_attach = function(client)
     end
 
     if client.resolved_capabilities.rename then
-        map(
-            "n",
-            "<leader>rn",
-            "<cmd>lua vim.lsp.buf.rename()<CR>",
-            { buffer = true }
-        )
+        map("n", "<leader>rn", "<cmd>Lspsaga rename<cr>", { buffer = true })
     end
 
     if client.resolved_capabilities.code_action then
         map(
             "n",
             "<leader>ca",
-            "<cmd>lua require'telescope.builtin'.lsp_code_actions()<CR>",
+            "<cmd>Lspsaga code_action<cr>",
+            { buffer = true }
+        )
+        map(
+            "x",
+            "<leader>ca",
+            ":<c-u>Lspsaga range_code_action<cr>",
             { buffer = true }
         )
     end
@@ -174,9 +187,17 @@ for _, server_name in pairs(servers) do
                 }
             end
 
-            for k, v in pairs(extra_opts) do
-                opts[k] = v
+            if server_name == "jsonls" then
+                extra_opts = {
+                    settings = {
+                        json = {
+                            schemas = require("schemastore").json.schemas(),
+                        },
+                    },
+                }
             end
+
+            opts = vim.tbl_deep_extend("error", opts, extra_opts)
 
             server:setup(opts)
         end)
