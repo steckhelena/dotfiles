@@ -8,7 +8,7 @@ M.toggle_tree = function()
         require("bufferline.state").set_offset(0)
     else
         require("bufferline.state").set_offset(31, "File Explorer")
-        require("nvim-tree").find_file(true, false)
+        require("nvim-tree").toggle(true)
     end
 end
 
