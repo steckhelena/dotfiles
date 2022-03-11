@@ -344,8 +344,9 @@ return require("packer").startup(function(use)
     }
     use {
         "L3MON4D3/LuaSnip",
-        requires = { "honza/vim-snippets" },
+        requires = { "honza/vim-snippets", "rafamadriz/friendly-snippets" },
         config = function()
+            require("luasnip.loaders.from_vscode").load()
             require("luasnip.loaders.from_snipmate").load()
         end,
     }
