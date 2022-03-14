@@ -66,6 +66,8 @@ return require("packer").startup(function(use)
             -- Move to previous/next
             map("n", "<A-,>", ":BufferPrevious<CR>")
             map("n", "<A-.>", ":BufferNext<CR>")
+            map("n", "≤", ":BufferPrevious<CR>")
+            map("n", "≥", ":BufferNext<CR>")
             -- Re-order to previous/next
             map("n", "<A-<>", ":BufferMovePrevious<CR>")
             map("n", "<A->>", " :BufferMoveNext<CR>")
