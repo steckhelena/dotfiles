@@ -312,7 +312,7 @@ return require("packer").startup(function(use)
                     ["<C-e>"] = cmp.mapping.close(),
                     ["<CR>"] = cmp.mapping.confirm {
                         behavior = cmp.ConfirmBehavior.Replace,
-                        select = true,
+                        select = false,
                     },
                     ["<Tab>"] = function(fallback)
                         if cmp.visible() then
@@ -346,8 +346,9 @@ return require("packer").startup(function(use)
     }
     use {
         "L3MON4D3/LuaSnip",
-        requires = { "honza/vim-snippets" },
+        requires = { "honza/vim-snippets", "rafamadriz/friendly-snippets" },
         config = function()
+            require("luasnip.loaders.from_vscode").load()
             require("luasnip.loaders.from_snipmate").load()
         end,
     }
@@ -361,10 +362,6 @@ return require("packer").startup(function(use)
             saga.setup {
                 use_saga_diagnostic_sign = true,
                 use_diagnostic_virtual_text = false,
-                error_sign = "❌",
-                warn_sign = "⚠️",
-                hint_sign = "🤔",
-                infor_sign = "ℹ️",
                 code_action_keys = {
                     quit = { "q", "<C-[>" },
                     exec = "<CR>",

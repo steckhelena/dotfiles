@@ -197,6 +197,20 @@ for _, server_name in pairs(servers) do
                 }
             end
 
+            if server_name == "ltex" then
+                extra_opts = {
+                    filetypes = {
+                        "bib",
+                        "markdown",
+                        "org",
+                        "plaintex",
+                        "rst",
+                        "rnoweb",
+                        "tex",
+                    },
+                }
+            end
+
             opts = vim.tbl_deep_extend("error", opts, extra_opts)
 
             server:setup(opts)
