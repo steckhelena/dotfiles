@@ -94,6 +94,10 @@ eval "$(pyenv init --path)"
 # poetry
 export PATH="$HOME/.poetry/bin:$PATH"
 
+# volta
+export VOLTA_HOME="$HOME/.volta"
+export PATH="$VOLTA_HOME/bin:$PATH"
+
 # source oh-my-zsh
 source $ZSH/oh-my-zsh.sh
 
