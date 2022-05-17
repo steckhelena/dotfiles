@@ -98,6 +98,10 @@ export PATH="$HOME/.poetry/bin:$PATH"
 export VOLTA_HOME="$HOME/.volta"
 export PATH="$VOLTA_HOME/bin:$PATH"
 
+# google cloud sdk
+if [ -f '/home/steckhelena/google-cloud-sdk/path.zsh.inc' ]; then . '/home/steckhelena/google-cloud-sdk/path.zsh.inc'; fi
+if [ -f '/home/steckhelena/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/steckhelena/google-cloud-sdk/completion.zsh.inc'; fi
+
 # source oh-my-zsh
 source $ZSH/oh-my-zsh.sh
 
