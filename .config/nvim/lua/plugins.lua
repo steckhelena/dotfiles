@@ -212,8 +212,9 @@ return require("packer").startup(function(use)
             require("indent_blankline").setup {
                 show_current_context = true,
                 show_current_context_start = true,
-                show_end_of_line = true,
-                space_char_blank_line = " ",
+                space_char_blank_line = "",
+                char = "",
+                context_char = "│",
             }
         end,
     }
@@ -242,7 +243,8 @@ return require("packer").startup(function(use)
             null_ls.setup {
                 sources = {
                     null_ls.builtins.formatting.stylua,
-                    null_ls.builtins.diagnostics.eslint,
+                    null_ls.builtins.diagnostics.eslint_d,
+                    null_ls.builtins.formatting.eslint_d,
                     null_ls.builtins.formatting.prettierd,
                     null_ls.builtins.code_actions.gitsigns,
                     null_ls.builtins.formatting.black,
@@ -378,7 +380,8 @@ return require("packer").startup(function(use)
         run = ":TSUpdate",
         config = function()
             require("nvim-treesitter.configs").setup {
-                ensure_installed = "maintained",
+                ensure_installed = "all",
+                ignore_install = { "phpdoc" },
                 highlight = {
                     enable = true,
                     additional_vim_regex_highlighting = false,
@@ -407,7 +410,10 @@ return require("packer").startup(function(use)
     }
 
     -- This adds a preview server to nvim for markdown files
-    use { "iamcco/markdown-preview.nvim", run = "cd app & yarn install" }
+    use {
+        "iamcco/markdown-preview.nvim",
+        run = "cd app & yarn install --frozen-lockfile",
+    }
 
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins
