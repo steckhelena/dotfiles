@@ -65,10 +65,15 @@ plugins=(
   git
   ssh-agent
   docker
+  kubectl
   yarn
   zsh-completions
   docker-compose
   extract
+  gcloud
+  volta
+  poetry
+  pyenv
 )
 
 # Cuda directories
@@ -85,22 +90,8 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib64/
 alias tpr="tput reset"
 alias rm="rmtrash"
 
-# Pipx
-export PATH="$HOME/.local/bin:$PATH"
-
 # pyenv
 eval "$(pyenv init --path)"
-
-# poetry
-export PATH="$HOME/.poetry/bin:$PATH"
-
-# volta
-export VOLTA_HOME="$HOME/.volta"
-export PATH="$VOLTA_HOME/bin:$PATH"
-
-# google cloud sdk
-if [ -f '/home/steckhelena/google-cloud-sdk/path.zsh.inc' ]; then . '/home/steckhelena/google-cloud-sdk/path.zsh.inc'; fi
-if [ -f '/home/steckhelena/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/steckhelena/google-cloud-sdk/completion.zsh.inc'; fi
 
 # source oh-my-zsh
 source $ZSH/oh-my-zsh.sh
