@@ -93,6 +93,10 @@ alias rm="rmtrash"
 # pyenv
 eval "$(pyenv init --path)"
 
+# volta
+export VOLTA_HOME="$HOME/.volta"
+export PATH="$VOLTA_HOME/bin:$PATH"
+
 # source oh-my-zsh
 source $ZSH/oh-my-zsh.sh
 
