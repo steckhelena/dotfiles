@@ -66,6 +66,8 @@ return require("packer").startup(function(use)
             -- Move to previous/next
             map("n", "<A-,>", ":BufferPrevious<CR>")
             map("n", "<A-.>", ":BufferNext<CR>")
+            map("n", "≤", ":BufferPrevious<CR>")
+            map("n", "≥", ":BufferNext<CR>")
             -- Re-order to previous/next
             map("n", "<A-<>", ":BufferMovePrevious<CR>")
             map("n", "<A->>", " :BufferMoveNext<CR>")
@@ -138,10 +140,11 @@ return require("packer").startup(function(use)
                 { noremap = false }
             )
 
-            vim.g.nvim_tree_git_hl = true
-
             require("nvim-tree").setup {
                 open_on_setup = true,
+                renderer = {
+                    highlight_git = true,
+                },
             }
         end,
     }
