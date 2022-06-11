@@ -56,6 +56,14 @@ return require("packer").startup(function(use)
 
     use "kyazdani42/nvim-web-devicons"
 
+    use {
+        "lazytanuki/nvim-mapper",
+        config = function()
+            require("nvim-mapper").setup {}
+        end,
+        before = "telescope.nvim",
+    }
+
     -- This is a tab bar for my buffers
     use {
         "romgrk/barbar.nvim",
@@ -154,6 +162,7 @@ return require("packer").startup(function(use)
         "nvim-telescope/telescope.nvim",
         requires = { { "nvim-lua/plenary.nvim" } },
         config = function()
+            require("telescope").load_extension "mapper"
             local map = require("utils").map
 
             map(
