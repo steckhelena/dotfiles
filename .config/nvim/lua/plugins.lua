@@ -69,37 +69,6 @@ return require("packer").startup(function(use)
         "romgrk/barbar.nvim",
         requires = { "kyazdani42/nvim-web-devicons" },
         config = function()
-            local map = require("utils").map
-
-            -- Move to previous/next
-            map("n", "<A-,>", ":BufferPrevious<CR>")
-            map("n", "<A-.>", ":BufferNext<CR>")
-            map("n", "≤", ":BufferPrevious<CR>")
-            map("n", "≥", ":BufferNext<CR>")
-            -- Re-order to previous/next
-            map("n", "<A-<>", ":BufferMovePrevious<CR>")
-            map("n", "<A->>", " :BufferMoveNext<CR>")
-            -- Goto buffer in position...
-            map("n", "<A-1>", ":BufferGoto 1<CR>")
-            map("n", "<A-2>", ":BufferGoto 2<CR>")
-            map("n", "<A-3>", ":BufferGoto 3<CR>")
-            map("n", "<A-4>", ":BufferGoto 4<CR>")
-            map("n", "<A-5>", ":BufferGoto 5<CR>")
-            map("n", "<A-6>", ":BufferGoto 6<CR>")
-            map("n", "<A-7>", ":BufferGoto 7<CR>")
-            map("n", "<A-8>", ":BufferGoto 8<CR>")
-            map("n", "<A-9>", ":BufferGoto 9<CR>")
-            map("n", "<A-0>", ":BufferLast<CR>")
-            -- Close buffer
-            map("n", "<A-c>", ":BufferClose<CR>")
-            map("n", "<leader>d", ":BufferClose<cr>")
-            -- Magic buffer-picking mode
-            map("n", "<C-p>", ":BufferPick<CR>")
-            -- Sort automatically by...
-            map("n", "<leader>bb", ":BufferOrderByBufferNumber<CR>")
-            map("n", "<leader>bd", ":BufferOrderByDirectory<CR>")
-            map("n", "<leader>bl", ":BufferOrderByLanguage<CR>")
-
             vim.g.bufferline = {
                 auto_hide = false,
             }
@@ -139,15 +108,6 @@ return require("packer").startup(function(use)
             "kyazdani42/nvim-web-devicons", -- optional, for file icon
         },
         config = function()
-            local map = require("utils").map
-
-            map(
-                "n",
-                "<C-n>",
-                ":lua require'tree'.toggle_tree()<CR>",
-                { noremap = false }
-            )
-
             require("nvim-tree").setup {
                 open_on_setup = true,
                 renderer = {
@@ -163,23 +123,6 @@ return require("packer").startup(function(use)
         requires = { { "nvim-lua/plenary.nvim" } },
         config = function()
             require("telescope").load_extension "mapper"
-            local map = require("utils").map
-
-            map(
-                "n",
-                "<leader>ff",
-                ":lua require'telescope.builtin'.find_files()<CR>"
-            )
-            map(
-                "n",
-                "<leader>fg",
-                ":lua require'telescope.builtin'.live_grep()<CR>"
-            )
-            map(
-                "n",
-                "<leader>fb",
-                ":lua require'telescope.builtin'.buffers()<CR>"
-            )
 
             require("telescope").setup {
                 defaults = {
@@ -284,14 +227,6 @@ return require("packer").startup(function(use)
         "folke/trouble.nvim",
         requires = "kyazdani42/nvim-web-devicons",
         config = function()
-            local map = require("utils").map
-
-            map("n", "<leader>xx", "<cmd>Trouble<cr>")
-            map("n", "<leader>xw", "<cmd>Trouble workspace_diagnostics<cr>")
-            map("n", "<leader>xd", "<cmd>Trouble document_diagnostics<cr>")
-            map("n", "<leader>xl", "<cmd>Trouble loclist<cr>")
-            map("n", "<leader>qf", "<cmd>Trouble quickfix<cr>")
-
             require("trouble").setup {}
         end,
     }
