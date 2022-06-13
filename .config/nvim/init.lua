@@ -1,5 +1,5 @@
 require "plugins"
-require "lsp"
+require "lsp/lsp"
 require "theme"
 require "settings"
 require "mappings"

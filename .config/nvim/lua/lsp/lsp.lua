@@ -1,4 +1,4 @@
-local map = require("utils").map
+local on_attach = require('lsp/helpers').on_attach
 
 vim.diagnostic.config {
     virtual_text = false,
@@ -26,24 +26,11 @@ local servers = {
 }
 local lsp_installer_servers = require "nvim-lsp-installer.servers"
 
-local null_ls_formatting_override = {
-    tsserver = true,
-    jsonls = true,
-    sumneko_lua = true,
-}
 
 local lsp_status = require "lsp-status"
 lsp_status.register_progress()
 capabilities = vim.tbl_extend("keep", capabilities, lsp_status.capabilities)
 
-local on_attach = function(client)
-    if null_ls_formatting_override[client.name] then
-        client.server_capabilities.documentFormattingProvider = false
-        client.server_capabilities.documentRangeFormattingProvider = false
-    end
-
-    require("lsp-status").on_attach(client)
-end
 
 for _, server_name in pairs(servers) do
     local server_available, server = lsp_installer_servers.get_server(

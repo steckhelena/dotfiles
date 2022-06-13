@@ -178,7 +178,10 @@ return require("packer").startup(function(use)
     use "ryanoasis/vim-devicons"
 
     -- Use nvim-lsp as language server client
-    use "neovim/nvim-lspconfig"
+    use {
+        "neovim/nvim-lspconfig",
+        tag = "v0.1.3",
+    }
     use "williamboman/nvim-lsp-installer"
 
     -- Lua lsp
@@ -208,16 +211,7 @@ return require("packer").startup(function(use)
                     null_ls.builtins.formatting.isort,
                     null_ls.builtins.diagnostics.mypy,
                 },
-                on_attach = function(client)
-                    if client.resolved_capabilities.document_formatting then
-                        vim.cmd [[
-                            augroup LspFormatting
-                                autocmd! * <buffer>
-                                autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()
-                            augroup END
-                        ]]
-                    end
-                end,
+                on_attach = require("lsp/helpers").on_attach,
             }
         end,
     }
