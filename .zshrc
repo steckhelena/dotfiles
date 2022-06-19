@@ -97,6 +97,9 @@ eval "$(pyenv init --path)"
 export VOLTA_HOME="$HOME/.volta"
 export PATH="$VOLTA_HOME/bin:$PATH"
 
+# local bin
+export PATH="${PATH}:$HOME/.local/bin"
+
 # source oh-my-zsh
 source $ZSH/oh-my-zsh.sh
 
