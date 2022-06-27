@@ -1,10 +1,7 @@
 local M = {}
 
-local util = require "vim.lsp.util"
-
-local lsp_formatting = function(client, bufnr)
-    local params = util.make_formatting_params {}
-    client.request("textDocument/formatting", params, nil, bufnr)
+local lsp_formatting = function()
+    vim.lsp.buf.formatting_sync()
 end
 
 local null_ls_formatting_override = {
@@ -22,7 +19,7 @@ M.on_attach = function(client, bufnr)
                 group = augroup,
                 buffer = bufnr,
                 callback = function()
-                    lsp_formatting(client, bufnr)
+                    lsp_formatting()
                 end,
             })
         else
