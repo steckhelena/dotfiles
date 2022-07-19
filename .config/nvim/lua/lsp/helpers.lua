@@ -28,6 +28,10 @@ M.on_attach = function(client, bufnr)
         end
     end
 
+    if vim.bo[bufnr].buftype ~= "" or vim.bo[bufnr].filetype == "helm" then
+        vim.diagnostic.disable()
+    end
+
     require("lsp-status").on_attach(client)
 end
 

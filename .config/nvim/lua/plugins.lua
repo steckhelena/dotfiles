@@ -29,6 +29,9 @@ return require("packer").startup(function(use)
         end,
     }
 
+    -- helm template syntax highlighting
+    use "towolf/vim-helm"
+
     -- This enables using git commands from nvim
     use "tpope/vim-fugitive"
     use {
