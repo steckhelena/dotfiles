@@ -162,6 +162,8 @@ return require("packer").startup(function(use)
         end,
     }
 
+    use "hashivim/vim-terraform"
+
     -- This plugin displays the line indentation for better visualization of
     -- code.
     use {
@@ -357,7 +359,7 @@ return require("packer").startup(function(use)
     -- This adds a preview server to nvim for markdown files
     use {
         "iamcco/markdown-preview.nvim",
-        run = "cd app & yarn install --frozen-lockfile",
+        run = "cd app && yarn install --frozen-lockfile",
     }
 
     -- Automatically set up your configuration after cloning packer.nvim
