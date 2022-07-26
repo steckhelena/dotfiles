@@ -102,6 +102,11 @@ export PATH="${PATH}:$HOME/.local/bin"
 # source oh-my-zsh
 source $ZSH/oh-my-zsh.sh
 
+# source some env vars
+if [[ -f $HOME/.env && -r $HOME/.env ]]; then
+  source $HOME/.env
+fi
+
 # reload zsh completions
 autoload -U compinit && compinit
 
