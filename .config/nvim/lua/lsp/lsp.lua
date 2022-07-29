@@ -1,4 +1,4 @@
-local on_attach = require('lsp/helpers').on_attach
+local on_attach = require("lsp/helpers").on_attach
 
 vim.diagnostic.config {
     virtual_text = false,
@@ -23,19 +23,17 @@ local servers = {
     "taplo",
     "terraformls",
     "svelte",
+    "gopls",
 }
 local lsp_installer_servers = require "nvim-lsp-installer.servers"
-
 
 local lsp_status = require "lsp-status"
 lsp_status.register_progress()
 capabilities = vim.tbl_extend("keep", capabilities, lsp_status.capabilities)
 
-
 for _, server_name in pairs(servers) do
-    local server_available, server = lsp_installer_servers.get_server(
-        server_name
-    )
+    local server_available, server =
+        lsp_installer_servers.get_server(server_name)
 
     if server_available then
         server:on_ready(function()
