@@ -74,6 +74,7 @@ plugins=(
   volta
   poetry
   pyenv
+  ripgrep
 )
 
 # Cuda directories
