@@ -18,6 +18,11 @@ vim.cmd [[
   augroup end
 ]]
 
+vim.cmd [[
+ let g:copilot_no_tab_map = v:true
+ imap <expr> <Plug>(vimrc:copilot-dummy-map) copilot#Accept("\<Tab>")
+]]
+
 return require("packer").startup(function(use)
     use "wbthomason/packer.nvim"
 
@@ -230,6 +235,8 @@ return require("packer").startup(function(use)
         end,
     }
 
+    use "github/copilot.vim"
+
     -- Use nvim-cmp as autocomplete
     use {
         "hrsh7th/nvim-cmp",
@@ -251,6 +258,20 @@ return require("packer").startup(function(use)
                     end,
                 },
                 mapping = {
+                    ["<C-g>"] = cmp.mapping(function(fallback)
+                        vim.api.nvim_feedkeys(
+                            vim.fn["copilot#Accept"](
+                                vim.api.nvim_replace_termcodes(
+                                    "<Tab>",
+                                    true,
+                                    true,
+                                    true
+                                )
+                            ),
+                            "n",
+                            true
+                        )
+                    end),
                     ["<C-p>"] = cmp.mapping.select_prev_item(),
                     ["<C-n>"] = cmp.mapping.select_next_item(),
                     ["<C-d>"] = cmp.mapping.scroll_docs(-4),
