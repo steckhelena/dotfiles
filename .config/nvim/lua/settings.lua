@@ -52,3 +52,8 @@ vim.wo.signcolumn = "yes:1"
 
 vim.o.shortmess = vim.o.shortmess .. "c"
 vim.o.completeopt = "menu,menuone,noselect"
+
+vim.cmd [[
+ let g:copilot_no_tab_map = v:true
+ imap <expr> <Plug>(vimrc:copilot-dummy-map) copilot#Accept("\<Tab>")
+]]
