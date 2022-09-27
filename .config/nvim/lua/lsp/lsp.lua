@@ -59,6 +59,9 @@ for _, server_name in pairs(servers) do
                     init_options = {
                         clangdFileStatus = true,
                     },
+                    capabilities = {
+                        offsetEncoding = { "utf-16" },
+                    },
                 }
             end
 
