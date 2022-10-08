@@ -210,7 +210,7 @@ map(
 map(
     "n",
     "<leader>f",
-    "<cmd>lua vim.lsp.buf.formatting()<CR>",
+    "<cmd>lua vim.lsp.buf.format{ async = true }<CR>",
     nil,
     "LSP",
     "lsp.formatting()",

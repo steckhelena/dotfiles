@@ -1,7 +1,7 @@
 local M = {}
 
 local lsp_formatting = function()
-    vim.lsp.buf.formatting_sync()
+    vim.lsp.buf.format { async = false }
 end
 
 local null_ls_formatting_override = {
@@ -23,8 +23,8 @@ M.on_attach = function(client, bufnr)
                 end,
             })
         else
-            client.resolved_capabilities.document_formatting = false
-            client.resolved_capabilities.document_range_formatting = false
+            client.server_capabilities.documentFormattingProvider = false
+            client.server_capabilities.documentRangeFormattingProvider = false
         end
     end
 
