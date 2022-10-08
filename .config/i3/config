@@ -322,6 +322,7 @@ for_window [class="Spotify"] move to workspace $ws2
 for_window [class="Deezer"] move to workspace $ws2
 assign [title="Deluge"] $ws3
 assign [title="calibre"] $ws3
+for_window [class="filen-desktop"] move to workspace $ws3
 assign [class="Steam"] $ws4
 for_window [class="Steam"] layout tabbed
 assign [class="discord"] $ws5
