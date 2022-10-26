@@ -7,9 +7,10 @@ vim.diagnostic.config {
     update_in_insert = false,
     severity_sort = false,
 }
+require("neodev").setup {}
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
+capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
 local servers = {
     "pyright",
@@ -34,7 +35,7 @@ capabilities = vim.tbl_extend("keep", capabilities, lsp_status.capabilities)
 
 for _, server_name in pairs(servers) do
     local server_available, server =
-        lsp_installer_servers.get_server(server_name)
+    lsp_installer_servers.get_server(server_name)
 
     if server_available then
         server:on_ready(function()
@@ -48,10 +49,6 @@ for _, server_name in pairs(servers) do
             }
 
             local extra_opts = {}
-
-            if server_name == "sumneko_lua" then
-                opts = require("lua-dev").setup { lspconfig = opts }
-            end
 
             if server_name == "clangd" then
                 extra_opts = {
