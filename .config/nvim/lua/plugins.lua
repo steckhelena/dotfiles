@@ -111,6 +111,8 @@ return require("packer").startup(function(use)
             "kyazdani42/nvim-web-devicons", -- optional, for file icon
         },
         config = function()
+            require("tree").setup()
+
             require("nvim-tree").setup {
                 open_on_setup = true,
                 renderer = {
@@ -152,13 +154,21 @@ return require("packer").startup(function(use)
         "nvim-lualine/lualine.nvim",
         requires = {
             "nvim-lua/lsp-status.nvim",
+            "RRethy/nvim-base16",
         },
         config = function()
+            -- This workaround is necessary do disable an error from lualine
+            -- showing
+            local tmp_colors = vim.g.colors_name
+            vim.g.colors_name = nil
+
             require("lualine").setup {
                 sections = {
                     lualine_c = { "filename", "require'lsp-status'.status()" },
                 },
             }
+
+            vim.g.colors_name = tmp_colors
         end,
     }
 
@@ -206,8 +216,6 @@ return require("packer").startup(function(use)
             null_ls.setup {
                 sources = {
                     null_ls.builtins.formatting.stylua,
-                    null_ls.builtins.diagnostics.eslint,
-                    null_ls.builtins.formatting.eslint,
                     null_ls.builtins.diagnostics.tsc,
                     null_ls.builtins.formatting.prettierd,
                     null_ls.builtins.code_actions.gitsigns,
@@ -347,7 +355,7 @@ return require("packer").startup(function(use)
                 ignore_install = { "phpdoc" },
                 highlight = {
                     enable = true,
-                    additional_vim_regex_highlighting = false,
+                    additional_vim_regex_highlighting = { "gitcommit" },
                 },
                 incremental_selection = {
                     enable = true,

@@ -16,6 +16,7 @@ local servers = {
     "pyright",
     "clangd",
     "tsserver",
+    "eslint",
     "sumneko_lua",
     "jsonls",
     "yamlls",
@@ -35,7 +36,7 @@ capabilities = vim.tbl_extend("keep", capabilities, lsp_status.capabilities)
 
 for _, server_name in pairs(servers) do
     local server_available, server =
-    lsp_installer_servers.get_server(server_name)
+        lsp_installer_servers.get_server(server_name)
 
     if server_available then
         server:on_ready(function()
@@ -72,6 +73,23 @@ for _, server_name in pairs(servers) do
                 }
             end
 
+            if server_name == "eslint" then
+                extra_opts = {
+                    on_attach = function(client, bufnr)
+                        vim.api.nvim_create_autocmd("BufWritePre", {
+                            group = vim.api.nvim_create_augroup(
+                                "eslint-autofix",
+                                {}
+                            ),
+                            command = "EslintFixAll",
+                            buffer = bufnr,
+                        })
+
+                        on_attach(client, bufnr)
+                    end,
+                }
+            end
+
             if server_name == "ltex" then
                 extra_opts = {
                     filetypes = {
@@ -86,7 +104,7 @@ for _, server_name in pairs(servers) do
                 }
             end
 
-            opts = vim.tbl_deep_extend("error", opts, extra_opts)
+            opts = vim.tbl_deep_extend("force", opts, extra_opts)
 
             server:setup(opts)
         end)
