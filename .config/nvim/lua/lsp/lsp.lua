@@ -34,6 +34,8 @@ local lsp_status = require "lsp-status"
 lsp_status.register_progress()
 capabilities = vim.tbl_extend("keep", capabilities, lsp_status.capabilities)
 
+local eslint_group = vim.api.nvim_create_augroup("eslint-autofix", {})
+
 for _, server_name in pairs(servers) do
     local server_available, server =
         lsp_installer_servers.get_server(server_name)
@@ -77,10 +79,7 @@ for _, server_name in pairs(servers) do
                 extra_opts = {
                     on_attach = function(client, bufnr)
                         vim.api.nvim_create_autocmd("BufWritePre", {
-                            group = vim.api.nvim_create_augroup(
-                                "eslint-autofix",
-                                {}
-                            ),
+                            group = eslint_group,
                             command = "EslintFixAll",
                             buffer = bufnr,
                         })
