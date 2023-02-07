@@ -100,6 +100,9 @@ export PATH="$VOLTA_HOME/bin:$PATH"
 # local bin
 export PATH="${PATH}:$HOME/.local/bin"
 
+# go bin
+export PATH="${PATH}:$HOME/go/bin"
+
 # source oh-my-zsh
 source $ZSH/oh-my-zsh.sh
 
