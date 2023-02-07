@@ -114,11 +114,52 @@ return require("packer").startup(function(use)
             require("tree").setup()
 
             require("nvim-tree").setup {
-                open_on_setup = true,
                 renderer = {
                     highlight_git = true,
                 },
             }
+
+            function string.starts(String, Start)
+                return string.sub(String, 1, string.len(Start)) == Start
+            end
+
+            local function open_nvim_tree(data)
+                -- buffer is a [No Name]
+                local no_name = data.file == ""
+                    and vim.bo[data.buf].buftype == ""
+
+                if no_name then
+                    -- open the tree, find the file and focus it
+                    require("nvim-tree.api").tree.toggle {
+                        focus = true,
+                        find_file = true,
+                    }
+                end
+
+                -- buffer is a directory
+                local directory = vim.fn.isdirectory(data.file) == 1
+
+                if not directory then
+                    return
+                end
+
+                -- create a new, empty buffer
+                vim.cmd.enew()
+
+                -- wipe the directory buffer
+                vim.cmd.bw(data.buf)
+
+                -- change to the directory
+                vim.cmd.cd(data.file)
+
+                -- open the tree
+                require("nvim-tree.api").tree.open()
+            end
+
+            vim.api.nvim_create_autocmd(
+                { "VimEnter" },
+                { callback = open_nvim_tree }
+            )
         end,
     }
 
@@ -193,11 +234,9 @@ return require("packer").startup(function(use)
     use "ryanoasis/vim-devicons"
 
     -- Use nvim-lsp as language server client
-    use {
-        "neovim/nvim-lspconfig",
-        tag = "v0.1.3",
-    }
-    use "williamboman/nvim-lsp-installer"
+    use "neovim/nvim-lspconfig"
+    use "williamboman/mason.nvim"
+    use "williamboman/mason-lspconfig.nvim"
 
     -- Lua lsp
     use "folke/neodev.nvim"
