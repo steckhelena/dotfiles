@@ -40,15 +40,11 @@ capabilities = vim.tbl_extend("keep", capabilities, lsp_status.capabilities)
 local eslint_group = vim.api.nvim_create_augroup("eslint-autofix", {})
 
 for _, server_name in pairs(servers) do
-    server = require("lspconfig")[server_name]
+    local server = require("lspconfig")[server_name]
 
     local opts = {
         on_attach = on_attach,
         capabilities = capabilities,
-        flags = {
-            -- This will be the default in neovim 0.7+
-            debounce_text_changes = 150,
-        },
     }
 
     local extra_opts = {}
@@ -105,5 +101,5 @@ for _, server_name in pairs(servers) do
 
     opts = vim.tbl_deep_extend("force", opts, extra_opts)
 
-    server:setup(opts)
+    server.setup(opts)
 end
