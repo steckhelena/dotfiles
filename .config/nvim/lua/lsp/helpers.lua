@@ -7,7 +7,7 @@ end
 local null_ls_formatting_override = {
     tsserver = true,
     jsonls = true,
-    sumneko_lua = true,
+    lua_ls = true,
 }
 
 local augroup = vim.api.nvim_create_augroup("LspFormatting", {})

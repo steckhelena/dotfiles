@@ -21,7 +21,7 @@ local servers = {
     "clangd",
     "tsserver",
     "eslint",
-    "sumneko_lua",
+    "lua_ls",
     "jsonls",
     "yamlls",
     "tflint",

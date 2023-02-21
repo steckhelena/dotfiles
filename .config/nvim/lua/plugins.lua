@@ -29,6 +29,8 @@ return require("packer").startup(function(use)
         end,
     }
 
+    use "rebelot/kanagawa.nvim"
+
     -- helm template syntax highlighting
     use "towolf/vim-helm"
 
@@ -302,7 +304,7 @@ return require("packer").startup(function(use)
                     end,
                 },
                 mapping = {
-                    ["<C-g>"] = cmp.mapping(function(fallback)
+                    ["<C-g>"] = cmp.mapping(function()
                         vim.api.nvim_feedkeys(
                             vim.fn["copilot#Accept"](
                                 vim.api.nvim_replace_termcodes(
@@ -320,7 +322,12 @@ return require("packer").startup(function(use)
                     ["<C-n>"] = cmp.mapping.select_next_item(),
                     ["<C-d>"] = cmp.mapping.scroll_docs(-4),
                     ["<C-f>"] = cmp.mapping.scroll_docs(4),
-                    ["<C-Space>"] = cmp.mapping.complete(),
+                    ["<C-Space>"] = cmp.mapping.complete {
+                        reason = "auto",
+                    },
+                    ["<M-Space>"] = cmp.mapping.complete {
+                        reason = "manual",
+                    },
                     ["<C-e>"] = cmp.mapping.close(),
                     ["<CR>"] = cmp.mapping.confirm {
                         behavior = cmp.ConfirmBehavior.Replace,

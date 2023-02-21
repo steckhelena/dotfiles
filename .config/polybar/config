@@ -13,22 +13,22 @@
 
 ; %%base16_template: polybar##default %%
 [colors]
-base00 = ee2d2d2d
-base01 = 393939
-base02 = 515151
-base03 = 999999
-base04 = b4b7b4
-base05 = cccccc
-base06 = e0e0e0
-base07 = ffffff
-base08 = f2777a
-base09 = f99157
-base0A = ffcc66
-base0B = 99cc99
-base0C = 66cccc
-base0D = 6699cc
-base0E = cc99cc
-base0F = a3685a
+base00 = ee1F1F28
+base01 = 2A2A37
+base02 = 223249
+base03 = 727169
+base04 = C8C093
+base05 = DCD7BA
+base06 = 938AA9
+base07 = 363646
+base08 = C34043
+base09 = FFA066
+base0A = DCA561
+base0B = 98BB6C
+base0C = 7FB4CA
+base0D = 7E9CD8
+base0E = 957FB8
+base0F = D27E99
 
 ; %%base16_template_end%%
 
