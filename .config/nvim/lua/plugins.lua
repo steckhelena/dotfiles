@@ -374,20 +374,24 @@ return require("packer").startup(function(use)
 
     -- Use lspsaga for prettier lsp interface
     use {
-        "tami5/lspsaga.nvim",
+        "glepnir/lspsaga.nvim",
+        requires = {
+            { "nvim-tree/nvim-web-devicons" },
+            { "nvim-treesitter/nvim-treesitter" },
+        },
         config = function()
             local saga = require "lspsaga"
 
             saga.setup {
-                use_saga_diagnostic_sign = true,
-                use_diagnostic_virtual_text = false,
-                code_action_keys = {
-                    quit = { "q", "<C-[>" },
-                    exec = "<CR>",
-                },
-                code_action_prompt = {
+                lightbulb = {
                     enable = false,
-                    virtual_text = false,
+                },
+                code_action = {
+                    extend_gitsigns = false,
+                },
+                rename = {
+                    quit = "q",
+                    in_select = false,
                 },
             }
         end,

@@ -45,6 +45,14 @@ for _, server_name in pairs(servers) do
     local opts = {
         on_attach = on_attach,
         capabilities = capabilities,
+        handlers = {
+            ["textDocument/publishDiagnostics"] = vim.lsp.with(
+                vim.lsp.diagnostic.on_publish_diagnostics,
+                {
+                    signs = true,
+                }
+            ),
+        },
     }
 
     local extra_opts = {}
