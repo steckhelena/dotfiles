@@ -296,6 +296,7 @@ return require("packer").startup(function(use)
             local luasnip = require "luasnip"
             local cmp = require "cmp"
             local lspkind = require "lspkind"
+            local types = require "cmp.types"
 
             cmp.setup {
                 snippet = {
@@ -323,10 +324,7 @@ return require("packer").startup(function(use)
                     ["<C-d>"] = cmp.mapping.scroll_docs(-4),
                     ["<C-f>"] = cmp.mapping.scroll_docs(4),
                     ["<C-Space>"] = cmp.mapping.complete {
-                        reason = "auto",
-                    },
-                    ["<M-Space>"] = cmp.mapping.complete {
-                        reason = "manual",
+                        reason = types.cmp.ContextReason.Manual,
                     },
                     ["<C-e>"] = cmp.mapping.close(),
                     ["<CR>"] = cmp.mapping.confirm {
@@ -436,6 +434,19 @@ return require("packer").startup(function(use)
     use {
         "iamcco/markdown-preview.nvim",
         run = "cd app && yarn install --frozen-lockfile",
+    }
+
+    -- Auto configures the yaml language server
+    use {
+        "someone-stole-my-name/yaml-companion.nvim",
+        requires = {
+            { "neovim/nvim-lspconfig" },
+            { "nvim-lua/plenary.nvim" },
+            { "nvim-telescope/telescope.nvim" },
+        },
+        config = function()
+            require("telescope").load_extension "yaml_schema"
+        end,
     }
 
     -- Automatically set up your configuration after cloning packer.nvim

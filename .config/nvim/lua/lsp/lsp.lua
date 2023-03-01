@@ -1,12 +1,5 @@
 local on_attach = require("lsp/helpers").on_attach
 
-vim.diagnostic.config {
-    virtual_text = false,
-    signs = true,
-    underline = false,
-    update_in_insert = false,
-    severity_sort = false,
-}
 require("neodev").setup {}
 require("mason").setup {}
 require("mason-lspconfig").setup {
@@ -45,14 +38,6 @@ for _, server_name in pairs(servers) do
     local opts = {
         on_attach = on_attach,
         capabilities = capabilities,
-        handlers = {
-            ["textDocument/publishDiagnostics"] = vim.lsp.with(
-                vim.lsp.diagnostic.on_publish_diagnostics,
-                {
-                    signs = true,
-                }
-            ),
-        },
     }
 
     local extra_opts = {}
@@ -77,6 +62,10 @@ for _, server_name in pairs(servers) do
                 },
             },
         }
+    end
+
+    if server_name == "yamlls" then
+        extra_opts = require("yaml-companion").setup {}
     end
 
     if server_name == "eslint" then
@@ -111,3 +100,11 @@ for _, server_name in pairs(servers) do
 
     server.setup(opts)
 end
+
+vim.diagnostic.config {
+    virtual_text = false,
+    signs = true,
+    underline = false,
+    update_in_insert = false,
+    severity_sort = false,
+}
