@@ -54,6 +54,10 @@
 !.config/nvim/theme.vim
 !.config/nvim/lua/
 !.config/nvim/lua/**/*
+!.config/nvim/ftdetect/
+!.config/nvim/ftdetect/**/*
+!.config/nvim/queries/
+!.config/nvim/queries/**/*
 
 # rofi
 !.config/rofi/

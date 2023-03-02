@@ -65,7 +65,9 @@ for _, server_name in pairs(servers) do
     end
 
     if server_name == "yamlls" then
-        extra_opts = require("yaml-companion").setup {}
+        extra_opts = require("yaml-companion").setup {
+            lspconfig = opts,
+        }
     end
 
     if server_name == "eslint" then

@@ -28,8 +28,11 @@ M.on_attach = function(client, bufnr)
         end
     end
 
-    if vim.bo[bufnr].buftype ~= "" or vim.bo[bufnr].filetype == "helm" then
-        vim.diagnostic.disable()
+    if vim.bo[bufnr].buftype ~= "" or vim.bo[bufnr].filetype == "gotmpl" then
+        vim.diagnostic.disable(bufnr)
+        if client.name == "yamlls" then
+            client.stop()
+        end
     end
 
     require("lsp-status").on_attach(client)

@@ -31,9 +31,6 @@ return require("packer").startup(function(use)
 
     use "rebelot/kanagawa.nvim"
 
-    -- helm template syntax highlighting
-    use "towolf/vim-helm"
-
     -- This enables using git commands from nvim
     use "tpope/vim-fugitive"
     use {
@@ -427,6 +424,17 @@ return require("packer").startup(function(use)
             vim.o.foldlevelstart = 20
             vim.wo.foldexpr = "nvim_treesitter#foldexpr()"
             vim.wo.foldmethod = "expr"
+
+            local parser_config =
+                require("nvim-treesitter.parsers").get_parser_configs()
+            parser_config.gotmpl = {
+                install_info = {
+                    url = "https://github.com/ngalaiko/tree-sitter-go-template",
+                    files = { "src/parser.c" },
+                },
+                filetype = "gotmpl",
+                used_by = { "gohtmltmpl", "gotexttmpl", "gotmpl", "yaml" },
+            }
         end,
     }
 
