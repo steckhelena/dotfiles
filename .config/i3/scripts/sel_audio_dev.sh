@@ -7,6 +7,7 @@ then
 	pactl set-card-profile alsa_card.pci-0000_00_1b.0 output:iec958-stereo
 	pactl set-card-profile alsa_card.usb-Astro_Gaming_Astro_A50-00 output:stereo-game+output:stereo-chat+input:mono-chat
 	pactl set-default-source alsa_input.usb-Astro_Gaming_Astro_A50-00.mono-chat
+	pactl set-card-profile alsa_card.usb-ESS_SABRE_HiFi_USB_Audio_Device_ESS_SABRE_HiFi_USB_Audio_Device-00 output:analog-stereo
 	while read -r line
 	do 
 		if [[ "$line" = *"iec958"* ]] 
@@ -24,7 +25,7 @@ then
 	pactl set-card-profile alsa_card.pci-0000_00_1b.0 output:analog-stereo
 	while read -r line
 	do 
-		if [[ "$line" = *"alsa_output.pci-0000_00_1b.0.analog-stereo"* ]] 
+		if [[ "$line" = *"alsa_output.usb-ESS_SABRE_HiFi_"* ]] 
 		then
 			name=${line##Name:}
 			echo $name
