@@ -1,7 +1,9 @@
 local M = {}
 
 M.toggle_tree = function()
-    require("nvim-tree").toggle(true)
+    require("nvim-tree.api").tree.toggle {
+        find_file = true,
+    }
 end
 
 M.setup = function()

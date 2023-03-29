@@ -58,6 +58,7 @@
 !.config/nvim/ftdetect/**/*
 !.config/nvim/queries/
 !.config/nvim/queries/**/*
+.config/nvim/lua/.luarc.json
 
 # rofi
 !.config/rofi/
