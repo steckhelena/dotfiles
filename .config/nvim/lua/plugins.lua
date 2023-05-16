@@ -71,9 +71,7 @@ return require("packer").startup(function(use)
         "romgrk/barbar.nvim",
         requires = { "kyazdani42/nvim-web-devicons" },
         config = function()
-            vim.g.bufferline = {
-                auto_hide = false,
-            }
+            require("barbar").setup {}
         end,
     }
 
@@ -385,7 +383,6 @@ return require("packer").startup(function(use)
                     extend_gitsigns = false,
                 },
                 rename = {
-                    quit = "q",
                     in_select = false,
                 },
             }

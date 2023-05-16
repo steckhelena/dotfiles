@@ -81,7 +81,7 @@ M.map = function(
                 result,
                 options,
                 category,
-                unique_identifier,
+                unique_identifier .. "_" .. modes[i],
                 description
             )
         else
@@ -91,7 +91,7 @@ M.map = function(
                 result,
                 options,
                 category,
-                unique_identifier,
+                unique_identifier .. "_" .. modes[i],
                 description
             )
         end

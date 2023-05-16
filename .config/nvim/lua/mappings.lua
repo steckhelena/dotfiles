@@ -181,22 +181,13 @@ map(
     "Opens a hovering window for renaming the currently hovered text"
 )
 map(
-    "n",
+    { "n", "v" },
     "<leader>ca",
     "<cmd>Lspsaga code_action<cr>",
     nil,
     "LSP",
     "lspsaga.code_action",
     "Opens a hovering window where the user can select among code actions for the hovered line"
-)
-map(
-    "x",
-    "<leader>ca",
-    ":<c-u>Lspsaga range_code_action<cr>",
-    nil,
-    "LSP",
-    "lspsaga.range_code_action",
-    "Opens a hovering window where the user can select among code actions for selected text"
 )
 map(
     "n",
