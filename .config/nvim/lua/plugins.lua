@@ -93,9 +93,6 @@ return require("packer").startup(function(use)
         end,
     }
 
-    -- This plugin automatically closes tags
-    use "windwp/nvim-ts-autotag"
-
     -- This plugin automatically adjusts indent options based on file type
     use "tpope/vim-sleuth"
 
@@ -367,11 +364,12 @@ return require("packer").startup(function(use)
 
     -- Use lspsaga for prettier lsp interface
     use {
-        "glepnir/lspsaga.nvim",
+        "nvimdev/lspsaga.nvim",
         requires = {
             { "nvim-tree/nvim-web-devicons" },
             { "nvim-treesitter/nvim-treesitter" },
         },
+        after = "nvim-lspconfig",
         config = function()
             local saga = require "lspsaga"
 
