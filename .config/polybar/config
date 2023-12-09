@@ -47,7 +47,7 @@ background = ${colors.base00}
 foreground = ${colors.base05}
 
 line-size = 3
-line-color = {$colors.base03}
+line-color = ${colors.base03}
 
 border-size = 0
 border-color = #00000000
@@ -67,8 +67,8 @@ enable-ipc = true
 
 font-0 = Dejavu Sans:size=12;1
 font-1 = Hack Nerd Font Mono:size=13.5;2
-font-2 = Hack Nerd Font Mono:size=4;0
-font-3 = Hack Nerd Font Mono:size=8;0
+font-2 = Hack Nerd Font Mono:size=5;-1
+font-3 = Hack Nerd Font Mono:size=9;0
 ; Extra symbols: http://fontawesome.io/cheatsheet/
 
 
@@ -78,12 +78,7 @@ font-3 = Hack Nerd Font Mono:size=8;0
 
 modules-left = i3 player-mpris-tail pulseaudio
 modules-center = date
-modules-right = filesystem cpu memory temperature ifname ip download upload
-
-tray-position = right
-tray-padding = 2
-tray-backgroud = ${colors.base00}
-
+modules-right = filesystem cpu memory temperature ifname ip download upload tray
 
 ;----------------------------------------------------------
 ;			i 3   M O D U L E
@@ -145,7 +140,6 @@ interval = 25
 fixed-values = true
 
 mount-0 = /
-;mount-1 = /home
 
 format-mounted = <label-mounted>
 format-mounted-prefix = "  "
@@ -153,7 +147,7 @@ format-mounted-foreground = ${colors.base05}
 format-mounted-underline = ${colors.base0B}
 
 label-mounted = %percentage_used%%
-label-mounted-foreground = ${colors.05}
+label-mounted-foreground = ${colors.base05}
 label-mounted-underline = ${colors.base0B}
 label-unmounted = %mountpoint%: not mounted
 label-unmounted-foreground = ${colors.base0B}
@@ -366,7 +360,7 @@ label-muted-foreground = ${colors.base08}
 ; Only applies if <ramp-volume> is used
 ramp-volume-0 = 
 
-bar-volume-width = 50
+bar-volume-width = 40
 bar-volume-foreground-0 = ${colors.base0B}
 bar-volume-gradient = true
 bar-volume-indicator = |
@@ -377,6 +371,15 @@ bar-volume-empty = ■
 bar-volume-empty-font = 3
 bar-volume-empty-foreground = ${colors.base06}
 
+;----------------------------------------------------------
+;			T R A Y   M O D U L E
+;----------------------------------------------------------
+
+[module/tray]
+
+type = internal/tray
+tray-padding = 2
+tray-backgroud = ${colors.base00}
 
 ;----------------------------------------------------------
 ;			C U S T O M
