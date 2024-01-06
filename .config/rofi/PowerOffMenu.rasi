@@ -13,7 +13,11 @@ window {
 
 vertibox {
     orientation: vertical;
-    children:    [ listview ];
+    children:    [ promptbox, listview ];
+}
+
+textbox-prompt {
+  content: "Power menu";
 }
 
 listview {

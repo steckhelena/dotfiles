@@ -4,16 +4,17 @@ configuration {
 }
 
 window {
-    anchor:     north west;
-    location:   north west;
     width:      12%;
-    margin:     27px 0px 0px ;
     children:   [ vertibox ];
 }
 
 vertibox {
     orientation: vertical;
-    children:   [ prompt, listview ];
+    children:   [ promptbox, listview ];
+}
+
+textbox-prompt {
+  content: "Polybar network iface";
 }
 
 listview {

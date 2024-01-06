@@ -4,20 +4,20 @@ configuration {
 }
 
 window {
-    anchor:     north west;
-    location:   north west;
     width:      12%;
-    margin:     27px 0px 0px ;
     children:   [ vertibox ];
 }
 
 vertibox {
     orientation: vertical;
-    children:   [ prompt, listview ];
+    children:   [ promptbox, listview ];
+}
+
+textbox-prompt {
+  content: "Audio device";
 }
 
 listview {
-    border: 2px dash 0px 0px ;
     lines:  2;
 }
 

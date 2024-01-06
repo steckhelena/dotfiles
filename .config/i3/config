@@ -174,8 +174,6 @@ bindsym $mod+Shift+0 move container to workspace $ws10; workspace $ws10
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
-# select themes
-bindsym $mod+Shift+t exec "~/.config/i3/scripts/change_theme.sh $HOME"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -185,10 +183,10 @@ mode "resize" {
         # Pressing right will grow the window’s width.
         # Pressing up will shrink the window’s height.
         # Pressing down will grow the window’s height.
-        bindsym j resize shrink width 10 px or 10 ppt
+        bindsym h resize shrink width 10 px or 10 ppt
         bindsym k resize grow height 10 px or 10 ppt
-        bindsym l resize shrink height 10 px or 10 ppt
-        bindsym semicolon resize grow width 10 px or 10 ppt
+        bindsym j resize shrink height 10 px or 10 ppt
+        bindsym l resize grow width 10 px or 10 ppt
 
         # same bindings, but for the arrow keys
         bindsym Left resize shrink width 10 px or 10 ppt
@@ -288,16 +286,14 @@ set $ws10 "10"
 set $wsNull desktop
 
 # i3 gaps
-for_window [class="^.*"] border pixel 2
-gaps inner 15
+for_window [class="^.*"] border pixel 3
+gaps inner 10
 gaps outer 5
-smart_gaps on
-smart_borders on
 
 # Property Name         Border  BG      Text    Indicator Child Border
-client.focused          $base04 $base03 $base05 $base04 $base04
-client.focused_inactive $base03 $base01 $base05 $base04 $base03
-client.unfocused        $base03 $base00 $base05 $base04 $base03
+client.focused          $base04 $base04 $base01 $base04 $base04
+client.focused_inactive $base03 $base03 $base05 $base04 $base03
+client.unfocused        $base03 $base03 $base05 $base05 $base03
 client.urgent           $base0F $base0F $base00 $base0F $base0F
 client.placeholder      $base04 $base00 $base05 $base00 $base00
 client.background       $base07

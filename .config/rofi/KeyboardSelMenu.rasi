@@ -4,20 +4,20 @@ configuration {
 }
 
 window {
-    anchor:     center;
-    location:   center;
     width:      15%;
-	margin:     0 0 0 0;
     children:   [ vertibox ];
 }
 
 vertibox {
     orientation: vertical;
-    children:   [ prompt, listview ];
+    children:   [ promptbox, listview ];
+}
+
+textbox-prompt {
+  content: "Keyboard layout";
 }
 
 listview {
-    border: 2px dash 0px 0px ;
     lines:  2;
 }
 

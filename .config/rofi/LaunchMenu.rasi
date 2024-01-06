@@ -14,11 +14,9 @@ listview {
     cycle:        true;
     dynamic:      false;
     border-color: var(separatorcolor);
-    border:       2px dash 0px 0px ;
     spacing:      10px 5px;
 }
 scrollbar {
-    padding:      0px 0px 2em;
     handle-width: 8px ;
     handle-color: var(normal-foreground);
 }
@@ -32,13 +30,9 @@ entry {
     placeholder:       "Type to filter";
 }
 window {
-    background-color: var(background);
-    margin:           27px 0px 0px ;
-    width:       22.0000% ;
     orientation: horizontal;
-    location:    northwest;
-    anchor:      northwest;
-    height:      100.0000% ;
+    width:       30%;
+    height:      70% ;
     children:    [ mainbox ];
 }
 mainbox {
