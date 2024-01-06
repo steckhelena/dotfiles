@@ -92,6 +92,10 @@
 !.config/polybar/
 !.config/polybar/*
 
+# neofetch
+!.config/neofetch/
+!.config/neofetch/config.conf
+
 # tig
 !.tigrc
 
