@@ -290,6 +290,9 @@ for_window [class="^.*"] border pixel 3
 gaps inner 10
 gaps outer 5
 
+# polybar offset + polybar height + total gaps = 15 + 28 + 15 = 58
+gaps top 58
+
 # Property Name         Border  BG      Text    Indicator Child Border
 client.focused          $base04 $base04 $base01 $base04 $base04
 client.focused_inactive $base03 $base03 $base05 $base04 $base03

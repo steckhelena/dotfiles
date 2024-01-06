@@ -38,16 +38,19 @@ base0F = D27E99
 ;----------------------------------------------------------
 
 [bar/main]
-width = 100%
-height = 2%
+; 2560 - 15 - 15
+width = 2530
+height = 28
 radius = 10
 fixed-center = true
 
-; Makes the border invisible and adds a gap similar in size to i3 gaps
-border-left-size=15
-border-right-size=15
-border-top-size=15
-border-color = #00000000
+border-size=3
+border-color = ${colors.base04}
+
+offset-y = 15
+offset-x = 15
+override-redirect = true
+wm-restack = i3
 
 background = ${colors.base00}
 foreground = ${colors.base05}
