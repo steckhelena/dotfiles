@@ -97,10 +97,10 @@ bindsym $mod+Shift+n exec "~/.config/i3/scripts/sel_polybar_net_iface.sh &"
 bindsym $mod+space exec rofi -show combi -theme LaunchMenu
 
 # change focus
-bindsym $mod+j focus left
+bindsym $mod+h focus left
+bindsym $mod+j focus down
 bindsym $mod+k focus up
-bindsym $mod+l focus down
-bindsym $mod+semicolon focus right
+bindsym $mod+l focus right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
@@ -109,10 +109,10 @@ bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
 # move focused window
-bindsym $mod+Shift+j move left
-bindsym $mod+Shift+k move down
-bindsym $mod+Shift+l move up
-bindsym $mod+Shift+semicolon move right
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
@@ -121,7 +121,7 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
-bindsym $mod+h split h
+bindsym $mod+s split h
 
 # split in vertical orientation
 bindsym $mod+v split v
@@ -130,9 +130,9 @@ bindsym $mod+v split v
 bindsym $mod+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
-bindsym $mod+s layout stacking
-bindsym $mod+w layout tabbed
-bindsym $mod+e layout toggle split
+bindsym $mod+Shift+s layout stacking
+bindsym $mod+Shift+w layout tabbed
+bindsym $mod+Shift+e layout toggle split
 
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
@@ -289,17 +289,17 @@ set $wsNull desktop
 
 # i3 gaps
 for_window [class="^.*"] border pixel 2
-gaps inner 10
-gaps outer 0
+gaps inner 15
+gaps outer 5
 smart_gaps on
 smart_borders on
 
 # Property Name         Border  BG      Text    Indicator Child Border
-client.focused          $base05 $base0D $base00 $base0D $base0C
-client.focused_inactive $base01 $base01 $base05 $base03 $base01
-client.unfocused        $base01 $base00 $base05 $base01 $base01
-client.urgent           $base08 $base08 $base00 $base08 $base08
-client.placeholder      $base00 $base00 $base05 $base00 $base00
+client.focused          $base04 $base03 $base05 $base04 $base04
+client.focused_inactive $base03 $base01 $base05 $base04 $base03
+client.unfocused        $base03 $base00 $base05 $base04 $base03
+client.urgent           $base0F $base0F $base00 $base0F $base0F
+client.placeholder      $base04 $base00 $base05 $base00 $base00
 client.background       $base07
 
 # Enables desktop background manager
