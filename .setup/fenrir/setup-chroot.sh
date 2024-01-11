@@ -2,6 +2,26 @@
 
 set -e
 
+change_password() {
+    local user=$1
+    local max_attempts=5
+    local attempt=0
+
+    while [ $attempt -lt $max_attempts ]; do
+        if passwd $user; then
+            echo "Password changed successfully for $user."
+            return 0
+        else
+            echo "Passwords did not match. Please try again."
+            attempt=$((attempt + 1))
+        fi
+    done
+
+    echo "Maximum number of attempts reached for $user."
+    return 1
+}
+
+
 # Set timezone
 echo "Setting timezone..."
 ln -sf /usr/share/zoneinfo/America/Sao_Paulo /etc/localtime
@@ -39,7 +59,7 @@ mkinitcpio -P
 
 # Set root password
 echo "Setting root password..."
-passwd
+change_password root
 
 # Install grub
 echo "Installing grub..."
@@ -72,7 +92,7 @@ useradd -m -G wheel -s /bin/zsh steckhelena
 
 # Change user password
 echo "Changing user password..."
-passwd steckhelena
+change_password steckhelena
 
 # Set up sudo
 echo "Setting up sudo..."
