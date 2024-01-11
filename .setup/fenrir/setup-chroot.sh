@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -e
+
 # Set timezone
 echo "Setting timezone..."
 ln -sf /usr/share/zoneinfo/America/Sao_Paulo /etc/localtime
@@ -59,23 +61,36 @@ sed -i '/\[multilib\]/,/Include/s/^#//' /etc/pacman.conf
 sed -i 's/^#Color/Color\nILoveCandy/' /etc/pacman.conf
 sed -i 's/^#ParallelDownloads = 5/ParallelDownloads = 8/' /etc/pacman.conf
 
-# Install yay
-echo "Installing yay..."
-git clone https://aur.archlinux.org/yay.git
-cd yay
-makepkg -si --noconfirm
-cd ..
-rm -rf yay
+# Download multlib database
+echo "Downloading multilib database..."
+pacman -Sy
 
-# Install packages
-echo "Installing packages..."
-curl 'https://raw.githubusercontent.com/steckhelena/dotfiles/experimental-fenrir/.setup/fenrir/packages' -o .apps
-yay -S --noconfirm --needed --removemake - < .apps
-rm .apps
+# Set up user
+echo "Setting up user..."
+useradd -m -G wheel -s /bin/zsh steckhelena
+
+# Change user password
+echo "Changing user password..."
+passwd steckhelena
 
 # Set up sudo
 echo "Setting up sudo..."
 sed -i 's/^# %wheel ALL=(ALL) ALL/%wheel ALL=(ALL) ALL/' /etc/sudoers
+
+# Install yay, makepkg can't run as root so we need to do this as the user
+echo "Installing yay..."
+cd /home/steckhelena
+sudo -u steckhelena git clone https://aur.archlinux.org/yay.git
+cd yay
+sudo -u steckhelena makepkg -si --noconfirm
+cd ..
+sudo -u steckhelena rm -rf yay
+
+# Install packages
+echo "Installing packages..."
+sudo -u steckhelena curl 'https://raw.githubusercontent.com/steckhelena/dotfiles/experimental-fenrir/.setup/fenrir/packages' -o .apps
+sudo -u steckhelena yay -S --noconfirm --needed --removemake - < .apps
+sudo -u steckhelena rm .apps
 
 # Set up lightdm
 echo "Setting up lightdm..."
@@ -119,18 +134,6 @@ systemctl enable bluetooth.service
 systemctl enable xsettingsd.service
 systemctl enable fstrim.timer
 
-# Set up user
-echo "Setting up user..."
-useradd -m -G wheel -s /bin/zsh steckhelena
-
-# Change user password
-echo "Changing user password..."
-passwd steckhelena
-
-# Set up zsh
-echo "Setting up zsh..."
-sudo -u steckhelena sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-
 # Set up dotfiles
 echo "Setting up dotfiles..."
 sudo -u steckhelena git init
@@ -138,6 +141,10 @@ sudo -u steckhelena git remote add origin https://github.com/steckhelena/dotfile
 sudo -u steckhelena git fetch
 sudo -u steckhelena git reset origin/master --hard
 sudo -u steckhelena git submodule init
+
+# Set up zsh
+echo "Setting up zsh..."
+sudo -u steckhelena sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 # Adding wallpaper folders
 echo "Adding wallpaper folders..."
