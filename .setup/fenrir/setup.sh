@@ -62,7 +62,7 @@ genfstab -U /mnt >> /mnt/etc/fstab
 
 # Chroot into new system
 echo "Chrooting into new system..."
-arch-chroot /mnt /bin/sh -c "$(curl -fsSL https://raw.githubusercontent.com/steckhelena/dotfiles/experimental-fenrir/.setup/fenrir/setup-chroot.sh)"
+arch-chroot /mnt /bin/sh -c "$(curl -fsSL https://raw.githubusercontent.com/steckhelena/dotfiles/experimental-fenrir/.setup/fenrir/setup-chroot.sh\?$(date +%s))"
 
 # Reboot
 echo "Rebooting..., press any key to continue"
