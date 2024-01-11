@@ -37,7 +37,7 @@ mkfs.ext4 /dev/mapper/root
 # Mount partitions
 echo "Mounting partitions..."
 mount /dev/mapper/root /mnt
-mount /dev/nvme0n1p1 /mnt/boot
+mount --mkdir /dev/nvme0n1p1 /mnt/boot
 
 # Get mirrorlist
 echo "Getting mirrorlist..."
