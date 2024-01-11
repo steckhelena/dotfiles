@@ -26,6 +26,7 @@ echo "fenrir" >> /etc/hostname
 
 # Setting hooks
 echo "Setting hooks..."
+touch /etc/vconsole.conf # needed for mkinitcpio
 sed -i 's/^HOOKS=.*/HOOKS=(base systemd autodetect kms keyboard sd-vconsole block sd-encrypt filesystems fsck)/' /etc/mkinitcpio.conf
 
 # Setting modules

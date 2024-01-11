@@ -77,6 +77,9 @@ plugins=(
   ripgrep
 )
 
+# Disable magic functions
+DISABLE_MAGIC_FUNCTIONS=true
+
 # Cuda directories
 export PATH="${PATH}:/opt/cuda/bin"
 export CPATH="${CPATH}:/opt/cuda/include"
