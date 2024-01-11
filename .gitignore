@@ -96,6 +96,10 @@
 !.config/neofetch/
 !.config/neofetch/config.conf
 
+# pulseaudio
+!.config/pulse/
+!.config/pulse/default.pa
+
 # tig
 !.tigrc
 
