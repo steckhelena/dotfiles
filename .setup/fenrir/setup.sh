@@ -107,8 +107,9 @@ grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB
 
 # Set grub config, including the cryptdevice and WQHD resolution
 echo "Setting grub config..."
-sed -i 's/^GRUB_CMDLINE_LINUX=.*/GRUB_CMDLINE_LINUX="cryptdevice=\/dev\/nvme0n1p2:root:allow-discards root=\/dev\/mapper\/root resume=\/dev\/mapper\/root"/' /etc/default/grub
-sed -i 's/^GRUB_GFXMODE=.*/GRUB_GFXMODE=2560x1440x32/' /etc/default/grub
+LUKSPARTUUID=$(blkid -s UUID -o value /dev/nvme0n1p2)
+sed -i 's/^GRUB_CMDLINE_LINUX=.*/GRUB_CMDLINE_LINUX="quiet splash rd.luks.name='$LUKSPARTUUID'=root root=\/dev\/mapper\/root"/ rd.luks.options=discard/' /etc/default/grub
+sed -i 's/^GRUB_GFXMODE=.*/GRUB_GFXMODE=2560x1440/' /etc/default/grub
 sed -i 's/^GRUB_GFXPAYLOAD_LINUX=.*/GRUB_GFXPAYLOAD_LINUX=keep/' /etc/default/grub
 
 # Regenerate grub config
@@ -117,7 +118,9 @@ grub-mkconfig -o /boot/grub/grub.cfg
 
 # Set up pacman, use ILoveCandy
 echo "Setting up pacman..."
+sed -i '/\[multilib\]/,/Include/s/^#//' /etc/pacman.conf
 sed -i 's/^#Color/Color\nILoveCandy/' /etc/pacman.conf
+sed -i 's/^#ParallelDownloads = 5/ParallelDownloads = 8/' /etc/pacman.conf
 
 # Install yay
 echo "Installing yay..."
@@ -177,6 +180,7 @@ systemctl enable lightdm.service
 systemctl enable NetworkManager.service
 systemctl enable bluetooth.service
 systemctl enable xsettingsd.service
+systemctl enable fstrim.timer
 
 # Set up user
 echo "Setting up user..."
