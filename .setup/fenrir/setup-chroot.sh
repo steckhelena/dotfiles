@@ -152,7 +152,7 @@ echo "Enabling services..."
 systemctl enable lightdm.service
 systemctl enable NetworkManager.service
 systemctl enable bluetooth.service
-systemctl enable xsettingsd.service
+systemctl enable fstrim.timer
 
 # Set up dotfiles
 echo "Setting up dotfiles..."
