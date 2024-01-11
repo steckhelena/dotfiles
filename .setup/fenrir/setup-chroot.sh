@@ -76,7 +76,7 @@ passwd steckhelena
 
 # Set up sudo
 echo "Setting up sudo..."
-sed -i 's/^# %wheel ALL=(ALL) ALL/%wheel ALL=(ALL) ALL/' /etc/sudoers
+sed -i 's/^# %wheel ALL=(ALL:ALL) ALL/%wheel ALL=(ALL:ALL) ALL/' /etc/sudoers
 
 # Install yay, makepkg can't run as root so we need to do this as the user
 echo "Installing yay..."
