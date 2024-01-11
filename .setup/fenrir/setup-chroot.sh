@@ -146,8 +146,4 @@ mkdir -p /usr/share/lightdmwallpaper
 chown -R steckhelena:steckhelena /usr/share/lightdmwallpaper
 chmod -R a+r /usr/share/lightdmwallpaper
 
-# Reboot
-echo "Rebooting..."
 exit
-umount -R /mnt
-reboot
