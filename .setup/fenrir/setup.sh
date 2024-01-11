@@ -54,7 +54,7 @@ reflector \
 
 # Install base system
 echo "Installing base system..."
-pacstrap /mnt base base-devel linux linux-firmware git vim zsh networkmanager grub curl cryptsetup sudo amd-ucode
+pacstrap /mnt base base-devel linux linux-firmware git vim zsh networkmanager grub curl cryptsetup sudo amd-ucode efibootmgr
 
 # Generate fstab
 echo "Generating fstab..."
