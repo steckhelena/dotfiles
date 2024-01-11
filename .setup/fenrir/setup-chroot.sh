@@ -154,6 +154,10 @@ systemctl enable NetworkManager.service
 systemctl enable bluetooth.service
 systemctl enable fstrim.timer
 
+# Set up zsh
+echo "Setting up zsh..."
+sudo -u steckhelena sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
 # Set up dotfiles
 echo "Setting up dotfiles..."
 sudo -u steckhelena git init
@@ -161,10 +165,6 @@ sudo -u steckhelena git remote add origin https://github.com/steckhelena/dotfile
 sudo -u steckhelena git fetch
 sudo -u steckhelena git reset origin/master --hard
 sudo -u steckhelena git submodule init
-
-# Set up zsh
-echo "Setting up zsh..."
-sudo -u steckhelena sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 # Adding wallpaper folders
 echo "Adding wallpaper folders..."
