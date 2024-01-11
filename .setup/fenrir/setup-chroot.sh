@@ -153,7 +153,6 @@ systemctl enable lightdm.service
 systemctl enable NetworkManager.service
 systemctl enable bluetooth.service
 systemctl enable xsettingsd.service
-sudo -u steckhelena systemctl --user enable xsettingsd.service
 
 # Set up dotfiles
 echo "Setting up dotfiles..."
