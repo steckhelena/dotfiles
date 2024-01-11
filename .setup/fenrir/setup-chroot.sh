@@ -48,7 +48,7 @@ grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB
 # Set grub config, including the cryptdevice and WQHD resolution
 echo "Setting grub config..."
 LUKSPARTUUID=$(blkid -s UUID -o value /dev/nvme0n1p2)
-sed -i 's/^GRUB_CMDLINE_LINUX=.*/GRUB_CMDLINE_LINUX="quiet splash rd.luks.name='$LUKSPARTUUID'=root root=\/dev\/mapper\/root"/ rd.luks.options=discard/' /etc/default/grub
+sed -i 's/^GRUB_CMDLINE_LINUX=.*/GRUB_CMDLINE_LINUX="quiet splash rd.luks.name='$LUKSPARTUUID'=root root=\/dev\/mapper\/root" rd.luks.options=discard/' /etc/default/grub
 sed -i 's/^GRUB_GFXMODE=.*/GRUB_GFXMODE=2560x1440/' /etc/default/grub
 sed -i 's/^GRUB_GFXPAYLOAD_LINUX=.*/GRUB_GFXPAYLOAD_LINUX=keep/' /etc/default/grub
 
