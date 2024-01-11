@@ -27,6 +27,7 @@ EOF
 # Encrypt root partition
 echo "Encrypting root partition..."
 cryptsetup luksFormat /dev/nvme0n1p2
+echo "Opening encrypted partition..."
 cryptsetup open /dev/nvme0n1p2 root
 
 # Format partitions
