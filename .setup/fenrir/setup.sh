@@ -68,4 +68,5 @@ arch-chroot /mnt /bin/sh -c "$(curl -fsSL https://raw.githubusercontent.com/stec
 echo "Rebooting..., press any key to continue"
 read -n 1 -s
 sleep 5
+umount -R /mnt
 reboot
