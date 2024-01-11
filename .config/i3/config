@@ -73,7 +73,7 @@ bindsym Print exec xfce4-screenshooter -f -s $HOME/Downloads/screenshot_`date +%
 bindsym $mod+Print exec xfce4-screenshooter
 
 # Screenshot of selected area to clipboard
-bindsym $mod+Shift+Control+4 exec "maim --hidecursor -s --format=png /dev/stdout | xclip -selection clipboard -t image/png -i"
+bindsym $mod+Shift+Control+4 exec --no-startup-id "maim --hidecursor -s --format=png /dev/stdout | xclip -selection clipboard -t image/png -i"
 
 # Screenshot of selected area to file
 bindsym $mod+Shift+Control+3 exec "maim --hidecursor -s --format=png $HOME/Downloads/screenshot_`date +%Y-%m-%d_%H:%M:%S`.png"
@@ -136,6 +136,9 @@ bindsym $mod+Shift+e layout toggle split
 
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
+
+# toggle picom
+bindsym  $mod+t exec --no-startup-id "pkill picom || picom"
 
 # change focus between tiling / floating windows
 #bindsym $mod+space focus mode_toggle
@@ -266,9 +269,6 @@ exec --no-startup-id nm-applet
 
 # Bluetooth manager
 exec --no-startup-id blueman-applet
-
-# Enables redshift, to make display warmer
-exec --no-startup-id redshift-gtk
 
 ###################################################################
 # Windows

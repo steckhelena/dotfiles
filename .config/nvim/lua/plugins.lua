@@ -272,7 +272,6 @@ return require("packer").startup(function(use)
 
     use {
         "github/copilot.vim",
-        tag = "324ec9eb69e20971b58340d0096c3caac7bc2089",
     }
 
     -- Use nvim-cmp as autocomplete

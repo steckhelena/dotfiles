@@ -106,3 +106,8 @@
 
 # lua
 !stylua.toml
+
+# computer setup
+!.setup/
+!.setup/fenrir/
+!.setup/fenrir/*
