@@ -173,4 +173,8 @@ mkdir -p /usr/share/lightdmwallpaper
 chown -R steckhelena:steckhelena /usr/share/lightdmwallpaper
 chmod -R a+r /usr/share/lightdmwallpaper
 
+# Adding betterlockscreen cache folder
+echo "Adding betterlockscreen folder..."
+sudo -u steckhelena mkdir -p .cache/betterlockscreen/current/
+
 exit
