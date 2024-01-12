@@ -119,7 +119,7 @@ sed -i 's/^#greeter-session=example-gtk-gnome/greeter-session=lightdm-gtk-greete
 
 # Set up lightdm-gtk-greeter
 echo "Setting up lightdm-gtk-greeter..."
-sed -i 's/^#background=.*/background=\/usr\/share\/backgrounds\/gnome\/gnome-background-default.jpg/' /etc/lightdm/lightdm-gtk-greeter.conf
+sed -i 's/^#background=.*/background=\/usr\/share\/lightdmwallpaper\/.current/' /etc/lightdm/lightdm-gtk-greeter.conf
 sed -i 's/^#theme-name=.*/theme-name=Kanagawa-Border/' /etc/lightdm/lightdm-gtk-greeter.conf
 sed -i 's/^#icon-theme-name=.*/icon-theme-name=Kanagawa/' /etc/lightdm/lightdm-gtk-greeter.conf
 sed -i 's/^#xft-dpi=.*/xft-dpi=120/' /etc/lightdm/lightdm-gtk-greeter.conf
