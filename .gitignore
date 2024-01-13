@@ -100,6 +100,11 @@
 !.config/pulse/
 !.config/pulse/default.pa
 
+# pipewire-pulse
+!.config/pipewire/
+!.config/pipewire/pipewire-pulse.conf.d/
+!.config/pipewire/pipewire-pulse.conf.d/*
+
 # yay
 !.config/yay/
 !.config/yay/config.json
