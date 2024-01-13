@@ -113,6 +113,10 @@ sudo -u steckhelena curl 'https://raw.githubusercontent.com/steckhelena/dotfiles
 sudo -u steckhelena yay -S --noconfirm --needed --removemake - < .apps
 sudo -u steckhelena rm .apps
 
+# Add user to gamemode group
+echo "Adding user to gamemode group..."
+gpasswd -a steckhelena gamemode
+
 # Set up lightdm
 echo "Setting up lightdm..."
 sed -i 's/^#greeter-session=example-gtk-gnome/greeter-session=lightdm-gtk-greeter/' /etc/lightdm/lightdm.conf
