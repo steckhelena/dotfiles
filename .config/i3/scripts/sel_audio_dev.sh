@@ -1,6 +1,6 @@
 #!/bin/bash
 
-res=$(echo "	Headphone;	Speakers" | rofi -sep ";" -dmenu -p "Select audio device:" -i -theme AudioSelMenu)
+res=$(echo "	Headphone;	Speakers;󰡁	HDMI" | rofi -sep ";" -dmenu -p "Select audio device:" -i -theme AudioSelMenu)
 
 if [[ "$res" = *"Headphone"* ]]
 then
@@ -21,7 +21,20 @@ fi
 
 if [[ $res = *"Speakers"* ]]
 then
-	pactl set-card-profile alsa_card.pci-0000_00_1b.0 output:analog-stereo
+	pactl set-card-profile alsa_card.usb-Generic_USB_Audio_200901010001-00 HiFi
+	pactl set-card-profile alsa_card.usb-Generic_USB_Audio-00 'HiFi 5+1'
+	pactl set-default-sink `pactl list sinks \
+		| grep -Ei -B2 'description:.*(spdif|s/pdif|optical)' \
+		| grep -Ei -C1 '(idle|running)' \
+		| grep -i 'name:' \
+		| grep -v '^--$' \
+		| awk '{print $2}' \
+		| tail -n1`
+fi
+if [[ $res = *"HDMI"* ]]
+then
+	# pactl set-card-profile alsa_card.usb-Generic_USB_Audio_200901010001-00.3 
+	pactl set-card-profile alsa_card.pci-0000_03_00.1 output:hdmi-stereo
 	while read -r line
 	do 
 		if [[ "$line" = *"hdmi-stereo"* ]] 
