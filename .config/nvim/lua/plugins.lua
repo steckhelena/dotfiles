@@ -214,12 +214,10 @@ return require("packer").startup(function(use)
     use {
         "lukas-reineke/indent-blankline.nvim",
         config = function()
-            require("indent_blankline").setup {
-                show_current_context = true,
-                show_current_context_start = true,
-                space_char_blank_line = "",
-                char = "",
-                context_char = "│",
+            require("ibl").setup {
+                indent = {
+                    char = "▏",
+                },
             }
         end,
     }
@@ -249,12 +247,6 @@ return require("packer").startup(function(use)
             null_ls.setup {
                 sources = {
                     null_ls.builtins.formatting.stylua,
-                    null_ls.builtins.formatting.prettierd,
-                    null_ls.builtins.code_actions.gitsigns,
-                    null_ls.builtins.formatting.black,
-                    null_ls.builtins.diagnostics.pylint,
-                    null_ls.builtins.formatting.isort,
-                    null_ls.builtins.diagnostics.mypy,
                 },
                 on_attach = require("lsp/helpers").on_attach,
             }
@@ -377,7 +369,7 @@ return require("packer").startup(function(use)
                     enable = false,
                 },
                 code_action = {
-                    extend_gitsigns = false,
+                    extend_gitsigns = true,
                 },
                 rename = {
                     in_select = false,

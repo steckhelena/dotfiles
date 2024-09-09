@@ -106,6 +106,9 @@ export PATH="${PATH}:$HOME/.local/bin"
 # go bin
 export PATH="${PATH}:$HOME/go/bin"
 
+# disable homebrew auto update
+export HOMEBREW_NO_AUTO_UPDATE=1
+
 # source oh-my-zsh
 source $ZSH/oh-my-zsh.sh
 

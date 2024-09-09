@@ -4,17 +4,16 @@ local lsp_formatting = function()
     vim.lsp.buf.format { async = false }
 end
 
-local null_ls_formatting_override = {
-    tsserver = true,
-    jsonls = true,
-    lua_ls = true,
+local formatting_override = {
+    tsserver = true, -- handled by eslint
+    lua_ls = true, -- handled by stylua
 }
 
 local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
 M.on_attach = function(client, bufnr)
     if client.supports_method "textDocument/formatting" then
-        if not null_ls_formatting_override[client.name] then
+        if not formatting_override[client.name] then
             vim.api.nvim_create_autocmd("BufWritePre", {
                 group = augroup,
                 buffer = bufnr,

@@ -23,6 +23,7 @@ local servers = {
     "terraformls",
     "svelte",
     "gopls",
+    "sqlls",
     "kotlin_language_server",
 }
 
@@ -56,6 +57,9 @@ for _, server_name in pairs(servers) do
 
     if server_name == "jsonls" then
         extra_opts = {
+            init_options = {
+                provideFormatter = false,
+            },
             settings = {
                 json = {
                     schemas = require("schemastore").json.schemas(),
