@@ -92,6 +92,8 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib64/
 
 # Useful aliases
 alias tpr="tput reset"
+alias k="kubectl"
+alias kctx="kubectx"
 
 # pyenv
 eval "$(pyenv init --path)"
