@@ -305,8 +305,12 @@ client.background       $base07
 exec --no-startup-id ~/.config/i3/scripts/wallpaperslide.sh
 
 # Enables popup window.
-for_window [window_role="pop-up"] floating enable;border normal
-for_window [window_role="task_dialog"] floating enable;border normal
+for_window [window_role="pop-up"] floating enable
+no_focus [window_role="pop-up"]
+for_window [window_role="task_dialog"] floating enable
+no_focus [window_role="task_dialog"]
+for_window [window_role="alert"] floating enable
+no_focus [window_role="alert"]
 
 # Start polybar
 exec --no-startup-id polybar -r main
