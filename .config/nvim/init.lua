@@ -1,6 +1,1 @@
-require "plugins"
-require "lsp/lsp"
-require "theme"
-require "settings"
-require "mappings"
-require "autocmds"
+require("config.lazy")
