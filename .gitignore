@@ -52,6 +52,7 @@
 !.config/nvim/
 !.config/nvim/init.lua
 !.config/nvim/theme.vim
+!.config/nvim/lazy-lock.json
 !.config/nvim/lua/
 !.config/nvim/lua/**/*
 !.config/nvim/ftdetect/
