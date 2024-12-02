@@ -74,7 +74,6 @@ plugins=(
   volta
   poetry
   pyenv
-  ripgrep
 )
 
 # Disable magic functions
