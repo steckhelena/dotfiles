@@ -25,6 +25,12 @@ return {
         mappings = {
           -- I always want to use the window picker
           ["<cr>"] = "open_with_window_picker",
+          ["c"] = {
+            "copy",
+            config = {
+              show_path = "relative",
+            },
+          },
         },
       },
     },

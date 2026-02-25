@@ -19,6 +19,7 @@ require("lazy").setup({
     { "LazyVim/LazyVim", import = "lazyvim.plugins" },
 
     { import = "lazyvim.plugins.extras.lang.git" },
+    { import = "lazyvim.plugins.extras.lang.go" },
     { import = "lazyvim.plugins.extras.lang.yaml" },
     { import = "lazyvim.plugins.extras.lang.json" },
     { import = "lazyvim.plugins.extras.lang.helm" },
@@ -55,7 +56,7 @@ require("lazy").setup({
   install = { colorscheme = { "kanagawa" } },
   checker = {
     enabled = true, -- check for plugin updates periodically
-    notify = true, -- notify on update
+    notify = false, -- notify on update
   }, -- automatically check for plugin updates
   performance = {
     rtp = {

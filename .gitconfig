@@ -6,6 +6,7 @@
   fileMode = false
   excludesfile = /home/steckhelena/.gitignore_global
   quotepath = false
+  hooksPath = /home/steckhelena/.git/hooks
 [alias]
   g = log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(yellow)%h%C(reset) %s%C(reset) %C(dim white)<%an>%C(reset) %C(bold blue)%ar%C(reset)%C(bold yellow)%d%C(reset)'
 [merge]
@@ -28,3 +29,5 @@
   defaultBranch = main
 [url "ssh://git@github.com/"]
   insteadOf = https://github.com/
+[rerere]
+	enabled = true
