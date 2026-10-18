@@ -21,6 +21,19 @@ change_password() {
     return 1
 }
 
+# Branch the package lists and dotfiles are fetched from
+branch=master
+
+# Choose desktop: plasma, i3 or both (set DESKTOP beforehand to skip the prompt)
+if [ -z "$DESKTOP" ]; then
+    printf "Desktop to install [plasma/i3/both] (plasma): "
+    read DESKTOP
+fi
+DESKTOP=${DESKTOP:-plasma}
+case $DESKTOP in
+    plasma|i3|both) ;;
+    *) echo "Unknown desktop: $DESKTOP"; exit 1 ;;
+esac
 
 # Set timezone
 echo "Setting timezone..."
@@ -47,7 +60,7 @@ echo "fenrir" >> /etc/hostname
 # Setting hooks
 echo "Setting hooks..."
 touch /etc/vconsole.conf # needed for mkinitcpio
-sed -i 's/^HOOKS=.*/HOOKS=(base systemd autodetect modconf kms keyboard sd-vconsole block sd-encrypt filesystems fsck)/' /etc/mkinitcpio.conf
+sed -i 's/^HOOKS=.*/HOOKS=(base systemd autodetect microcode modconf kms keyboard sd-vconsole block sd-encrypt filesystems fsck)/' /etc/mkinitcpio.conf
 
 # Setting modules
 echo "Setting modules..."
@@ -84,7 +97,7 @@ grub-mkconfig -o /boot/grub/grub.cfg
 echo "Setting up pacman..."
 sed -i '/\[multilib\]/,/Include/s/^#//' /etc/pacman.conf
 sed -i 's/^#Color/Color\nILoveCandy/' /etc/pacman.conf
-sed -i 's/^#ParallelDownloads = 5/ParallelDownloads = 8/' /etc/pacman.conf
+sed -i 's/^#\?ParallelDownloads.*/ParallelDownloads = 8/' /etc/pacman.conf
 
 # Download multlib database
 echo "Downloading multilib database..."
@@ -113,7 +126,12 @@ sudo -u steckhelena rm -rf yay
 
 # Install packages
 echo "Installing packages..."
-sudo -u steckhelena curl 'https://raw.githubusercontent.com/steckhelena/dotfiles/experimental-fenrir/.setup/fenrir/packages' -o .apps
+lists="packages"
+[ "$DESKTOP" != i3 ] && lists="$lists packages-plasma"
+[ "$DESKTOP" != plasma ] && lists="$lists packages-i3"
+for list in $lists; do
+    sudo -u steckhelena curl -fsSL "https://raw.githubusercontent.com/steckhelena/dotfiles/$branch/.setup/fenrir/$list" >> .apps
+done
 sudo -u steckhelena yay -S --noconfirm --needed --removemake - < .apps
 sudo -u steckhelena rm .apps
 
@@ -128,7 +146,7 @@ sed -i 's/^#greeter-session=example-gtk-gnome/greeter-session=lightdm-gtk-greete
 # Set up lightdm-gtk-greeter
 echo "Setting up lightdm-gtk-greeter..."
 sed -i 's/^#background=.*/background=\/usr\/share\/lightdmwallpaper\/.current/' /etc/lightdm/lightdm-gtk-greeter.conf
-sed -i 's/^#theme-name=.*/theme-name=Kanagawa-Border/' /etc/lightdm/lightdm-gtk-greeter.conf
+sed -i 's/^#theme-name=.*/theme-name=Kanagawa-Dark/' /etc/lightdm/lightdm-gtk-greeter.conf
 sed -i 's/^#icon-theme-name=.*/icon-theme-name=Kanagawa/' /etc/lightdm/lightdm-gtk-greeter.conf
 sed -i 's/^#xft-dpi=.*/xft-dpi=120/' /etc/lightdm/lightdm-gtk-greeter.conf
 
@@ -162,17 +180,18 @@ systemctl enable lightdm.service
 systemctl enable NetworkManager.service
 systemctl enable bluetooth.service
 systemctl enable fstrim.timer
+systemctl enable ntpd.service
 
 # Set up zsh
 echo "Setting up zsh..."
-sudo -u steckhelena sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+sudo -u steckhelena sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 
 # Set up dotfiles
 echo "Setting up dotfiles..."
 sudo -u steckhelena git init
 sudo -u steckhelena git remote add origin https://github.com/steckhelena/dotfiles
 sudo -u steckhelena git fetch
-sudo -u steckhelena git reset origin/master --hard
+sudo -u steckhelena git reset origin/$branch --hard
 sudo -u steckhelena git submodule init
 
 # Adding wallpaper folders
@@ -183,7 +202,9 @@ chown -R steckhelena:steckhelena /usr/share/lightdmwallpaper
 chmod -R a+r /usr/share/lightdmwallpaper
 
 # Adding betterlockscreen cache folder
-echo "Adding betterlockscreen folder..."
-sudo -u steckhelena mkdir -p .cache/betterlockscreen/current/
+if [ "$DESKTOP" != plasma ]; then
+    echo "Adding betterlockscreen folder..."
+    sudo -u steckhelena mkdir -p .cache/betterlockscreen/current/
+fi
 
 exit
