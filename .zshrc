@@ -121,4 +121,4 @@ fi
 # reload zsh completions
 autoload -U compinit && compinit
 
-neofetch
+fastfetch

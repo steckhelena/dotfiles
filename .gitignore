@@ -93,9 +93,9 @@
 !.config/polybar/
 !.config/polybar/*
 
-# neofetch
-!.config/neofetch/
-!.config/neofetch/config.conf
+# fastfetch
+!.config/fastfetch/
+!.config/fastfetch/config.jsonc
 
 # pulseaudio
 !.config/pulse/

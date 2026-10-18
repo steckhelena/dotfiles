@@ -2,6 +2,11 @@
 
 set -e
 
+# Bluetooth headset: Sony WH-1000XM6.
+# On this card `a2dp-sink` is the LDAC profile (SBC/SBC-XQ/AAC are separate
+# a2dp-sink-* profiles). Change this one line when swapping headsets.
+headset_mac=58_18_62_50_BB_C9
+
 res=$(echo "	Headphone;	Speakers;󰡁	HDMI" | rofi -sep ";" -dmenu -p "Select audio device:" -i -theme AudioSelMenu)
 
 
@@ -20,10 +25,10 @@ done <<<$(pactl list sources)
 
 if [[ "$res" = *"Headphone"* ]]
 then
-	pactl set-card-profile bluez_card.88_C9_E8_68_B2_26 a2dp-sink
+	pactl set-card-profile "bluez_card.$headset_mac" a2dp-sink
 	while read -r line
-	do 
-		if [[ "$line" = *"bluez"* ]] 
+	do
+		if [[ "$line" = *"bluez_output.$headset_mac"* ]]
 		then
 			name=${line##Name: }
 			echo $name

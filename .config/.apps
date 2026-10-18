@@ -44,6 +44,7 @@ eigen
 epub-thumbnailer-git
 exfat-utils
 fakeroot
+fastfetch
 feh
 ffmpegthumbnailer
 file
@@ -145,7 +146,6 @@ mtr
 nano
 nautilus
 ncurses5-compat-libs
-neofetch
 neovim
 nerd-fonts-hack
 net-tools

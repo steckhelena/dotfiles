@@ -12,6 +12,7 @@ dbus-python
 deezer
 discord
 efibootmgr
+fastfetch
 feh
 firefox
 gamemode
@@ -40,7 +41,6 @@ man-pages
 mesa
 mesa-utils
 mesa-vdpau
-neofetch
 neovim
 network-manager-applet
 networkmanager

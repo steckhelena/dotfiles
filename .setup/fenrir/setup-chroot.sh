@@ -53,6 +53,10 @@ sed -i 's/^HOOKS=.*/HOOKS=(base systemd autodetect modconf kms keyboard sd-vcons
 echo "Setting modules..."
 sed -i 's/^MODULES=.*/MODULES=(amdgpu)/' /etc/mkinitcpio.conf
 
+# Set up modprobe for nct6775 for sensors
+echo "Setting up modprobe..."
+echo "nct6775" > /etc/modules-load.d/nct6775.conf
+
 # Regenerate initramfs
 echo "Regenerating initramfs..."
 mkinitcpio -P
